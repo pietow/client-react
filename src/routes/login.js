@@ -1,7 +1,8 @@
 /** @format */
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
-export default function Login() {
+export default function Login({ setToken }) {
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
     function onSubmit(event) {
@@ -17,7 +18,9 @@ export default function Login() {
                     )
                 return res.json()
             })
-            .then(console.log)
+            .then((res) => {
+                setToken(res)
+            })
         event.preventDefault()
     }
     return (
@@ -48,4 +51,8 @@ export default function Login() {
             </div>
         </div>
     )
+}
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
 }

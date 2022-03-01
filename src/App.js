@@ -1,19 +1,20 @@
 /** @format */
 
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Login from './routes/login'
+import Admin from './routes/admin'
 
 export default function App() {
+    const [token, setToken] = useState('')
+    if (!token) {
+        return <Login setToken={setToken}></Login>
+    }  
     return (
-        <div>
-            <h1 className="text-3xl font-bold underline">Hello world!</h1>
-            <nav
-                style={{
-                    borderBottom: 'solid 1px',
-                    paddingBottom: '1rem',
-                }}
-            >
-                <Link to="/login">Login</Link> | <Link to="/admin">Admin</Link>
-            </nav>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="admin" element={<Admin />} />
+            </Routes>
+        </BrowserRouter>
     )
 }

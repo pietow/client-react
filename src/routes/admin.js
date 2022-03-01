@@ -1,7 +1,7 @@
 export default function Admin() {
   return (
-    <main style={{ padding: "1rem 0" }}>
-      <h2>Invoices</h2>
+    <main className="flex">
+      <h2 className="m-10 font-semibold mx-auto text-xl ">Admin Page</h2>
     </main>
   );
 }
