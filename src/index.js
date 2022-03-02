@@ -2,10 +2,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App'
-import Login from './routes/login'
-import Admin from './routes/admin'
 import reportWebVitals from './reportWebVitals'
 import './index.css'
 
