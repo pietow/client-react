@@ -1,19 +1,21 @@
 /** @format */
-
+// import Header from './components/Header'
+import './assets/colorPattern.css'
 import React, { useState } from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import Login from './routes/login'
-import Admin from './routes/admin'
-import Contact from './routes/contact'
-import Register from './routes/register'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Login from './pages/login'
+import Dashboard from './pages/dashboard'
 import useToken from './components/useToken'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 export default function App() {
-    const { token, setToken } = useToken()
+
+    /* const { token, setToken } = useToken()
 
     if (!token) {
         return <Login setToken={setToken}></Login>
-    }
+    }   */
     return (
         <BrowserRouter>
             <nav>
