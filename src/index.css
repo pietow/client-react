@@ -2,3 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: 'knewave';
+    src: url('../src/assets/font/header/Knewave-Regular.ttf');
+}
+@font-face {
+    font-family: 'zeyada';
+    src: url('../src/assets/font/header/Zeyada-Regular.ttf');
+}

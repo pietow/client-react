@@ -1,6 +1,6 @@
 /** @format */
 // import Header from './components/Header'
-import './assets/colorPattern.css'
+
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/login'
@@ -8,10 +8,11 @@ import Admin from './pages/admin'
 import Contact from './pages/contact'
 import Register from './pages/register'
 import useToken from './components/useToken'
-import Navbar from './components/navbar'
+// import Navbar from './components/navbar'
 import Hero from './components/hero'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Dashboard from './pages/dashboard'
 
 export default function App() {
 
@@ -22,8 +23,8 @@ export default function App() {
     }   */
     return (
         <BrowserRouter>
-            <Navbar />
-            <Hero />
+            {/* <Navbar /> */}
+            {/* <Hero /> */}
             {/* <nav>
                 <Link to="/"> Home </Link>
                 <Link to="/"> Login </Link>
@@ -31,12 +32,15 @@ export default function App() {
                 <Link to="/about"> About </Link>
                 <Link to="./contact"> Contact </Link>
             </nav> */}
+            <Header />
             <Routes>
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/" element={<Dashboard />} />
             </Routes>
+            <Footer />
         </BrowserRouter>
     )
 }
