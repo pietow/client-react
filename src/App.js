@@ -3,13 +3,13 @@
 import './assets/colorPattern.css'
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Login from './pages/login'
-import Admin from './pages/admin'
-import Contact from './pages/contact'
-import Register from './pages/register'
+import Login from './pages/Login'
+import Admin from './pages/Admin'
+import Contact from './pages/Contact'
+import Register from './pages/Register'
 import useToken from './components/useToken'
-import Navbar from './components/navbar'
-import Hero from './components/hero'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
@@ -32,11 +32,12 @@ export default function App() {
                 <Link to="./contact"> Contact </Link>
             </nav> */}
             <Routes>
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/contact" element={<Contact />} />
+                <Route path="/Admin" element={<Admin />} />
+                <Route path="/Login" element={<Login />} />
+                <Route path="/Register" element={<Register />} />
+                <Route path="/Contact" element={<Contact />} />
             </Routes>
+            <Footer />
         </BrowserRouter>
     )
 }
