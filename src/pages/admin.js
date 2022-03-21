@@ -6,7 +6,7 @@ export default function Admin() {
   return (
     <>
       <Header />
-      <main className="text-center bg-teal-n text-pistachio-n">
+      <main className="text-center bg-teal-normal text-pistachio-normal">
         <h1>thanks for your HELP</h1>
         <p>current inner window width {window.innerWidth}px</p>
       </main>

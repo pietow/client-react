@@ -1,7 +1,7 @@
 //rfc shortcut
 import React from 'react'
 import {useState, useEffect} from 'react'
-import '../assets/colorPattern.css'
+
 
 
 export default function Piet() {

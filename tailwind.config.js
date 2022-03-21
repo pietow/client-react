@@ -1,4 +1,4 @@
-// const colors = require('tailwindcss/colors') 
+// import './src/assets/font/header/Knewave-Regular.ttf'
 
 module.exports = {
     content: [
@@ -20,30 +20,34 @@ module.exports = {
       'gray-dark': '#273444',
       'gray': '#8492a6',
       'gray-light': '#d3dce6',
-    },
-    /* colors: {
       'apricot': {
-        bright: '#fff6e8',
-        normal: '#F6D7A7',
-        dark: '#ffb648'
+        'bright': '#fff6e8',
+        'normal': '#F6D7A7',
+        'dark': '#ffb648'
       },
       'yellow': {
-        bright: '#fffae8',
-        normal: '#F6EABE',
-        dark: '#ffe482'
+        'bright': '#fffae8',
+        'normal': '#F6EABE',
+        'dark': '#ffe482'
       },
       'pistachio': {
-        bright: '#dfebe4',
-        normal: '#C8E3D4',
-        dark: '#b6f0d0'
+        'bright': '#dfebe4',
+        'normal': '#C8E3D4',
+        'dark': '#b6f0d0'
       },
       'teal': {
-        bright: '#9eb1b1',
-        normal: '#87AAAA',
-        dark: '#66acac'
-      }, */
-      // 'green': colors.green
+        'bright': '#9eb1b1',
+        'normal': '#87AAAA',
+        'dark': '#66acac'
+      },
+
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        knewave: ["knewave", "cursive"],
+        zeyada: ["zeyada", "cursive"]
+      }
+    },
   plugins: []
+  }
 }
