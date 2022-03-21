@@ -8,11 +8,11 @@ import Admin from './pages/Admin'
 import Contact from './pages/Contact'
 import Register from './pages/Register'
 import useToken from './components/useToken'
-import Navbar from './components/Navbar'
+/* import Navbar from './components/Navbar.js' */
 import Hero from './components/Hero'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Dashboard from './pages/dashboard'
+import Dashboard from './pages/Dashboard'
 
 export default function App() {
 
