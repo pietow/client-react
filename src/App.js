@@ -8,8 +8,9 @@ import Admin from './pages/Admin'
 import Contact from './pages/Contact'
 import Register from './pages/Register'
 import useToken from './components/useToken'
-/* import Navbar from './components/Navbar.js' */
+import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import Features from './components/Features'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard'
@@ -23,8 +24,9 @@ export default function App() {
     }   */
     return (
         <BrowserRouter>
-            {/* <Navbar /> */}
-            {/* <Hero /> */}
+            <Navbar />
+            <Hero />
+            <Features />
             {/* <nav>
                 <Link to="/"> Home </Link>
                 <Link to="/"> Login </Link>

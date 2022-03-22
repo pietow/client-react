@@ -43,10 +43,13 @@ module.exports = {
 
     },
     extend: {
+      backgroundImage: (theme) => ({
+        hero: "url('/src/assets/img/toa-heftiba-Bm-N1gh4AUs-unsplash.jpg')",
+      }),
       fontFamily: {
         knewave: ["knewave", "cursive"],
         zeyada: ["zeyada", "cursive"]
-      }
+      },
     },
   plugins: []
   }
