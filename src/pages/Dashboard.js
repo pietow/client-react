@@ -1,4 +1,5 @@
 import React from 'react'
+import Logo from '../components/Logo.js'
 import PrevNextButtons from '../components/PrevNextButtons'
 import {useState, useEffect} from 'react'
 
@@ -28,25 +29,26 @@ export default function Dashboard() {
         <button onClick={getData} className="active:bg-light-orange hover:outline-1 m-1 hover:drop-shadow hover:outline-teal-dark rounded-md bg-pistachio-normal p-2">fetch data</button>
 
       <section className="flex flex-col items-center bg-apricot-bright m-4 rounded-md drop-shadow-md">
-        <h1 className="font-zeyada mt-4 text-3xl">Maybe about the person</h1>
+        <h1 className="font-zeyada m-4 text-3xl">Maybe about the person</h1>
         <p className="rounded-md justify-center mx-4 p-2 bg-apricot-bright opacity-80">{randomData[10]?.title}
         </p>
         <PrevNextButtons />
       </section>
 
       <section className="flex flex-col items-center bg-apricot-bright m-4 rounded-md drop-shadow-md">
-        <h1 className="font-zeyada mt-4 text-3xl">another section</h1>
+        <h1 className="font-zeyada m-4 text-3xl">another section</h1>
         <p className="rounded-md justify-center mx-4 p-2 bg-apricot-bright opacity-80">{randomData[10]?.body}
         </p>
         <PrevNextButtons />
       </section>
 
       <section className="flex flex-col items-center bg-apricot-bright m-4 rounded-md drop-shadow-md">
-        <h1 className="font-zeyada mt-4 text-3xl">and even more</h1>
+        <h1 className="font-zeyada m-4 text-3xl">and even more</h1>
         <p className="rounded-md justify-center mx-4 p-2 bg-apricot-bright opacity-80">{randomData[10]?.body}
         </p>
         <PrevNextButtons />
       </section>
+      <Logo />
     </div>
   )
 }

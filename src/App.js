@@ -23,15 +23,6 @@ export default function App() {
     }   */
     return (
         <BrowserRouter>
-            {/* <Navbar /> */}
-            {/* <Hero /> */}
-            {/* <nav>
-                <Link to="/"> Home </Link>
-                <Link to="/"> Login </Link>
-                <Link to="/"> Register </Link>
-                <Link to="/about"> About </Link>
-                <Link to="./contact"> Contact </Link>
-            </nav> */}
             <Header />
             <Routes>
                 <Route path="/admin" element={<Admin />} />

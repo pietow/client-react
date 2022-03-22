@@ -43,8 +43,11 @@ module.exports = {
 
     },
     extend: {
+      backgroundImage: (theme) => ({
+        hero: "url('/src/assets/img/toa-heftiba-Bm-N1gh4AUs-unsplash.jpg')",
+        logo: "url('/src/assets/img/logo-big.png')",
+      }),
       fontFamily: {
-        knewave: ["knewave", "cursive"],
         zeyada: ["zeyada", "cursive"]
       }
     },
