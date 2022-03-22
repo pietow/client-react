@@ -4,27 +4,36 @@ import {useState} from 'react'
 
 export default function Register() {
 
-  const [fName, setFName] = useState('');
-  const [lName, setLName] = useState('');
+  const [fname, setFName] = useState('');
+  const [lname, setLName] = useState('');
   const [email, setEmail] = useState('');
   const [date, setDate] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
+
   const [data, setData] = useState({});
+
+  const addUser = async () => {
+    const response = await fetch('api/users/', {
+      method: "POST",
+      body: data
+    });
+    // const result = await response.json();
+  }               
 
 
   const submit = (e) => {
     e.preventDefault()
     setData({
-      fName,
-      lName,
-      email,
-      date,
-      password,
-      rePassword
+      fname,
+      lname,
+      // email,
+      // date,
+      // password,
+      // rePassword
     })
-    e.target.value = ''
     console.log(data)
+    addUser()
   }
 
   return (
