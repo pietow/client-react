@@ -7,7 +7,7 @@ import Login from './pages/Login'
 import Admin from './pages/Admin'
 import Contact from './pages/Contact'
 import Register from './pages/Register'
-import useToken from './components/useToken'
+// import useToken from './components/useToken'
 /* import Navbar from './components/Navbar.js' */
 import Hero from './components/Hero'
 import Header from './components/Header'
