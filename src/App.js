@@ -16,6 +16,13 @@ import Dashboard from './pages/Dashboard'
 
 export default function App() {
 
+    const [toggle, setToggle] = useState(0)
+
+    const toggleBurger = (e) => { //menu visible or not?
+        e.preventDefault()
+        toggle ? setToggle(0) : setToggle(1);
+      }   
+
     /* const { token, setToken } = useToken()
 
     if (!token) {
@@ -23,6 +30,7 @@ export default function App() {
     }   */
     return (
         <BrowserRouter>
+            <Header toggle={toggle} setToggle={setToggle} toggleBurger={toggleBurger}/>
             <Navbar />
             <Hero />
             <Features />
@@ -33,11 +41,10 @@ export default function App() {
                 <Link to="/about"> About </Link>
                 <Link to="./contact"> Contact </Link>
             </nav> */}
-            <Header />
             <Routes>
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/register" element={<Register toggle={toggle}/>} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/" element={<Dashboard />} />
             </Routes>
