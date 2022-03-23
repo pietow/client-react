@@ -31,13 +31,13 @@ export default function Header({toggle, setToggle, toggleBurger}) {
             {burger()}
           </div>
         </a>
-        <nav className={toggle? "visible absolute" : "hidden"}>
+        <nav className={toggle ? "visible absolute" : "hidden"}>
         <ul className="flex flex-col absolute z-10 bg-lemon-meringue opacity-95 text-gray-dark left-0 space-y-2 top-7 p-2 text-2xl rounded-md">
-          <li className=""><a href="#">home</a></li>
-          <li className=""><a href="#">blabla</a></li>
-          <li className=""><a href="#">blibli</a></li>
-          <li className=""><a href="#">contact</a></li>
-          <li className=""><a href="#">logOut</a></li>
+          <li className="hover:bg-light-orange px-2 rounded"><a href="#">home</a></li>
+          <li className="hover:bg-light-orange px-2 rounded"><a href="#">blabla</a></li>
+          <li className="hover:bg-light-orange px-2 rounded"><a href="#">blibli</a></li>
+          <li className="hover:bg-light-orange px-2 rounded"><a href="#">contact</a></li>
+          <li className="hover:bg-light-orange px-2 rounded"><a href="#">logOut</a></li>
         </ul>
       </nav>
       </header>

@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard'
+import Login from './pages/Login'
 
 export default function App() {
 
@@ -25,10 +26,11 @@ export default function App() {
             <Header toggle={toggle} setToggle={setToggle} toggleBurger={toggleBurger}/>
             {/*<Navbar />*/}
             <Routes>
-                <Route path="/" element={<Home />}/>
+                <Route path="/" element={<Home toggle={toggle}/>}/>
                 <Route path="/register" element={<Register toggle={toggle}/>} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard toggle={toggle}/>} />
+                <Route path="/login" element={<Login toggle={toggle}/>}/>
             </Routes>
             <Footer />
         </BrowserRouter>

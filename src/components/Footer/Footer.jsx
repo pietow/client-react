@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <footer className="h-14 bg-teal-normal py-2">
+    <footer className="bg-teal-normal py-2 h-14">
       footer here
     </footer>
   )

@@ -1,8 +1,10 @@
 /** @format */
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+// import Logo from '../components/Logo'
+import Logo_Big from '../assets/img/logo-big.png'
 
-export default function Login({ setToken }) {
+export default function Login({ setToken, toggle }) {
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
     function onSubmit(event) {
@@ -24,18 +26,19 @@ export default function Login({ setToken }) {
         event.preventDefault()
     }
     return (
-        <div className="w-fit mx-auto flex items-center h-screen">
-            <div className="form border-2 rounded">
-                <form onSubmit={onSubmit} className="flex flex-col m-5">
-                    <input
-                        className="m-3 p-1 border-2 rounded"
+
+        <main className={toggle ? "blur bg-login bg-content bg-center bg-cover w-full h-screen" : "bg-login bg-center bg-content bg-cover w-full h-screen"}>
+            
+            <form onSubmit={onSubmit} className="mx-auto top-2 relative flex flex-col border-best-white border mx-4 rounded">
+                     <input
+                        className="my-2 mx-4 p-1 rounded"
                         type="text"
                         placeholder="username"
                         value={user}
                         onChange={({ target: { value } }) => setUser(value)}
                     />
                     <input
-                        className="m-3 p-1 border-2 rounded"
+                        className="my-2 mx-4 p-1 rounded"
                         type="password"
                         placeholder="password"
                         value={password}
@@ -43,16 +46,22 @@ export default function Login({ setToken }) {
                     />
                     <button
                         type="submit"
-                        className="mx-auto p-1 border-2 rounded bg-green-600 w-1/2"
+                        className="mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2"
                     >
                         login
                     </button>
                 </form>
-            </div>
-        </div>
+            
+                {/* <Logo /> */}
+                <figure className="w-20 h-20 mx-auto relative mt-2">
+                    <img className="" src={Logo_Big}/>
+                    <figcaption></figcaption>
+                </figure>
+            
+        </main>
     )
 }
 
 Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-}
+    setToken: PropTypes.func.isRequired
+  }
