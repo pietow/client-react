@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../components/Logo.js'
+import Logo from '../components/Logo'
 import PrevNextButtons from '../components/PrevNextButtons'
 import {useState} from 'react'
 

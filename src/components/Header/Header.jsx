@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import Logo from '../components/Logo'
+import Logo from '../Logo/Logo'
 
 export default function Header({toggle, setToggle, toggleBurger}) {
 

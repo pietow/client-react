@@ -48,7 +48,8 @@ module.exports = {
         logo: "url('/src/assets/img/logo-big.png')",
       }),
       fontFamily: {
-        zeyada: ["zeyada", "cursive"]
+        zeyada: ["zeyada", "cursive"],
+        noto: ["noto", "ui-sans-serif"]
       },
     },
   plugins: []
