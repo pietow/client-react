@@ -1,7 +1,7 @@
 import React from 'react'
 import Logo from '../components/Logo.js'
 import PrevNextButtons from '../components/PrevNextButtons'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 
 export default function Dashboard() {
 
@@ -13,12 +13,6 @@ export default function Dashboard() {
     const result = await response.json()
     setRandomData(result)
   }
-
- /*  useEffect(()=> {
-    getData()
-  }, []) */
-
-  console.log(randomData)
 
   return (
     <div className="flex flex-col items-center space-y-10 bg-gradient-to-t from-pistachio-normal to-apricot-bright"> 
