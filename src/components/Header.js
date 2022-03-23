@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import Logo from '../components/Logo'
 
-export default function Header() {
+export default function Header({toggle, setToggle, toggleBurger}) {
 
-  const [toggle, setToggle] = useState(0)
+  // const [toggle, setToggle] = useState(0)
 
-  const toggleBurger = (e) => { //menu visible or not?
-    e.preventDefault()
-    toggle ? setToggle(0) : setToggle(1);
-  }
+  // const toggleBurger = (e) => { //menu visible or not?
+  //   e.preventDefault()
+  //   toggle ? setToggle(0) : setToggle(1);
+  // }
 
   const burger = () => { //burger menu; maybe over-engineered ^^
     let rows = [];
