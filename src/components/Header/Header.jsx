@@ -1,14 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import Logo from '../Logo/Logo'
 
 export default function Header({toggle, setToggle, toggleBurger}) {
 
-  // const [toggle, setToggle] = useState(0)
-
-  // const toggleBurger = (e) => { //menu visible or not?
-  //   e.preventDefault()
-  //   toggle ? setToggle(0) : setToggle(1);
-  // }
+  const ref = useRef()
 
   const burger = () => { //burger menu; maybe over-engineered ^^
     let rows = [];
@@ -18,6 +13,20 @@ export default function Header({toggle, setToggle, toggleBurger}) {
       return rows;
   }
 
+  useEffect(() => {
+    const checkOutsideClick = e => {
+      if (toggle && ref.current && !ref.current.contains(e.target)) {
+        setToggle(0)
+      }
+    }
+    document.addEventListener("mousedown", checkOutsideClick)
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkOutsideClick)
+    }
+  }, [toggle])
+    
+
   return (
     <>
       <header className="flex flex-row space-x-5 items-center justify-center h-14 sticky top-0 z-10 bg-teal-normal">
@@ -26,7 +35,7 @@ export default function Header({toggle, setToggle, toggleBurger}) {
 
         <h1 className="text-best-white font-zeyada text-4xl">here header</h1>
 
-        <a href="#" onClick={e => toggleBurger(e)} className={toggle ? "transition duration-300 ease-in-out rotate-180 hover:bg-teal-bright active:bg-light-orange" : "ease-in-out transition duration-300 hover:bg-teal-bright active:bg-light-orange"}>
+        <a ref={ref} href="#" onClick={e => toggleBurger(e)} className={toggle ? "transition duration-300 ease-in-out rotate-180 hover:bg-teal-bright active:bg-light-orange" : "ease-in-out transition duration-300 hover:bg-teal-bright active:bg-light-orange"}>
           <div className='w-8 h-8 flex flex-col space-y-1 border border-best-white rounded-sm items-center justify-center'>         
             {burger()}
           </div>
