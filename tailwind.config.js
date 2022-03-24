@@ -38,7 +38,8 @@ module.exports = {
       'teal': {
         'bright': '#9eb1b1',
         'normal': '#87AAAA',
-        'dark': '#66acac'
+        'dark': '#66acac',
+        'footer': '#008080'
       },
 
     },

@@ -16,9 +16,9 @@ const Features = () => {
                 <div className="rounded-lg shadow-lg bg-best-white max-w-sm">
                     <img className="rounded-t-lg" src={CardImage1} alt="" />
                     <div className="p-6">
-                        <h5 className="font-zeyada text-gray-900 text-xl font-medium mb-2">
-                            Card title
-                        </h5>
+                        <h2 className="mb-2">
+                            Be spontaneous
+                        </h2>
                         <p className="font-noto text-gray-700 text-base mb-4">
                             Some quick example text to build on the card title
                             and make up the bulk of the card's content. Some
@@ -33,9 +33,9 @@ const Features = () => {
                 <div className="rounded-lg shadow-lg bg-best-white max-w-sm">
                     <img className="rounded-t-lg" src={CardImage2} alt="" />
                     <div className="p-6">
-                    <h5 className="font-zeyada text-gray-900 text-xl font-medium mb-2">
-                            Card title
-                        </h5>
+                    <h2 className="mb-2">
+                            Start friendships
+                        </h2>
                         <p className="font-noto text-gray-700 text-base mb-4">
                             Some quick example text to build on the card title
                             and make up the bulk of the card's content. Some
@@ -50,9 +50,9 @@ const Features = () => {
                 <div className="rounded-lg shadow-lg bg-best-white max-w-sm">
                     <img className="rounded-t-lg" src={CardImage3} alt="" />
                     <div className="p-6">
-                    <h5 className="font-zeyada text-gray-900 text-xl font-medium mb-2">
-                            Card title
-                        </h5>
+                    <h2 className="mb-2">
+                            Learn from a local
+                        </h2>
                         <p className="font-noto text-gray-700 text-base mb-4">
                             Some quick example text to build on the card title
                             and make up the bulk of the card's content. Some
@@ -67,9 +67,9 @@ const Features = () => {
                 <div className="rounded-lg shadow-lg bg-best-white max-w-sm">
                     <img className="rounded-t-lg" src={CardImage4} alt="" />
                     <div className="p-6">
-                    <h5 className="font-zeyada text-gray-900 text-xl font-medium mb-2">
-                            Card title
-                        </h5>
+                    <h2 className="mb-2">
+                            Sustainability
+                        </h2>
                         <p className="font-noto text-gray-700 text-base mb-4">
                             Some quick example text to build on the card title
                             and make up the bulk of the card's content. Some

@@ -3,8 +3,8 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <footer className="bg-teal-normal py-2 h-14">
-      footer here
+    <footer className="bg-gradient-to-t from-teal-footer to-pistachio-normal pb-14 pt-4 h-14">
+      <p className="text-best-white text-center">Footer here</p>
     </footer>
   )
 }

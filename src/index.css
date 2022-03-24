@@ -5,6 +5,10 @@
         @apply text-6xl;
         @apply font-zeyada;
     }
+    h2 {
+        @apply text-4xl;
+        @apply font-zeyada;
+    }
 }
 @tailwind components;
 @tailwind utilities;
