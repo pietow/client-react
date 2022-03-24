@@ -6,11 +6,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Contact from './pages/Contact'
 import Register from './pages/Register'
 /* import Navbar from './components/Navbar' */
-import Hero from './components/Hero'
-import Features from './components/Features'
+import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard'
+import Login from './pages/Login'
 
 export default function App() {
 
@@ -25,12 +25,12 @@ export default function App() {
         <BrowserRouter>
             <Header toggle={toggle} setToggle={setToggle} toggleBurger={toggleBurger}/>
             {/*<Navbar />*/}
-            <Hero />
-            <Features />
             <Routes>
+                <Route path="/" element={<Home toggle={toggle}/>}/>
                 <Route path="/register" element={<Register toggle={toggle}/>} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard toggle={toggle}/>} />
+                <Route path="/login" element={<Login toggle={toggle}/>}/>
             </Routes>
             <Footer />
         </BrowserRouter>

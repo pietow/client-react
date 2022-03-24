@@ -1,7 +1,13 @@
-export default function Home() {
+import React from 'react'
+import Hero from '../components/Hero/Hero'
+import Features from '../components/Features/'
+
+
+export default function Home({toggle}) {
   return (
-    <main className="flex">
-      <h2 className="m-10 font-semibold mx-auto text-xl ">Home Page</h2>
+    <main className={toggle ? "blur" : ""}>
+        <Hero />
+        <Features />
     </main>
-  );
+  )
 }

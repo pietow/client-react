@@ -1,9 +1,9 @@
 import React from 'react'
-import Logo from '../components/Logo.js'
+import Logo from '../components/Logo'
 import PrevNextButtons from '../components/PrevNextButtons'
 import {useState} from 'react'
 
-export default function Dashboard() {
+export default function Dashboard({toggle}) {
 
   const [randomData, setRandomData] = useState([]);
 
@@ -15,7 +15,8 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col items-center space-y-10 bg-gradient-to-t from-pistachio-normal to-apricot-bright"> 
+    <div className={toggle ? "blur flex flex-col items-center space-y-10 bg-fixed bg-gradient-to-t from-pistachio-normal to-apricot-bright" :
+    "flex flex-col items-center space-y-10 bg-fixed bg-gradient-to-t from-pistachio-normal to-apricot-bright"}> 
       <figure className="w-40 space-y-2 m-6">
         <img className="drop-shadow-lg rounded-full" src={'https://picsum.photos/200/200.jpg'} alt="lorem"/>
         <figcaption className="text-center" >inner width: {window.innerWidth}<br /> random data id: {randomData[10]?.id}</figcaption>

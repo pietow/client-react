@@ -9,8 +9,8 @@
 @tailwind components;
 @tailwind utilities;
 @font-face {
-    font-family: 'knewave';
-    src: url('../src/assets/font/header/Knewave-Regular.ttf');
+    font-family: 'noto';
+    src: url('../src/assets/font/text/NotoSans-Regular.ttf');
 }
 @font-face {
     font-family: 'zeyada';
