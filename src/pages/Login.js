@@ -27,7 +27,7 @@ export default function Login({ setToken, toggle }) {
     }
     return (
 
-        <main className={toggle ? "blur bg-login bg-content bg-center bg-cover w-full" : "bg-login bg-center bg-content bg-cover h-screen"}>
+        <main className={toggle ? "blur bg-login bg-content bg-center bg-cover h-screen" : "bg-login bg-center bg-content bg-cover h-screen"}>
             <h1 className="text-best-white text-6xl font-zeyada text-center pt-8">Login</h1>
             <figure className="w-28 h-28 mx-auto pt-10">
                     <img className="" src={Logo_Big}/>
