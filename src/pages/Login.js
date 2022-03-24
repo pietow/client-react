@@ -27,9 +27,13 @@ export default function Login({ setToken, toggle }) {
     }
     return (
 
-        <main className={toggle ? "blur bg-login bg-content bg-center bg-cover w-full h-screen" : "bg-login bg-center bg-content bg-cover w-full h-screen"}>
-            
-            <form onSubmit={onSubmit} className="mx-auto top-2 relative flex flex-col border-best-white border mx-4 rounded">
+        <main className={toggle ? "blur bg-login bg-content bg-center bg-cover w-full" : "bg-login bg-center bg-content bg-cover h-screen"}>
+            <h1 className="text-best-white text-6xl font-zeyada text-center pt-8">Login</h1>
+            <figure className="w-28 h-28 mx-auto pt-10">
+                    <img className="" src={Logo_Big}/>
+                    <figcaption></figcaption>
+                </figure>
+            <form onSubmit={onSubmit} className="mx-auto top-2 relative flex flex-col border-best-white border mx-4 rounded top-60 absolute">
                      <input
                         className="my-2 mx-4 p-1 rounded"
                         type="text"
@@ -53,10 +57,7 @@ export default function Login({ setToken, toggle }) {
                 </form>
             
                 {/* <Logo /> */}
-                <figure className="w-20 h-20 mx-auto relative mt-2">
-                    <img className="" src={Logo_Big}/>
-                    <figcaption></figcaption>
-                </figure>
+                
             
         </main>
     )
