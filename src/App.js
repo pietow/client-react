@@ -25,6 +25,7 @@ export default function App() {
         <BrowserRouter>
             <Header toggle={toggle} setToggle={setToggle} toggleBurger={toggleBurger}/>
             {/*<Navbar />*/}
+            <div className={toggle ? "transition duration-75 blur ease-in saturate-50" : "transition duration-50 ease-in"}>
             <Routes>
                 <Route path="/" element={<Home toggle={toggle}/>}/>
                 <Route path="/register" element={<Register toggle={toggle}/>} />
@@ -32,6 +33,7 @@ export default function App() {
                 <Route path="/dashboard" element={<Dashboard toggle={toggle}/>} />
                 <Route path="/login" element={<Login toggle={toggle}/>}/>
             </Routes>
+            </div>
             <Footer />
         </BrowserRouter>
     )

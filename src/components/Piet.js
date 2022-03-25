@@ -24,10 +24,6 @@ export default function Piet() {
 
   return (
     <>
-      {/* <figure>
-        <figcaption></figcaption>
-        <img src={'https://picsum.photos/200/300'}/>
-      </figure> */}
       <div id="joke">{randomUser[0]["title"]}</div>
     </>
   )
