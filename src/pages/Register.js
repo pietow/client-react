@@ -30,8 +30,8 @@ export default function Register({toggle}) {
           <input onChange={e => setData(data, data.fname = e.target.value)} className="p-1 m-1 rounded-md" type="text" id="fname" name="fname" placeholder="First Name*"/>
           <input onChange={e => setData(data, data.lname = e.target.value)} className="p-1 m-1 rounded-md" type="text" id="lname" name="lname" placeholder="Last Name*"/>
           <input onChange={e => setData(data, data.email = e.target.value)} className="p-1 m-1 rounded-md" type="email" id="email" name="email" placeholder="E-Mail*"/>
-          <input onChange={e => setData(data, data.password = e.target.value)} className="p-1 m-1 rounded-md" type="password" id="password" name="password" placeholder="Create Password"/>
-          <input onChange={e => setData(data, data.rePassword = e.target.value)} className="p-1 m-1 rounded-md" type="password" id="rePassword" name="rePassword" placeholder="Repeat Password"/>
+          <input onChange={e => setData(data, data.password = e.target.value)} className="p-1 m-1 rounded-md" type="password" id="password" name="password" placeholder="Create Password*"/>
+          <input onChange={e => setData(data, data.rePassword = e.target.value)} className="p-1 m-1 rounded-md" type="password" id="rePassword" name="rePassword" placeholder="Repeat Password*"/>
           <input onClick={submit} className="active:bg-light-orange hover:outline-1 m-1 hover:drop-shadow hover:outline-teal-dark rounded-md bg-pistachio-normal p-2" type="submit" value="Become a Member"/>
         </form>
       </section>
