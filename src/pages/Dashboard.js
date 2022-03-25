@@ -15,8 +15,7 @@ export default function Dashboard({toggle}) {
   }
 
   return (
-    <div className={toggle ? "blur flex flex-col items-center space-y-10 bg-fixed bg-gradient-to-t from-pistachio-normal to-apricot-bright" :
-    "flex flex-col items-center space-y-10 bg-fixed bg-gradient-to-t from-pistachio-normal to-apricot-bright"}> 
+    <div className="flex flex-col items-center space-y-10 bg-fixed bg-gradient-to-t from-pistachio-normal to-apricot-bright"> 
       <figure className="w-40 space-y-2 m-6">
         <img className="drop-shadow-lg rounded-full" src={'https://picsum.photos/200/200.jpg'} alt="lorem"/>
         <figcaption className="text-center" >inner width: {window.innerWidth}<br /> random data id: {randomData[10]?.id}</figcaption>

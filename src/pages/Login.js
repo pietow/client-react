@@ -1,5 +1,5 @@
 /** @format */
-import React, { useState, useEffect } from 'react'
+import React, { useState/* , useEffect */ } from 'react'
 import PropTypes from 'prop-types'
 // import Logo from '../components/Logo'
 import Logo_Big from '../assets/img/logo-big.png'
@@ -27,10 +27,10 @@ export default function Login({ setToken, toggle }) {
     }
     return (
 
-        <main className={toggle ? "blur bg-login bg-content bg-center bg-cover h-screen" : "bg-login bg-center bg-content bg-cover h-screen"}>
+        <main className="bg-login bg-content bg-center bg-cover h-screen">
             <h1 className="text-best-white text-6xl font-zeyada text-center pt-8">Login</h1>
             <figure className="w-28 h-28 mx-auto pt-10">
-                    <img className="" src={Logo_Big}/>
+                    <img className="" src={Logo_Big} alt="roam mate logo"/>
                     <figcaption></figcaption>
                 </figure>
             <form onSubmit={onSubmit} className="mx-auto top-2 relative flex flex-col border-best-white border mx-4 rounded top-60 absolute">
