@@ -8,7 +8,7 @@ const Hero = () => {
       
         <section className="md:flex md:flex-col w-full h-screen bg-hero bg-cover bg-center">
             <div className="backdrop-blur w-1/2 overflow-hidden text-center m-auto bg-morning-sky-blue p-24 opacity-70 border border-best-white rounded-full">
-                <figure className="flex justify-center mb-10 scale-[5]">{/* mb-10 scale-[5]*/}
+                <figure className="flex justify-center mb-10 scale-[5]">
                     <Logo />
                 </figure>
                 <h1 className="text-best-white">Connect... roam!</h1>

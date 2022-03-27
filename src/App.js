@@ -1,6 +1,4 @@
 /** @format */
-// import Header from './components/Header'
-
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Contact from './pages/Contact'
@@ -23,8 +21,8 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <HeaderLarge />
-            {/* <Header toggle={toggle} setToggle={setToggle} toggleBurger={toggleBurger}/> */}
+            {/* <HeaderLarge /> */}
+            <Header toggle={toggle} setToggle={setToggle} toggleBurger={toggleBurger}/>
 
             <div className={toggle ? "transition duration-75 blur ease-in saturate-50" : "transition duration-50 ease-in"}>
             <Routes>
