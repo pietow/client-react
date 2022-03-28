@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 export default function NavList() {
     
+  
+
   const links = [['/register', 'register'], ['/login', 'login'], ['/contact', 'contact']]
     
   return (

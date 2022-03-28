@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // import Logo from '../components/Logo'
 import Logo_Big from '../assets/img/logo-big.png'
 
-export default function Login({ setToken, toggle }) {
+export default function Login({ setToken }) {
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
     function onSubmit(event) {

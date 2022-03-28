@@ -3,7 +3,7 @@ import Logo from '../components/Logo'
 import PrevNextButtons from '../components/PrevNextButtons'
 import {useState} from 'react'
 
-export default function Dashboard({toggle}) {
+export default function Dashboard() {
 
   const [randomData, setRandomData] = useState([]);
 
