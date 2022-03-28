@@ -7,7 +7,7 @@ export default function Register() {
   const [data, setData] = useState({})
 
   const addUser = async () => {
-      /* const response = */ await fetch('api/users/', {
+      /* const response = */ await fetch('api/users', {
       method: "POST",
       headers: {'content-type':'application/json'},
       body: JSON.stringify(data)
@@ -18,7 +18,7 @@ export default function Register() {
   const submit = (e) => {
     e.preventDefault();
     addUser();
-    console.log(data);
+    // console.log(data);
   }
 
   return (
