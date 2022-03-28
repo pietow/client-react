@@ -16,7 +16,7 @@ export default function Header({toggle, setToggle, toggleBurger}) {
   }, [toggle, setToggle])
 
   return (
-      <header className="flex flex-row space-x-5 items-center justify-center h-14 sticky top-0 z-10 bg-teal-normal">
+      <header className="flex flex-row space-x-5 items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal">
         <Logo />
         <h1 className="text-best-white font-zeyada text-4xl">here header</h1>
         <div ref={ref}>

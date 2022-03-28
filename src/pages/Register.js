@@ -2,7 +2,7 @@
 import Logo_Big from '../assets/img/logo-big.png'
 import {useState} from 'react'
 
-export default function Register({toggle}) {
+export default function Register() {
 
   const [data, setData] = useState({})
 
