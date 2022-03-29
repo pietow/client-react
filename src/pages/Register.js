@@ -24,9 +24,9 @@ export default function Register() {
         <h1 className="font-zeyada text-center text-6xl py-8 text-best-white">Register</h1>
    
         
-          <form onSubmit={submit} className="backdrop-blur-sm flex flex-col border-best-white border mx-4 mb-40 rounded">
+          <form onSubmit={submit} className="backdrop-brightness-75 backdrop-blur-sm flex flex-col border-best-white border mx-4 mb-40 rounded">
             <RegisterInputs data={data} setData={setData} />
-            <button onClick={submit} className="mx-auto my-4 p-1 border border-best-white text-best-white rounded w-1/2" type="submit" value="Become a Member">Become Member</button>
+            <button onClick={submit} className="active:scale-95 mx-auto my-4 p-1 border border-best-white text-best-white rounded w-1/2" type="submit" value="Become a Member">Become Member</button>
           </form>
         
 

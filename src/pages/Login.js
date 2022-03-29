@@ -24,7 +24,7 @@ export default function Login() {
         <main className="bg-login bg-center bg-cover bg-fixed h-screen">
             <h1 className="text-best-white text-6xl font-zeyada text-center py-8">Login</h1>
 
-            <form onSubmit={onSubmit} className="backdrop-blur-sm flex flex-col border-best-white border mx-4 my-40 rounded">{/*  */}
+            <form onSubmit={onSubmit} className="backdrop-brightness-75 backdrop-blur-sm flex flex-col border-best-white border mx-4 my-40 rounded">{/*  */}
                      <input
                         className="mt-4 mx-4 p-1 rounded opacity-70"
                         type="text"
@@ -41,7 +41,7 @@ export default function Login() {
                     />
                     <button
                         type="submit"
-                        className="mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2"
+                        className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2"
                     >
                         login
                     </button>
