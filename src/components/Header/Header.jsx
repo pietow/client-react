@@ -17,7 +17,7 @@ export default function Header({toggle, setToggle, toggleBurger}) {
 
   return (
       <header className="flex flex-row space-x-5 items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal">
-        <Logo />
+        <a href="/" className='border border-best-white rounded-full'><Logo /></a>
         <h1 className="text-best-white font-zeyada text-4xl">here header</h1>
         <div ref={ref}>
           <div onClick={e => toggleBurger(e)} className={toggle ? "transition duration-300 ease-in-out rotate-180 hover:bg-teal-bright active:bg-light-orange" : "ease-in-out transition duration-300 hover:bg-teal-bright active:bg-light-orange"}>     

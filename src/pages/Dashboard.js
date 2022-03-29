@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '../components/Logo'
-// import PrevNextButtons from '../components/PrevNextButtons'
+import PrevNextButtons from '../components/PrevNextButtons'
 import DashboardSection from '../components/DashboardSection'
 import {useState} from 'react'
 import DashboardPic from '../components/DashboardPic'
@@ -34,6 +34,7 @@ export default function Dashboard() {
           <button onClick={getUser} className="active:bg-light-orange hover:outline-1 m-1 hover:drop-shadow hover:outline-teal-dark rounded-md bg-pistachio-normal p-2">fetch data</button>
       <DashboardSection heading={'name'} randomData={randomData[0]?.fname + ' ' + randomData[0]?.lname}/>
       <DashboardSection heading={'email address'} randomData={randomData[0]?.email}/>
+      <PrevNextButtons />
       <Logo />
     </div>
   )
