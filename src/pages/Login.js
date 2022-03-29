@@ -1,7 +1,5 @@
 /** @format */
-import React, { useState/* , useEffect */ } from 'react'
-// import PropTypes from 'prop-types'
-// import Logo from '../components/Logo'
+import React, { useState } from 'react'
 import Logo_Big from '../assets/img/logo-big.png'
 
 export default function Login() {
@@ -29,9 +27,9 @@ export default function Login() {
                     <img className="" src={Logo_Big} alt="roam mate logo"/>
                     <figcaption></figcaption>
                 </figure>
-            <form onSubmit={onSubmit} className="backdrop-blur-sm mx-auto top-2 relative flex flex-col border-best-white border mx-4 rounded top-60 absolute">
+            <form onSubmit={onSubmit} className="backdrop-blur-sm relative flex flex-col border-best-white border mx-4 rounded top-48 absolute">{/*  */}
                      <input
-                        className="my-2 mx-4 p-1 rounded opacity-70"
+                        className="mt-4 mx-4 p-1 rounded opacity-70"
                         type="text"
                         placeholder="username"
                         value={username}
@@ -50,15 +48,7 @@ export default function Login() {
                     >
                         login
                     </button>
-                </form>
-            
-                {/* <Logo /> */}
-                
-            
+                </form>          
         </main>
     )
 }
-
-// Login.propTypes = {
-//     setToken: PropTypes.func.isRequired
-//   }
