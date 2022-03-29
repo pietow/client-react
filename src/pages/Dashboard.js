@@ -23,7 +23,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col items-center space-y-10 bg-fixed bg-gradient-to-t from-pistachio-normal to-apricot-bright"> 
+    <div className="flex flex-col items-center bg-cover bg-center bg-fixed bg-dashboard"> 
       <div className='flex items-center'>
         <PrevButton />
         <div>
@@ -35,7 +35,9 @@ export default function Dashboard() {
       <DashboardSection heading={'name'} randomData={randomData[0]?.fname + ' ' + randomData[0]?.lname}/>
       <DashboardSection heading={'email address'} randomData={randomData[0]?.email}/>
       <PrevNextButtons />
-      <Logo />
+      <div className="backdrop-blur-sm w-fit my-20 scale-[2] border border-best-white rounded-full">
+        <a href="/"><Logo /></a>
+      </div>
     </div>
   )
 }

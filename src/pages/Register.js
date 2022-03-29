@@ -30,7 +30,7 @@ export default function Register() {
           </form>
         
 
-        <div className="w-fit scale-[3] mx-auto border border-best-white rounded-full">
+        <div className="backdrop-blur-sm w-fit scale-[2] mx-auto border border-best-white rounded-full">
           <a href="/"><Logo /></a>
         </div>                
     </main>

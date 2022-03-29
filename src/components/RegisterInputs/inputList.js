@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function InputList({data, setData}) {
   
-    const inputList = [
+    const inputList = [ //
         ['fname', 'text', 'FirstName'],
         ['lname', 'text', 'Last Name'],
         ['email', 'email', 'E-Mail'],
