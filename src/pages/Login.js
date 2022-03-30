@@ -1,6 +1,6 @@
 /** @format */
 import React, { useState } from 'react'
-import Logo_Big from '../assets/img/logo-big.png'
+import Logo from '../components/Logo'
 
 export default function Login() {
 
@@ -21,13 +21,10 @@ export default function Login() {
 
     return (
 
-        <main className="bg-login bg-content bg-center bg-cover h-screen">
-            <h1 className="text-best-white text-6xl font-zeyada text-center pt-8">Login</h1>
-            <figure className="w-28 h-28 mx-auto pt-10">
-                    <img className="" src={Logo_Big} alt="roam mate logo"/>
-                    <figcaption></figcaption>
-                </figure>
-            <form onSubmit={onSubmit} className="backdrop-blur-sm relative flex flex-col border-best-white border mx-4 rounded top-48 absolute">{/*  */}
+        <main className="bg-login bg-center bg-cover bg-fixed h-screen">
+            <h1 className="text-best-white text-6xl font-zeyada text-center py-8">Login</h1>
+
+            <form onSubmit={onSubmit} className="backdrop-brightness-75 backdrop-blur-sm flex flex-col border-best-white border mx-4 my-40 rounded">{/*  */}
                      <input
                         className="mt-4 mx-4 p-1 rounded opacity-70"
                         type="text"
@@ -44,11 +41,15 @@ export default function Login() {
                     />
                     <button
                         type="submit"
-                        className="mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2"
+                        className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2"
                     >
                         login
                     </button>
-                </form>          
+                </form>
+
+                <div className="bg-best-white opacity-40 w-fit my-20 scale-[2] border border-best-white rounded-full mx-auto"> {/* backdrop-blur-sm w-fit scale-[2] mx-auto border border-best-white rounded-full */}
+                <a href="/"><Logo /></a>
+            </div>          
         </main>
     )
 }

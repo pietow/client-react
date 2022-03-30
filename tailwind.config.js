@@ -1,5 +1,3 @@
-// import './src/assets/font/header/Knewave-Regular.ttf'
-
 module.exports = {
     content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -48,8 +46,10 @@ module.exports = {
         hero: "url('/src/assets/img/toa-heftiba-Bm-N1gh4AUs-unsplash.jpg')",
         logo: "url('/src/assets/img/logo-big.png')",
         login: "url('/src/assets/img/alejandro-cartagena-eqzcs-hNvN0-unsplash.jpg')",
+        contact: "url('/src/assets/img/s-migaj-Yui5vfKHuzs-unsplash.jpg')",
         backpacker: "url('/src/assets/img/mukuko-studio-tPKQwYHy8q4-unsplash.jpg')",
-        contact: "url('/src/assets/img/s-migaj-Yui5vfKHuzs-unsplash.jpg')"
+        register: "url('/src/assets/img/tobias-tullius-pb7gfl7_Ni8-unsplash.jpg')",
+        dashboard: "url('/src/assets/img/s-migaj-Yui5vfKHuzs-unsplash.jpg')"
       }),
       fontFamily: {
         zeyada: ["zeyada", "cursive"],
