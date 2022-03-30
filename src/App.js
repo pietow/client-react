@@ -21,10 +21,8 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            {/* <HeaderLarge/> */}
+            {/* {<HeaderLarge/>} */}
             <Header toggle={toggle} setToggle={setToggle} toggleBurger={toggleBurger}/>
-            
-
             <div className={toggle ? "transition duration-75 blur ease-in saturate-50" : "transition duration-50 ease-in"}>
             <Routes>
                 <Route path="/" element={<Home/>}/>

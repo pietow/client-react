@@ -22,9 +22,9 @@ export default function Login() {
     return (
 
         <main className="flex flex-col justify-evenly items-center bg-huggingCrowd lg:bg-top bg-center bg-cover bg-fixed h-screen">
-            <h1 className="underline underline-offset-8 decoration-1 font-zeyada text-center text-x6l px-8 bg-gray bg-opacity-40 text-best-white border rounded">Login</h1>
+            <h1 className="underline underline-offset-8 decoration-1 font-zeyada text-center text-x6l px-8 backdrop-brightness-75 backdrop-blur-sm text-best-white border rounded">Login</h1>
 
-            <form onSubmit={onSubmit} className="lg:w-1/3 w-2/3 flex bg-gray bg-opacity-40 flex-col border-best-white border rounded">{/* backdrop-brightness-75 backdrop-blur-sm  */}
+            <form onSubmit={onSubmit} className="lg:w-1/3 w-2/3 flex backdrop-brightness-75 backdrop-blur-sm flex-col border-best-white border rounded">{/* backdrop-brightness-75 backdrop-blur-sm  */}
                      <input
                         className="mt-4 mx-4 p-1 rounded opacity-70"
                         type="text"
