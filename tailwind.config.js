@@ -49,7 +49,8 @@ module.exports = {
         contact: "url('/src/assets/img/s-migaj-Yui5vfKHuzs-unsplash.jpg')",
         backpacker: "url('/src/assets/img/mukuko-studio-tPKQwYHy8q4-unsplash.jpg')",
         register: "url('/src/assets/img/tobias-tullius-pb7gfl7_Ni8-unsplash.jpg')",
-        dashboard: "url('/src/assets/img/s-migaj-Yui5vfKHuzs-unsplash.jpg')"
+        dashboard: "url('/src/assets/img/s-migaj-Yui5vfKHuzs-unsplash.jpg')",
+        huggingCrowd: "url('/src/assets/img/duy-pham-Cecb0_8Hx-o-unsplash.jpg')"
       }),
       fontFamily: {
         zeyada: ["zeyada", "cursive"],
