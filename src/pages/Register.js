@@ -7,16 +7,21 @@ export default function Register() {
   const [data, setData] = useState({})
 
   const addUser = async () => {
-      await fetch('api/users', {
+      const host = process.env.NODE_ENV === 'production' ? 'https://restfulcouchsharing.herokuapp.com/' : ''
+      const response = await fetch(host + 'api/users', {
       method: "POST",
       headers: {'content-type':'application/json'},
       body: JSON.stringify(data)
-    });
+      });
+      const result = await response.json()
+      console.log(result)
+       
   }               
 
   const submit = (e) => {
     e.preventDefault();
     addUser();
+      console.log(process.env.NODE_ENV === '')
   }
 
   return (
