@@ -47,7 +47,7 @@ export default function Login() {
                     </button>
                 </form>
 
-                <div className="backdrop-blur-sm w-fit scale-[2] mx-auto border border-best-white rounded-full">
+                <div className="bg-best-white opacity-40 w-fit my-20 scale-[2] border border-best-white rounded-full mx-auto"> {/* backdrop-blur-sm w-fit scale-[2] mx-auto border border-best-white rounded-full */}
                 <a href="/"><Logo /></a>
             </div>          
         </main>

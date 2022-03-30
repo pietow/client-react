@@ -36,7 +36,7 @@ export default function Dashboard() {
       <DashboardSection heading={'about my dear guests'} randomData='My guests shall pay a lot and do the dishes twice a day. My fridge needs to be filled at least every other day past noon. I like to sleep long so NO KIDS. I snore though.' />
       <DashboardSection heading={'tongues i might understand'} randomData={'french, japanese, german, english, dutch (maybe insert tiny icon flags here)'}/>
       <PrevNextButtons />
-      <div className="bg-best-white opacity-50 w-fit my-20 scale-[2] border border-best-white rounded-full">
+      <div className="bg-best-white opacity-40 w-fit my-20 scale-[2] border border-best-white rounded-full">
         <a href="/"><Logo /></a>
       </div>
     </div>
