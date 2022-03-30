@@ -1,5 +1,3 @@
-// import './src/assets/font/header/Knewave-Regular.ttf'
-
 module.exports = {
     content: [
     "./src/**/*.{js,jsx,ts,tsx}",
