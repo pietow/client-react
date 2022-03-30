@@ -1,57 +1,58 @@
 /** @format */
-
+import Logo from '../components/Logo'
 import React from 'react'
 import SendBtn from '../components/SendBtn'
 
 export default function Contact() {
+
+    const submit = e => {
+        e.preventDefault()
+        alert('we might answer you. \n but most likely not.')
+    } 
+
     return (
-        <main className="bg-contact bg-content bg-center bg-cover h-screen">
-            <h1 className="text-best-white text-6xl font-zeyada text-center pt-8">
+        <main className="flex flex-col items-center justify-evenly bg-contact bg-fixed bg-center bg-cover h-screen">
+            <h1 className="underline underline-offset-8 decoration-1 font-zeyada text-center text-6xl px-8 backdrop-brightness-75 backdrop-blur-sm text-best-white border rounded">
                 Get in touch!
             </h1>
-            <form className="backdrop-blur-sm relative flex flex-col border-best-white border mx-4 rounded top-48 absolute">
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <form onSubmit={submit} className="xl:w-1/4 lg:w-1/3 md:w-1/2 w-2/3 backdrop-brightness-75 backdrop-blur-sm flex flex-col border-best-white border rounded">
+               
                         <input
-                            className="w-full font-noto border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            className="mt-4 mx-4 p-1 rounded opacity-70"
                             id="contact-first-name"
                             type="text"
                             placeholder="First name"
                         />
-                    </div>
-                    <div class="w-full md:w-1/2 px-3">
+                   
                         <input
-                            class="w-full font-noto border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            className="mt-4 mx-4 p-1 rounded opacity-70"
                             id="grid-last-name"
                             type="text"
                             placeholder="Last name"
                         />
-                    </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
+             
+         
                         <input
-                            class="w-full font-noto border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            className="mt-4 mx-4 p-1 rounded opacity-70"
                             id="email"
                             type="email"
-                            placeholder="your@email.com"
+                            placeholder="email"
                         />
-                    </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
+             
+    
                         <textarea
-                            class=" no-resize w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
+                            className="mt-4 mx-4 p-1 rounded opacity-70 h-48"
                             id="message"
                             placeholder="Your message here..."></textarea>
-                    </div>
-                </div>
-                <div class="mx-auto pb-2 md:flex md:items-center">
+           
                    
-                        <SendBtn />
-                </div>
+                <button onClick={submit} className="active:scale-95 mx-auto my-4 p-1 border border-best-white text-best-white rounded w-1/2" type="submit" value="Become a Member">Send</button>
+                
                 
             </form>
+            <div className="bg-best-white opacity-40 w-fit scale-[2] border border-best-white rounded-full">{/* backdrop-blur-sm w-fit scale-[2] mx-auto border border-best-white rounded-full */}
+          <a href="/"><Logo /></a>
+        </div>
         </main>
     )
 }
