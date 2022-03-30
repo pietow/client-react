@@ -7,7 +7,7 @@ const Hero = () => {
     return (
       
         <section className="md:flex md:flex-col w-full h-screen ">
-            <div className="w-1/2 overflow-hidden text-center m-auto p-24 opacity-70  bg-morning-sky-blue border border-best-white rounded-full">{/* backdrop-blur-sm */}
+            <div className="w-1/2 overflow-hidden text-center m-auto p-24 backdrop-blur backdrop-brightness-75 rounded-full">{/* bg-morning-sky-blue,  opacity-70 */}
                 <figure className="flex justify-center mb-10 scale-[5]">
                     <Logo />
                 </figure>

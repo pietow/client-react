@@ -6,7 +6,7 @@ export default function Home() {
 
 
   return (
-    <main className="bg-hero bg-center bg-cover bg-fixed">
+    <main className="bg-sunnyGroup bg-center bg-cover bg-fixed">
         <Hero />
         <Features />
     </main>
