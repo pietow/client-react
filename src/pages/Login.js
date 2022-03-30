@@ -21,10 +21,10 @@ export default function Login() {
 
     return (
 
-        <main className="bg-login bg-center bg-cover bg-fixed h-screen">
+        <main className="flex flex-col items-center bg-huggingCrowd lg:bg-top bg-center bg-cover bg-fixed h-screen">
             <h1 className="text-best-white text-6xl font-zeyada text-center py-8">Login</h1>
 
-            <form onSubmit={onSubmit} className="backdrop-brightness-75 backdrop-blur-sm flex flex-col border-best-white border mx-4 my-40 rounded">{/*  */}
+            <form onSubmit={onSubmit} className="lg:w-1/3 w-2/3 flex bg-gray bg-opacity-40 flex-col border-best-white border mx-4 my-40 rounded">{/* backdrop-brightness-75 backdrop-blur-sm  */}
                      <input
                         className="mt-4 mx-4 p-1 rounded opacity-70"
                         type="text"
