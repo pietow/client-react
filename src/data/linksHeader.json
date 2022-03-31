@@ -4,8 +4,8 @@
         "path": "/"
     },
     {
-        "name": "dashboard",
-        "path": "/dashboard"
+        "name": "profile",
+        "path": "/profile"
     },
     {
         "name": "contact",

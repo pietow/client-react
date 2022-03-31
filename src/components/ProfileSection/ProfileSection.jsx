@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function DashboardSection({randomData, heading}) {
+export default function ProfileSection({randomData, heading}) {
   return (
     <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 rounded-md drop-shadow-md border border-best-white rounded-md">
         <h1 className="underline underline-offset-8 decoration-1 font-zeyada text-best-white m-4 text-3xl text-center">{heading}</h1>

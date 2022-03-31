@@ -21,7 +21,7 @@ export default function Header({toggle, setToggle, toggleBurger}) {
       <header className="flex flex-row items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal border-b border-best-white">
         <LogoLinkHeader />
         <h2 className="hidden lg:block text-best-white underline underline-offset-8 decoration-1">Roam Mate</h2>
-        <Link title="go to dashboard" to="/dashboard" className='lg:order-none order-1 border border-best-white rounded-full w-12 h-12'><span className="relative top-2 left-1 text-best-white">°O.ô°</span><b/> profile pic</Link>
+        <Link title="go to profile" to="/profile" className='lg:order-none order-1 border border-best-white rounded-full w-12 h-12'><span className="relative top-2 left-1 text-best-white">°O.ô°</span><b/> profile pic</Link>
         <div className="lg:order-none order-last lg:hidden" ref={ref}>
           <div onClick={e => toggleBurger(e)} className={toggle ? "transition duration-300 ease-in-out rotate-180 hover:bg-teal-bright active:bg-light-orange" : "ease-in-out transition duration-300 hover:bg-teal-bright active:bg-light-orange"}>     
             <Burger/>

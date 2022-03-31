@@ -14,7 +14,10 @@ export default function Hero() {
                 </figure>
                 <h1 className="text-best-white">Connect... roam!</h1>
                 <p className="text-best-white mb-7">Find a roam mate</p>
-                <Link to="/register" className="active:bg-light-orange hover:border-light-orange text-best-white font-bold py-3 px-6 border border-best-white rounded">Register</Link>  
+                <div className="flex justify-center gap-4 w-1/2 m-auto">
+                    <Link to="/register" className="w-28 active:bg-light-orange hover:border-light-orange text-best-white font-bold py-3 border border-best-white rounded">Register</Link>  
+                    <Link to="/login" className="w-28 active:bg-light-orange hover:border-light-orange text-best-white font-bold py-3 border border-best-white rounded">Login</Link>  
+                </div>
             </div>
         </section> 
     )
