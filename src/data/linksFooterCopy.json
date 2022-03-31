@@ -1,7 +1,4 @@
 [
-    {
-        "title": "about",
-        "links": [
             {
                 "name": "About",
                 "path": "/about"
@@ -18,7 +15,4 @@
                 "name": "Register",
                 "path": "/register"
             }
-        ]
-    }
 ]
-
