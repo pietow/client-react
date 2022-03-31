@@ -1,7 +1,9 @@
-import React, {/* useState, */ useEffect, useRef} from 'react'
-import NavList from './navList.js'
+import React, {useEffect, useRef} from 'react'
+import SmNavList from './smNavList.js'
+import LgNavList from './lgNavList.js'
 import Burger from './burger.js'
-import Logo from '../Logo/Logo'
+import LogoLinkHeader from '../LogoLinkHeader'
+import {Link} from 'react-router-dom'
 
 export default function Header({toggle, setToggle, toggleBurger}) {
 
@@ -16,17 +18,27 @@ export default function Header({toggle, setToggle, toggleBurger}) {
   }, [toggle, setToggle])
 
   return (
-      <header className="flex flex-row space-x-5 items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal">
-        <a href="/" className='border border-best-white rounded-full'><Logo /></a>
-        <h1 className="text-best-white font-zeyada text-4xl">here header</h1>
-        <div ref={ref}>
+      <header className="flex flex-row items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal border-b border-best-white">
+        <LogoLinkHeader />
+        <h2 className="hidden lg:block text-best-white underline underline-offset-8 decoration-1">Roam Mate</h2>
+        <Link title="go to profile" to="/profile" className='lg:order-none order-1 border border-best-white rounded-full w-12 h-12'><span className="relative top-2 left-1 text-best-white">°O.ô°</span><b/> profile pic</Link>
+        
+        {/* ----------------------------BURGER MENU START------------------------------ */}
+        
+        <div className="lg:order-none order-last lg:hidden" ref={ref}>
           <div onClick={e => toggleBurger(e)} className={toggle ? "transition duration-300 ease-in-out rotate-180 hover:bg-teal-bright active:bg-light-orange" : "ease-in-out transition duration-300 hover:bg-teal-bright active:bg-light-orange"}>     
             <Burger/>
           </div>
           <nav className={toggle ? "absolute drop-shadow-lg top-full left-0 w-full" : "hidden"}>
-            <NavList />
+            <SmNavList />
           </nav>
         </div>
+        
+        {/* ----------------------------BURGER MENU END-------------------------------- */}
+        
+        <nav className='hidden lg:block text-best-white font-noto top-11 absolute bg-teal-normal border-b border-x rounded-full'>
+          <LgNavList />
+        </nav>
       </header> 
   )
 }

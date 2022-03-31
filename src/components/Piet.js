@@ -1,14 +1,8 @@
-//rfc shortcut
 import React from 'react'
-import {useState, useEffect} from 'react'
-
 
 
 export default function Piet() {
 
-  const [randomUser, setRandomUser] = useState('')
- 
-  
 
   useEffect(() => {
     const getData = async () => {
@@ -20,11 +14,10 @@ export default function Piet() {
     getData()
   },[])
 
-  // console.log(randomUser, 'ho')
 
   return (
     <>
-      <div id="joke">{randomUser[0]["title"]}</div>
+      <div id="joke">nothing here</div>
     </>
   )
 }

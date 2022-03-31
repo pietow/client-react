@@ -1,0 +1,26 @@
+[
+    {
+        "name": "home",
+        "path": "/"
+    },
+    {
+        "name": "profile",
+        "path": "/profile"
+    },
+    {
+        "name": "contact",
+        "path": "/contact"
+    },
+    {
+        "name": "login",
+        "path": "/login"
+    },
+    {
+        "name": "logout",
+        "path": "/logout"
+    },
+    {
+        "name": "register",
+        "path": "/register"
+    }
+]
