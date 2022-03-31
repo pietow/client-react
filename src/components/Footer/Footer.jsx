@@ -3,13 +3,13 @@
 // import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import links from '../../data/links.json'
+import linksFooter from '../../data/linksFooter.json'
 
 export default function Footer() {
     return (
         <footer className="bg-pistachio-dark pb-14 pt-4 h-14 border-t-2 border-teal-dark">
             <div className="flex md:flex-row justify-center md:mx-auto space-x-0 md:space-x-8 space-y-8 md:space-y-0 order-3 md:order-2">
-                {links.map((item) => (
+                {linksFooter.map((item) => (
                     <div className="flex flex-row" key={item.title}>
                         <div>
                             {item.links.map((link) => (

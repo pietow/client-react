@@ -1,0 +1,26 @@
+[
+    {
+        "name": "home",
+        "path": "/"
+    },
+    {
+        "name": "dashboard",
+        "path": "/dashboard"
+    },
+    {
+        "name": "contact",
+        "path": "/contact"
+    },
+    {
+        "name": "login",
+        "path": "/login"
+    },
+    {
+        "name": "logout",
+        "path": "/logout"
+    },
+    {
+        "name": "register",
+        "path": "/register"
+    }
+]

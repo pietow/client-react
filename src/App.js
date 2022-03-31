@@ -8,7 +8,6 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
-import HeaderLarge from './components/HeaderLarge'
 
 export default function App() {
 
@@ -21,7 +20,6 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            {/* {<HeaderLarge/>} */}
             <Header toggle={toggle} setToggle={setToggle} toggleBurger={toggleBurger}/>
             <div className={toggle ? "transition duration-75 blur ease-in saturate-50" : "transition duration-50 ease-in"}>
             <Routes>

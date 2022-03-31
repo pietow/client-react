@@ -24,7 +24,7 @@ export default function Piet() {
 
   return (
     <>
-      <div id="joke">{randomUser[0]["title"]}</div>
+      <div id="joke">nothing here</div>
     </>
   )
 }
