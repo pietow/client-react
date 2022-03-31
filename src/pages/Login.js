@@ -1,6 +1,6 @@
 /** @format */
 import React, { useState } from 'react'
-import Logo from '../components/Logo'
+import LogoLink from '../components/LogoLink'
 
 export default function Login() {
 
@@ -17,6 +17,7 @@ export default function Login() {
         const result = await response.json()
 
         console.log(result)
+        alert('you might be logged in.\n or are you?')
     }
 
     return (
@@ -46,10 +47,7 @@ export default function Login() {
                         login
                     </button>
                 </form>
-
-                <div className="bg-best-white opacity-40 w-fit scale-[2] border border-best-white rounded-full"> {/* backdrop-blur-sm w-fit scale-[2] mx-auto border border-best-white rounded-full */}
-                <a href="/"><Logo /></a>
-            </div>          
+                <LogoLink />        
         </main>
     )
 }

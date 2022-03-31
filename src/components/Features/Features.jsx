@@ -6,7 +6,7 @@ import CardImage2 from '../../assets/img/jaunt-and-joy-nmi2TJCW-BM-unsplash.jpg'
 import CardImage3 from '../../assets/img/jonas-verstuyft-jXwZOSXC7KA-unsplash.jpg'
 import CardImage4 from '../../assets/img/mukuko-studio-tPKQwYHy8q4-unsplash.jpg'
 
-const Features = () => {
+export default function Features() {
     return (
       <main className="bg-gradient-to-t from-pistachio-normal to-apricot-bright">
       <h1 className="text-center font-zeyada p-6">Connect and make new memories</h1>
@@ -83,5 +83,3 @@ const Features = () => {
         </main>
     )
 }
-
-export default Features

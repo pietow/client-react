@@ -1,9 +1,10 @@
 /** @format */
 import React from 'react'
 import Logo from '../Logo'
+import {Link} from 'react-router-dom'
 
 
-const Hero = () => {
+export default function Hero() {
     return (
       
         <section className="md:flex md:flex-col w-full h-screen ">
@@ -13,11 +14,8 @@ const Hero = () => {
                 </figure>
                 <h1 className="text-best-white">Connect... roam!</h1>
                 <p className="text-best-white mb-7">Find a roam mate</p>
-                <a href="/register" className="active:bg-light-orange hover:border-light-orange text-best-white font-bold py-3 px-6 border border-best-white rounded">Register</a>  
+                <Link to="/register" className="active:bg-light-orange hover:border-light-orange text-best-white font-bold py-3 px-6 border border-best-white rounded">Register</Link>  
             </div>
-        </section>
-        
+        </section> 
     )
 }
-
-export default Hero;
