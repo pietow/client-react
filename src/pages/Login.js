@@ -7,8 +7,9 @@ export default function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     
-    const onSubmit = async (event) => {
-        event.preventDefault()
+    const onSubmit = async e => {
+        e.preventDefault()
+        alert('you might be logged in.\n or are you?')
         const response = await fetch(`/api/users/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -17,7 +18,6 @@ export default function Login() {
         const result = await response.json()
 
         console.log(result)
-        alert('you might be logged in.\n or are you?')
     }
 
     return (

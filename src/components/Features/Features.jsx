@@ -20,7 +20,7 @@ export default function Features() {
         <main className="bg-gradient-to-t from-pistachio-normal to-apricot-bright">
             <h1 className="text-center p-6">Connect and make new memories</h1>
             <div className="flex flex-row justify-evenly mt-10 pb-32">
-            {images.map((elem, i) => (
+            {images.map(elem => (
                 <div className="justify-center" key={elem[1]}>
                     <div className="rounded-lg shadow-lg bg-best-white max-w-sm">
                         <figure>
