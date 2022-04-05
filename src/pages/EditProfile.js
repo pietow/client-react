@@ -6,14 +6,16 @@ import reducer from '../data/useReducer'
 const initialState = {
   name: 'Herbert', 
   nextName:'',
-  age: '',
+  age: 50,
   nextAge: '',
-  bio: '',
-  nextBio: ''
+  bio: 'I am hungry!',
+  nextBio: '',
+  email: '',
+  nextEmail: ''
 }
 
 
-export default function Profile() {
+export default function EditProfile() {
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -31,6 +33,13 @@ export default function Profile() {
       nextAge: e.target.value === '' ? state.age : e.target.value 
   })}
 
+  const inputChangeEmail = e => {
+    e.preventDefault()
+    dispatch({
+      type: 'changed_email',
+      nextEmail: e.target.value === '' ? state.email : e.target.value 
+  })}
+
   const inputChangeBio = e => {
     e.preventDefault()
     dispatch({
@@ -45,6 +54,7 @@ export default function Profile() {
       type: 'saved_data',
       nextName: state.nextName === '' ? state.name : state.nextName, 
       nextAge: state.nextAge === '' ? state.age : state.nextAge,
+      nextEmail: state.nextEmail === '' ? state.email : state.nextEmail,
       nextBio: state.nextBio === '' ? state.bio : state.nextBio
   })}
 
@@ -64,14 +74,16 @@ export default function Profile() {
       {/* -----------------------profile section start------------------- */}
       
       <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
-        <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 text-3xl">User Data</h1>
+        <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex346345rdgtd-3xl">User Data</h1>
         <p className="text-justify mx-4 mb-4 p-4 text-best-white">name: {state.name}</p>
         <p className="text-justify mx-4 mb-4 p-4 text-best-white">age: {state.age}</p>
         <p className="text-justify mx-4 mb-4 p-4 text-best-white">bio: {state.bio}</p>
+        <p className="text-justify mx-4 mb-4 p-4 text-best-white">email: {state.email}</p>
         <form onSubmit={saveData}>
           <input value={state.nextName} type="text" onChange={inputChangeName} placeholder="enter new name here"/>
           <input value={state.nextAge} type="number" onChange={inputChangeAge} placeholder="enter age here"/>
-          <textarea className="mt-4 mx-4 p-1 rounded opacity-70 h-48" value={state.nextBio} onChange={inputChangeBio} placeholder="Your message here..."></textarea>
+          <input value={state.nextEmail} type="email" onChange={inputChangeEmail} placeholder="enter email here"/>
+          <textarea className="mt-4 mx-4 p-1 rounded opacity-70 h-48" value={state.nextBio} onChange={inputChangeBio} placeholder={state.bio.length ? state.bio : "Your message here..."}></textarea>
           <button type='submit' className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2">save data</button>
         </form>
       </section>

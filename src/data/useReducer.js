@@ -7,7 +7,9 @@ export default function reducer(state, action) {
           age: action.nextAge,
           nextAge: '',
           bio: action.nextBio,
-          nextBio: ''
+          nextBio: '',
+          email: action.nextEmail,
+          nextEmail: ''
         }
       }
       case 'changed_name': {
@@ -17,7 +19,9 @@ export default function reducer(state, action) {
           age: state.age,
           nextAge: state.nextAge,
           bio: state.bio,
-          nextBio: state.nextBio
+          nextBio: state.nextBio,
+          email: state.email,
+          nextEmail: state.nextEmail
         }
       }
       case 'changed_age': {
@@ -27,7 +31,9 @@ export default function reducer(state, action) {
           age: state.age,
           nextAge: action.nextAge,
           bio: state.bio,
-          nextBio: state.nextBio
+          nextBio: state.nextBio,
+          email: state.email,
+          nextEmail: state.nextEmail
         }
       }
     
@@ -38,7 +44,21 @@ export default function reducer(state, action) {
           age: state.age,
           nextAge: state.nextAge,
           bio: state.bio,
-          nextBio: action.nextBio
+          nextBio: action.nextBio,
+          email: state.email,
+          nextEmail: state.nextEmail
+        }
+      }
+      case 'changed_email': {
+        return {
+          name: state.name,
+          nextName: state.nextName,
+          age: state.age,
+          nextAge: state.nextAge,
+          bio: state.bio,
+          nextBio: state.nextBio,
+          email: state.email,
+          nextEmail: action.nextEmail
         }
       }
     }
