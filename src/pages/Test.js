@@ -1,41 +1,42 @@
-import React, { useReducer } from 'react';
-// import reducer from '../data/useReducer'
+import React, {useEffect, useReducer} from "react";
 
-
-/* ________________________________________ */
-const initialState = { name: 'Jochen', age: 100 };
-/* ________________________________________ */
-
-
-export default function Form() {
-
-/* pppppppppppppppppppppppppppppppppppppppp */
-  const [state, dispatch] = useReducer(reducer, initialState);
-/* pppppppppppppppppppppppppppppppppppppppp */
-
-/* ---------------------------------------- */
-  function handleButtonClick() {
-    dispatch({ type: 'incremented_age' });
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'fetched_data': {
+      return {
+        fetched: action.fetched
+      }
+    }
   }
+  throw Error('something\'s wrong here:\n' + action.type)
+}
 
-  function handleInputChange(e) {
+export default function Test() {
+  
+  const [state, dispatch] = useReducer(reducer, {fetched: ''})
+  
+  const fetching = async () => {
+    const responds = await fetch('api/users/', {
+      method: "GET",
+      headers: {'content-type': 'application/json'}
+    })
+    const result = await responds.json();
     dispatch({
-      type: 'changed_name',
-      nextName: e.target.value
-    }); 
+      type: 'fetched_data',
+      fetched: result
+    })
   }
-/* ---------------------------------------- */
+
+  useEffect(() => {
+    fetching()
+    // console.log(state.fetched[0]?.fname) //gives undefined
+  }, [])
+  // console.log(state.fetched[0]?.fname) //gives undefined and actual data
+  
 
   return (
-    <>
-      <input
-        value={state.name}
-        onChange={handleInputChange}
-      />
-      <button onClick={handleButtonClick}>
-        Increment age
-      </button>
-      <p>Hello, {state.name}. You are {state.age}.</p>
-    </>
-  );
+    <div className="flex justify-center items-center h-screen bg-gray">
+      <p className="text-best-white text-xl text-center">TEST<br/>{state.fetched[0]?.fname}</p>
+    </div>
+  )
 }

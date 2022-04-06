@@ -1,48 +1,46 @@
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import LogoLink from '../components/LogoLink'
-import reducer from '../data/useReducer'
+// import reducer from '../data/useReducer'
 
-
-const initialState = {
-  name: 'Herbert', 
-  nextName:'',
-  age: 50,
-  nextAge: '',
-  bio: 'I am hungry!',
-  nextBio: '',
-  email: '',
-  nextEmail: ''
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'fetched_data': {
+      return {
+        fetched: action.fetched
+      }
+    }
+  }
+  throw Error('something\'s wrong: ' + action.type)
 }
-
 
 export default function EditProfile() {
 
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, {fetched: ''})
 
-  const [userData, setUserData] = useState({});
-
-
-  const getUser = async () => {
+  const fetching = async () => {
     const response = await fetch('api/users/', {
       method: "GET",
       headers: {'content-type':'application/json'}
     });
-    const result = await response.json();
-    setUserData(result)
-  }
+    const result = await response.json()
+    dispatch({
+      type: 'fetched_data',
+      fetched: result
+    })
+  }  
 
   useEffect(() => {
-    getUser()
-  }, [state])
+    fetching()
+  }, [])
 
 /* ggggggggggggggggggg */
-  const editUserName = async () => {
+  /* const editUserName = async () => {
     const response = await fetch(`api/users/${userData[0]._id}`, {
       method: "PUT",
       headers: {'content-type':'application/json'},
       body: JSON.stringify(state) //state is an object
     });
-  }
+  } */
 /* ggggggggggggggggggg */
 
   const inputChangeName = e => {
@@ -102,7 +100,7 @@ export default function EditProfile() {
       {/* -----------------------profile section start------------------- */}
       
       <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
-        <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex-3xl">username: <span className="bg-apricot-dark">{userData[0]?.fname}</span></h1>
+        <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex-3xl">username: <span className="bg-apricot-dark">{state.fetched[0]?.fname}</span></h1>
         <form onSubmit={saveData}>
         <p className="text-justify mx-4 mb-4 p-4 text-best-white">name: {state.name}</p>
           <input value={state.nextName} type="text" onChange={inputChangeName} placeholder="enter new name here"/>
@@ -111,10 +109,10 @@ export default function EditProfile() {
         <p className="text-justify mx-4 mb-4 p-4 text-best-white">email: {state.email}</p>
           <input value={state.nextEmail} type="email" onChange={inputChangeEmail} placeholder="enter email here"/>
         <p className="text-justify mx-4 mb-4 p-4 text-best-white">bio: {state.bio}</p>
-          <textarea className="mt-4 mx-4 p-1 rounded opacity-70 h-48" value={state.nextBio} onChange={inputChangeBio} placeholder={state.bio.length ? state.bio : "Your message here..."}></textarea>
+          <textarea className="mt-4 mx-4 p-1 rounded opacity-70 h-48" value={state.nextBio} onChange={inputChangeBio} placeholder="Your message here..."></textarea>
           <button type='submit' className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2">save data</button>
         </form>
-        <button onClick={editUserName}>click Herbert</button>
+        {/* <button onClick={editUserName}>click Herbert</button> */}
       </section>
 
       {/* -----------------------profile section end--------------------- */}
