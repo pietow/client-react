@@ -6,7 +6,7 @@ import reducer from '../data/useReducer'
 export default function EditProfile({ accessToken }) {
 
   const [state, dispatch] = useReducer(reducer, {fetched: [], fname: ''})
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('')//to reset the input field after sending the data to mongoDB
 
   useEffect(() => {
     (async () => {
@@ -14,7 +14,7 @@ export default function EditProfile({ accessToken }) {
         method: "GET",
         headers: {
           'content-type': 'application/json', 
-          'authorization': `bearer ${accessToken}` //wird bei erfolgreichem login vergeben
+          'authorization': `bearer ${accessToken}` //after successful login you get access token
         }
       });
       const result = await response.json()
