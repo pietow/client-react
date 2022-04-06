@@ -1,60 +1,28 @@
 import React, { useEffect, useReducer } from 'react'
 import LogoLink from '../components/LogoLink'
+import reducer from '../data/useReducer'
 
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'fetched_data': { //useEffect
-      return {
-        ...state,
-        fetched: action.fetched
-      }
-    }
-    case 'changed_fname': { //onChange im Input
-      return {
-        ...state,
-        nextFname: action.nextFname,
-      }
-    }
-    case 'saved_data': { //onSubmit
-      return {
-        ...state,
-        fname: action.nextFname,
-        nextFname: ''
-      }
-    }
-    case 'modified_user': {
-      state.fetched[0] = action.modification//wird in prod geändert!
-      return {
-        ...state
-      }
-    }
-  }
-  throw Error('something\'s wrong: ' + action.type)
-}
 
 export default function EditProfile() {
 
-  const [state, dispatch] = useReducer(reducer, {fetched: [], fname: '', nextFname: ''})
-
-  const fetching = async () => {
-    const response = await fetch('api/users/', {
-      method: "GET",
-      headers: {'content-type':'application/json'}
-    });
-    const result = await response.json()
-    dispatch({
-      type: 'fetched_data',
-      fetched: result
-    })
-  }  
+  const [state, dispatch] = useReducer(reducer, {fetched: [], fname: ''})
 
   useEffect(() => {
-    fetching()
+    (async () => {
+      const response = await fetch('api/users/', {
+        method: "GET",
+        headers: {'content-type':'application/json'}
+      });
+      const result = await response.json()
+      dispatch({
+        type: 'fetched_data',
+        fetched: result
+      })
+    })()  
   }, [])
 
-  /* ggggggggggggggggggg */
-  const editUserData = async () => { //clickHerbert
+  const editUserData = async (e) => {//send data to mongoDB
+    e.preventDefault()
     const responds = await fetch(`api/users/${state.fetched[0]?._id}`, {
       method: "PUT",
       headers: {'content-type':'application/json'},
@@ -63,32 +31,18 @@ export default function EditProfile() {
     const result = await responds.json()
     dispatch({
       type: 'modified_user',
+      fname: state.fname === '' ? state.fname : state.fname,
       modification: result
     })
+    document.getElementById('fname').value = ''
   }
-  /* ggggggggggggggggggg */
-  
-  // const state.fetched[0] = state.fetched[0]
   
   const inputChangeFname = e => {
     e.preventDefault()  
     dispatch({
       type: 'changed_fname',
-      nextFname: e.target.value === '' ? state.fetched[0].fname : e.target.value
+      fname: e.target.value === '' ? state.fetched[0].fname : e.target.value
   })}
-
-
-  const saveData = e => {
-
-    e.preventDefault()
-    dispatch({
-      type: 'saved_data',
-      nextFname: state.nextFname === '' ? state.fname : state.nextFname
-    })
-    document.getElementById('fname').value = ''
-
-  }
-
 
   return (
     <main className="xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker"> 
@@ -107,14 +61,13 @@ export default function EditProfile() {
       
       <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
         <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex-3xl">{state.fetched[0]?.fname}</h1>
-        <form onSubmit={saveData}>
+        <form onSubmit={editUserData}>
        
         <p className="text-justify mx-4 mb-4 p-4 text-best-white">fname: {state.fetched[0]?.fname}</p>
-          <input id="fname" value={state.fetched[0]?.nextFname} type="text" onChange={inputChangeFname} placeholder="enter new fname here"/>
+          <input id="fname" type="text" onChange={inputChangeFname} placeholder="enter new fname here" required/>
        
           <button type='submit' className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2">save data</button>
         </form>
-        <button onClick={editUserData} className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2">click Herbert</button>
       </section>
 
       {/* -----------------------profile section end--------------------- */}
