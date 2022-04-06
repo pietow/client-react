@@ -1,17 +1,21 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 import LogoLink from '../components/LogoLink'
 import reducer from '../data/useReducer'
 
 
-export default function EditProfile() {
+export default function EditProfile({ accessToken }) {
 
   const [state, dispatch] = useReducer(reducer, {fetched: [], fname: ''})
+  const [value, setValue] = useState('')
 
   useEffect(() => {
     (async () => {
       const response = await fetch('api/users/', {
         method: "GET",
-        headers: {'content-type':'application/json'}
+        headers: {
+          'content-type': 'application/json', 
+          'authorization': `bearer ${accessToken}` //wird bei erfolgreichem login vergeben
+        }
       });
       const result = await response.json()
       dispatch({
@@ -21,11 +25,14 @@ export default function EditProfile() {
     })()  
   }, [])
 
-  const editUserData = async (e) => {//send data to mongoDB
+  const editUserData = async e => {//send data to mongoDB
     e.preventDefault()
     const responds = await fetch(`api/users/${state.fetched[0]?._id}`, {
       method: "PUT",
-      headers: {'content-type':'application/json'},
+      headers: {
+        'content-type': 'application/json', 
+        'authorization': `bearer ${accessToken}`
+      },
       body: JSON.stringify(state) //state is an object
     });
     const result = await responds.json()
@@ -34,15 +41,17 @@ export default function EditProfile() {
       fname: state.fname === '' ? state.fname : state.fname,
       modification: result
     })
-    document.getElementById('fname').value = ''
+    setValue('')
   }
   
   const inputChangeFname = e => {
-    e.preventDefault()  
+    e.preventDefault()
+    setValue(e.target.value)  
     dispatch({
       type: 'changed_fname',
       fname: e.target.value === '' ? state.fetched[0].fname : e.target.value
   })}
+ 
 
   return (
     <main className="xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker"> 
@@ -63,8 +72,8 @@ export default function EditProfile() {
         <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex-3xl">{state.fetched[0]?.fname}</h1>
         <form onSubmit={editUserData}>
        
-        <p className="text-justify mx-4 mb-4 p-4 text-best-white">fname: {state.fetched[0]?.fname}</p>
-          <input id="fname" type="text" onChange={inputChangeFname} placeholder="enter new fname here" required/>
+          <p className="text-justify mx-4 mb-4 p-4 text-best-white">fname: {state.fetched[0]?.fname}</p>
+          <input value={value} type="text" onChange={inputChangeFname} placeholder="enter new fname here" required/>
        
           <button type='submit' className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2">save data</button>
         </form>
