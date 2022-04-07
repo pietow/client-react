@@ -18,6 +18,7 @@ export default function Login({ setAccessToken }) {
             })
         const result = await response.json()
         setAccessToken(result.token)
+        localStorage.setItem('key', result.token)
         console.log(result)
     }
 

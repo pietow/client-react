@@ -8,13 +8,12 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Profile from './pages/Profile'
 import Login from './pages/Login'
-// import Test from './pages/Test'
 import EditProfile from './pages/EditProfile'
 
 export default function App() {
 
     const [toggle, setToggle] = useState(0);
-    const [accessToken, setAccessToken] = useState('')
+    const [accessToken, setAccessToken] = useState(localStorage.getItem('key') || '')
 
     const toggleBurger = (e) => { //menu visible or not?
         e.preventDefault()
