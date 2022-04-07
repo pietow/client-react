@@ -23,7 +23,7 @@ export default function Login({ setAccessToken }) {
             setAccessToken(result.token)
             sessionStorage.setItem('key', result.token)
             navigate('/')
-            alert(`welcome back ${result.username}!`)
+            alert(`hey ${result.username}, welcome back!`)
         } else {
             setUsername('')
             setPassword('')
