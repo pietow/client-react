@@ -13,7 +13,7 @@ import EditProfile from './pages/EditProfile'
 export default function App() {
 
     const [toggle, setToggle] = useState(0);
-    const [accessToken, setAccessToken] = useState(localStorage.getItem('key') || '')
+    const [accessToken, setAccessToken] = useState(sessionStorage.getItem('key') || '')
 
     const toggleBurger = (e) => { //menu visible or not?
         e.preventDefault()
