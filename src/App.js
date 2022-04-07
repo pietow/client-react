@@ -29,12 +29,13 @@ export default function App() {
                         <div className={toggle ? "transition duration-75 blur ease-in saturate-50" : "transition duration-50 ease-in"}> {/* should be put in its own context */}
                         <Routes>
                             <Route path="/" element={<Home/>}/>
+                            <Route path="/*" element={<Home/>}/>
                             <Route path="/register" element={<Register/>} />
                             <Route path="/contact" element={<Contact />} />
                             <Route path="/profile" element={<Profile/>} />
                             <Route path="/login" element={<Login />}/>
                             <Route path="/logout" element={<Logout/>} />
-                            <Route path="/editprofile" element={<EditProfile/>} /> {/* needs accessToken */}
+                            <Route path="/editprofile" element={<EditProfile/>} />
                         </Routes>
                         </div>
                     </BlurContext.Provider>
