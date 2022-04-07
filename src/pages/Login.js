@@ -1,14 +1,16 @@
 /** @format */
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import LogoLink from '../components/LogoLink'
 import { useNavigate } from 'react-router-dom'
+import { SetAuthentication } from '../context/setAccessTokenContext'
 
 
-export default function Login({ setAccessToken }) {
+export default function Login() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    const setAccessToken = useContext(SetAuthentication)
     
     const onSubmit = async e => {
         e.preventDefault()
@@ -22,7 +24,7 @@ export default function Login({ setAccessToken }) {
         if (result.token) {
             setAccessToken(result.token)
             sessionStorage.setItem('key', result.token)
-            navigate('/')
+            navigate('/profile')
             alert(`hey ${result.username}, welcome back!`)
         } else {
             setUsername('')

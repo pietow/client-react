@@ -5,9 +5,14 @@ import Burger from './burger.js'
 import LogoLinkHeader from '../LogoLinkHeader'
 import {Link} from 'react-router-dom'
 
-export default function Header({toggle, setToggle, toggleBurger}) {
+export default function Header({toggle, setToggle}) {
 
   const ref = useRef()
+
+  const toggleBurger = (e) => { //menu visible or not?
+    e.preventDefault()
+    toggle ? setToggle(0) : setToggle(1);
+}
 
   useEffect(() => {
     const checkOutsideClick = e => {

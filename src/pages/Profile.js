@@ -3,13 +3,13 @@ import LogoLink from '../components/LogoLink'
 import ProfileSection from '../components/ProfileSection'
 import ProfilePic from '../components/ProfilePic'
 import { Authentication } from '../context/accessTokenContext'
-import Logout from './Logout'
+import Home from './Home'
 
 
 export default function Profile() {
 
   const [userData, setUserData] = useState({});
-  const tokenExists = useContext(Authentication)
+  const accessToken = useContext(Authentication)
 
   const getUser = async () => {
     const response = await fetch('api/users/', {
@@ -24,7 +24,7 @@ export default function Profile() {
     getUser()
   },[])
 
-  if (tokenExists) {
+  if (accessToken) {
     return (
       <main className="xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker"> 
         <ProfilePic />
@@ -37,5 +37,5 @@ export default function Profile() {
         <LogoLink />
       </main>
     )
-  } else return <Logout />
+  } else return <Home />
 }
