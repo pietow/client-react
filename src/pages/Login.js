@@ -1,25 +1,34 @@
 /** @format */
 import React, { useState } from 'react'
 import LogoLink from '../components/LogoLink'
+import { useNavigate } from 'react-router-dom'
+
 
 export default function Login({ setAccessToken }) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-
+    const navigate = useNavigate()
     
     const onSubmit = async e => {
         e.preventDefault()
-        alert('you might be logged in.\n or are you?')
         const response = await fetch(`/api/users/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({username, password}),
             })
         const result = await response.json()
-        setAccessToken(result.token)
-        sessionStorage.setItem('key', result.token)
-        console.log(result)
+        
+        if (result.token) {
+            setAccessToken(result.token)
+            sessionStorage.setItem('key', result.token)
+            navigate('/')
+            alert(`welcome back ${result.username}!`)
+        } else {
+            setUsername('')
+            setPassword('')
+            alert('nope. something\'s wrong.\nplease, try again.')
+        } 
     }
 
     return (
