@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import LogoLink from '../components/LogoLink'
 import ProfileSection from '../components/ProfileSection'
 import ProfilePic from '../components/ProfilePic'
-import { Authentication } from '../context/authContext'
+import { Authentication } from '../context/accessTokenContext'
 import Logout from './Logout'
 
 
