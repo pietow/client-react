@@ -14,6 +14,7 @@ import EditProfile from './pages/EditProfile'
 export default function App() {
 
     const [toggle, setToggle] = useState(0);
+    const [accessToken, setAccessToken] = useState('')
 
     const toggleBurger = (e) => { //menu visible or not?
         e.preventDefault()
@@ -26,12 +27,11 @@ export default function App() {
             <div className={toggle ? "transition duration-75 blur ease-in saturate-50" : "transition duration-50 ease-in"}>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                {/* <Route path="/test" element={<Test/>}/> */}
                 <Route path="/register" element={<Register/>} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/profile" element={<Profile/>} />
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/editprofile" element={<EditProfile />} />
+                <Route path="/login" element={<Login setAccessToken={setAccessToken} />}/>
+                <Route path="/editprofile" element={<EditProfile accessToken={accessToken}/>} />
             </Routes>
             </div>
             <Footer />

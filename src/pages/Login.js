@@ -2,10 +2,11 @@
 import React, { useState } from 'react'
 import LogoLink from '../components/LogoLink'
 
-export default function Login() {
+export default function Login({ setAccessToken }) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+
     
     const onSubmit = async e => {
         e.preventDefault()
@@ -16,7 +17,7 @@ export default function Login() {
             body: JSON.stringify({username, password}),
             })
         const result = await response.json()
-
+        setAccessToken(result.token)
         console.log(result)
     }
 
