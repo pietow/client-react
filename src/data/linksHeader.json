@@ -16,10 +16,6 @@
         "path": "/login"
     },
     {
-        "name": "logout",
-        "path": "/logout"
-    },
-    {
         "name": "register",
         "path": "/register"
     },

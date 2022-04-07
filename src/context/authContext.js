@@ -1,3 +1,3 @@
 import { createContext } from 'react'
 
-const Authentication = createContext(accessToken)
+export const Authentication = createContext(null)
