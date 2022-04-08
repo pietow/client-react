@@ -20,7 +20,7 @@ export default function Login() {
             body: JSON.stringify({username, password}),
             })
         const result = await response.json()
-        
+        console.log(result)
         if (result.token) {
             setAccessToken(result.token)
             sessionStorage.setItem('key', result.token)

@@ -1,26 +1,38 @@
 [
     {
         "name": "home",
-        "path": "/"
+        "path": "/",
+        "needsAccess": false,
+        "showAlways": true
     },
     {
         "name": "profile",
-        "path": "/profile"
-    },
-    {
-        "name": "contact",
-        "path": "/contact"
-    },
-    {
-        "name": "login",
-        "path": "/login"
-    },
-    {
-        "name": "register",
-        "path": "/register"
+        "path": "/profile",
+        "needsAccess": true,
+        "showAlways": false
     },
     {
         "name": "editprofile",
-        "path": "/editprofile"
+        "path": "/editprofile",
+        "needsAccess": true,
+        "showAlways": false
+    },
+    {
+        "name": "contact",
+        "path": "/contact",
+        "needsAccess": false,
+        "showAlways": true
+    },
+    {
+        "name": "register",
+        "path": "/register",
+        "needsAccess": false,
+        "showAlways": false
+    },
+    {
+        "name": "login",
+        "path": "/login",
+        "needsAccess": false,
+        "showAlways": false
     }
 ]
