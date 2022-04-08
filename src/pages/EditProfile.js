@@ -12,7 +12,7 @@ export default function EditProfile() {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch('api/users/', {
+      const response = await fetch(`api/users/`, {
         method: "GET",
         headers: {
           'content-type': 'application/json', 
@@ -20,6 +20,7 @@ export default function EditProfile() {
         }
       });
       const result = await response.json()
+      console.log(result)
       dispatch({
         type: 'fetched_data',
         fetched: result
@@ -29,7 +30,8 @@ export default function EditProfile() {
 
   const editUserData = async e => {//send data to mongoDB
     e.preventDefault()
-    const responds = await fetch(`api/users/${state.fetched[0]?._id}`, {
+    // console.log(sessionStorage.getItem('user'))
+    const responds = await fetch(`api/users/${state.fetched[0]?._id}`, { //sessionStorage.getItem('user')
       method: "PUT",
       headers: {
         'content-type': 'application/json', 
@@ -45,7 +47,9 @@ export default function EditProfile() {
     })
     setValue('')
   }
-  
+  // let what = sessionStorage.getItem('user')
+  // console.log(typeof what)
+
   const inputChangeFname = e => {
     e.preventDefault()
     setValue(e.target.value)  

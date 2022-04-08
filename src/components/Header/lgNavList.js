@@ -31,7 +31,7 @@ export default function LgNavList() {
         return result
       }, [])}
       <li key="logout" className={!accessToken ? "hidden" : "px-4 pb-2 pt-1 hover:scale-110"}>
-        <Link onClick={() => {setAccessToken(''); sessionStorage.removeItem('key'); alert('logout successful.')}} to="/">logout</Link>
+        <Link onClick={() => {setAccessToken(''); sessionStorage.removeItem('key'); /* sessionStorage.removeItem('user'); */ alert('logout successful.')}} to="/">logout</Link>
       </li>
     </ul>
   )

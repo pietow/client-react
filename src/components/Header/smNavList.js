@@ -31,7 +31,7 @@ export default function SmNavList({ toggle, setToggle }) {
         return result
       }, [])}
       <li key="logout" className={!accessToken ? "hidden" : "hover:bg-light-orange hover:text-gray-dark active:outline active:outline-aero-blue pl-2 rounded"}>
-        <Link onClick={() => {setAccessToken(''); sessionStorage.removeItem('key'); alert('logout successful.'); toggle ? setToggle(0) : setToggle=(1)}} to="/">logout</Link>
+        <Link onClick={() => {setAccessToken(''); sessionStorage.removeItem('key'); /* sessionStorage.removeItem('user'); */ alert('logout successful.'); toggle ? setToggle(0) : setToggle=(1)}} to="/">logout</Link>
       </li>
     </ul>
   )

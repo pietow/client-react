@@ -20,10 +20,11 @@ export default function Login() {
             body: JSON.stringify({username, password}),
             })
         const result = await response.json()
-        console.log(result)
         if (result.token) {
-            setAccessToken(result.token)
-            sessionStorage.setItem('key', result.token)
+            setAccessToken(result.token);
+            sessionStorage.setItem('key', result.token);
+            // sessionStorage.setItem('user', result._id);
+            // console.log(sessionStorage.getItem('user'))
             navigate('/profile')
             alert(`hey ${result.username}, welcome back!`)
         } else {
