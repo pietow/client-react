@@ -1,24 +1,36 @@
 /** @format */
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import LogoLink from '../components/LogoLink'
+import { useNavigate } from 'react-router-dom'
+import { SetAuthentication } from '../context/setAccessTokenContext'
 
-export default function Login({ setAccessToken }) {
+
+export default function Login() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-
+    const navigate = useNavigate()
+    const setAccessToken = useContext(SetAuthentication)
     
     const onSubmit = async e => {
         e.preventDefault()
-        alert('you might be logged in.\n or are you?')
         const response = await fetch(`/api/users/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({username, password}),
             })
         const result = await response.json()
-        setAccessToken(result.token)
         console.log(result)
+        if (result.token) {
+            setAccessToken(result.token)
+            sessionStorage.setItem('key', result.token)
+            navigate('/profile')
+            alert(`hey ${result.username}, welcome back!`)
+        } else {
+            setUsername('')
+            setPassword('')
+            alert('nope. something\'s wrong.\nplease, try again.')
+        } 
     }
 
     return (

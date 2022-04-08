@@ -5,9 +5,14 @@ import Burger from './burger.js'
 import LogoLinkHeader from '../LogoLinkHeader'
 import {Link} from 'react-router-dom'
 
-export default function Header({toggle, setToggle, toggleBurger}) {
+export default function Header({toggle, setToggle}) {
 
   const ref = useRef()
+
+  const toggleBurger = (e) => { //menu visible or not?
+    e.preventDefault()
+    toggle ? setToggle(0) : setToggle(1);
+}
 
   useEffect(() => {
     const checkOutsideClick = e => {
@@ -30,13 +35,13 @@ export default function Header({toggle, setToggle, toggleBurger}) {
             <Burger/>
           </div>
           <nav className={toggle ? "absolute drop-shadow-lg top-full left-0 w-full" : "hidden"}>
-            <SmNavList />
+            <SmNavList toggle={toggle} setToggle={setToggle}/>
           </nav>
         </div>
         
         {/* ----------------------------BURGER MENU END-------------------------------- */}
         
-        <nav className='hidden lg:block text-best-white font-noto top-11 absolute bg-teal-normal border-b border-x rounded-full'>
+        <nav className="hidden lg:block text-best-white font-noto top-11 absolute bg-teal-normal border-b border-x rounded-full">
           <LgNavList />
         </nav>
       </header> 

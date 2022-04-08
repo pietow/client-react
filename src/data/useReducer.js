@@ -18,6 +18,8 @@ export default function reducer(state, action) {
         ...state
       }
     }
+    default: {
+      return Error('something\'s wrong: ' + action.type)
+    }
   }
-  throw Error('something\'s wrong: ' + action.type)
-  }
+}
