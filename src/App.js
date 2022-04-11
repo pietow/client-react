@@ -26,11 +26,10 @@ export default function App() {
         <BrowserRouter>
             <Authentication.Provider value={accessToken}>
                 <SetAuthentication.Provider value={setAccessToken}>
-                    <Header toggle={toggle} setToggle={setToggle} /> {/* needs accessToken and setAccessToken */}
+                    <Header toggle={toggle} setToggle={setToggle} />{/* how to widen Link??? */}
                     {/* <BlurContext.Provider>could be filled with the toggle stuff from one line below, but might be too much work; would be useContext in every component; feels not right */}
                         <div className={toggle ? "transition duration-75 blur ease-in saturate-50" : "transition duration-50 ease-in"}> {/* should be put in its own context */}
                         <Routes>
-                            <Route path="/" element={<Home/>}/>
                             <Route path="/*" element={<Home/>}/>
                             <Route path="/register" element={<Register/>} />
                             <Route path="/contact" element={<Contact />} />
