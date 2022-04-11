@@ -44,9 +44,11 @@ export default function LgNavList() {
                     onClick={() => {
                         setAccessToken('')
                         sessionStorage.removeItem('key')
-                        sessionStorage.removeItem('user'); alert(
-                            'logout successful.',
-                        )
+                        setTimeout(() => {
+                            //otherwise alert comes before re-rendering which looks stupid!
+                            alert('logout successful.')
+                        }, 500)
+                        sessionStorage.removeItem('user')
                     }}
                     to="/">
                     logout

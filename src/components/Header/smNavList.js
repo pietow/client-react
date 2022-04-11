@@ -15,7 +15,10 @@ export default function SmNavList({ toggle, setToggle }) {
             onClick={() => setToggle()}
             key={name}
             className="hover:bg-light-orange hover:text-gray-dark active:outline active:outline-aero-blue pl-2 rounded">
-            <Link className="pr-[54rem]" to={path}>{name}</Link> {/* without  pr-[54rem] area for Link not working; cheating^^*/}
+            <Link className="pr-[54rem]" to={path}>
+                {name}
+            </Link>{' '}
+            {/* without  pr-[54rem] area for Link not working; cheating^^*/}
         </li>
     )
 
@@ -46,13 +49,16 @@ export default function SmNavList({ toggle, setToggle }) {
                         : 'hover:bg-light-orange hover:text-gray-dark active:outline active:outline-aero-blue pl-2 rounded'
                 }>
                 <Link
+                    className="pr-[54rem]"
                     onClick={() => {
                         setAccessToken('')
                         sessionStorage.removeItem('key')
-                        sessionStorage.removeItem('user'); alert(
-                            'logout successful.',
-                        )
-                        toggle ? setToggle(0) : (setToggle = 1)
+                        setTimeout(() => {
+                            //otherwise alert comes before re-rendering which looks stupid!
+                            alert('logout successful.')
+                        }, 500)
+                        sessionStorage.removeItem('user')
+                        toggle ? setToggle(0) : setToggle(1)
                     }}
                     to="/">
                     logout
