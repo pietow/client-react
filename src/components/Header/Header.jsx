@@ -1,13 +1,15 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useContext} from 'react'
 import SmNavList from './smNavList.js'
 import LgNavList from './lgNavList.js'
 import Burger from './burger.js'
 import LogoLinkHeader from '../LogoLinkHeader'
 import {Link} from 'react-router-dom'
+import { Authentication } from '../../context/accessTokenContext'
 
 export default function Header({toggle, setToggle}) {
 
   const ref = useRef()
+  const accessToken = useContext(Authentication)
 
   const toggleBurger = (e) => { //menu visible or not?
     e.preventDefault()
@@ -26,7 +28,7 @@ export default function Header({toggle, setToggle}) {
       <header className="flex flex-row items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal border-b border-best-white">
         <LogoLinkHeader />
         <h2 className="hidden lg:block text-best-white underline underline-offset-8 decoration-1">Roam Mate</h2>
-        <Link title="go to profile" to="/profile" className='lg:order-none order-1 border border-best-white rounded-full w-12 h-12'><span className="relative top-2 left-1 text-best-white">°O.ô°</span><b/> profile pic</Link>
+        <Link title="go to profile" to="/profile" className={accessToken? "lg:order-none order-1 border border-best-white rounded-full w-12 h-12 overflow-hidden" : "hidden"}><img src={'https://picsum.photos/200/200.jpg'} alt="lorem picsum"/></Link>
         
         {/* ----------------------------BURGER MENU START------------------------------ */}
         

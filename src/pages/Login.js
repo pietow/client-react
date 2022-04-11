@@ -22,7 +22,6 @@ export default function Login() {
             setAccessToken(result.token)
             sessionStorage.setItem('key', result.token)
             sessionStorage.setItem('user', result._id)
-            // console.log(sessionStorage.getItem('user'))
             navigate('/profile')
             setTimeout(() => {
                 alert(`hey ${result.username}, welcome back!`)

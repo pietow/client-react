@@ -12,6 +12,26 @@
     p {
         @apply font-noto;
     }
+    /* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #87AAAA;
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: #C8E3D4;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: #87AAAA;
+    border-radius: 30px;
+    border: 1px solid #C8E3D4;
+  }
 }
 @tailwind components;
 @tailwind utilities;
