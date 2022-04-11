@@ -24,7 +24,7 @@ export default function EditProfile() {
                 },
             )
             const result = await response.json()
-            console.log(result)
+            // console.log(result)
             dispatch({
                 type: 'fetched_data',
                 fetched: result,
@@ -49,20 +49,23 @@ export default function EditProfile() {
         const result = await responds.json()
         dispatch({
             type: 'modified_user',
-            fname: state.fname === '' ? state.fname : state.fname,
+            fname: state.fname,
             modification: result,
         })
         setValue('')
     }
 
-    console.log(state)
+    // console.log(state)
 
     const inputChangeFname = (e) => {
         e.preventDefault()
         setValue(e.target.value)
         dispatch({
             type: 'changed_fname',
-            fname: e.target.value === '' ? state.fetched.fname : e.target.value,
+            fname:
+                e.target.value.trim() === ''
+                    ? state.fetched.fname
+                    : e.target.value,
         })
     }
 
