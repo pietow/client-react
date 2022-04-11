@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react'
 import LogoLink from '../components/LogoLink'
 import { useNavigate } from 'react-router-dom'
 import { SetAuthentication } from '../context/setAccessTokenContext'
+import alertTimeoutMessage from '../data/alertTimeoutMessage'
 
 export default function Login() {
     const [username, setUsername] = useState('')
@@ -23,15 +24,11 @@ export default function Login() {
             sessionStorage.setItem('key', result.token)
             sessionStorage.setItem('user', result._id)
             navigate('/profile')
-            setTimeout(() => {
-                alert(`hey ${result.username}, welcome back!`)
-            }, 500)
+            alertTimeoutMessage(`hey ${result.username}, welcome back!`)
         } else {
             setUsername('')
             setPassword('')
-            setTimeout(() => {
-                alert("nope. something's wrong.\nplease, try again.")
-            }, 500)
+            alertTimeoutMessage("nope. something's wrong.\nplease, try again.")
         }
     }
 
@@ -44,13 +41,13 @@ export default function Login() {
             <form
                 onSubmit={onSubmit}
                 className="lg:w-1/3 w-2/3 flex backdrop-brightness-75 backdrop-blur-sm flex-col border-best-white border rounded">
-                {/* backdrop-brightness-75 backdrop-blur-sm  */}
                 <input
                     className="mt-4 mx-4 p-1 rounded opacity-70"
                     type="text"
                     placeholder="username"
                     value={username}
                     onChange={({ target: { value } }) => setUsername(value)}
+                    required
                 />
                 <input
                     className="my-2 mx-4 p-1 rounded opacity-70"
@@ -58,6 +55,7 @@ export default function Login() {
                     placeholder="password"
                     value={password}
                     onChange={({ target: { value } }) => setPassword(value)}
+                    required={true}
                 />
                 <button
                     type="submit"
