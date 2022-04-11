@@ -11,10 +11,22 @@ import LogoLink from '../LogoLink'
 export default function Features() {
 
     const images = [
-        [CardImage1, "Be spontaneous"],
-        [CardImage2, "Start friendships"],
-        [CardImage3, "Learn from a local"],
-        [CardImage4, "Sustainability"]
+        {
+            image: CardImage1,
+            saying: "Be spontaneous"
+        },
+        {
+            image: CardImage2,
+            saying: "Start friendships"
+        },
+        {
+            image: CardImage3,
+            saying: "Learn from a local"
+        },
+        {
+            image: CardImage4,
+            saying: "Sustainability"
+        },
     ]
 
     return (
@@ -22,14 +34,14 @@ export default function Features() {
             <h1 className="p-6">Connect and make new memories</h1>
             <div className="flex flex-row justify-evenly mt-10 pb-32 w-screen">
             {images.map(elem => (
-                <div className="justify-center" key={elem[1]}>
+                <div className="justify-center" key={elem.saying}>
                     <div className="rounded-lg shadow-lg bg-best-white max-w-sm">
                         <figure>
-                            <img className="rounded-t-lg" src={elem[0]} alt="this is a pic" />
+                            <img className="rounded-t-lg" src={elem.image} alt="this is a pic" />
                         </figure>
                         <div className="p-6">
                             <h2 className="mb-2">
-                                {elem[1]}
+                                {elem.saying}
                             </h2>
                             <p className="text-justify mb-4">
                                 Some quick example text to build on the card title
