@@ -44,7 +44,7 @@ export default function LgNavList() {
                     onClick={() => {
                         setAccessToken('')
                         sessionStorage.removeItem('key')
-                        /* sessionStorage.removeItem('user'); */ alert(
+                        sessionStorage.removeItem('user'); alert(
                             'logout successful.',
                         )
                     }}

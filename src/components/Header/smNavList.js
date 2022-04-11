@@ -49,7 +49,7 @@ export default function SmNavList({ toggle, setToggle }) {
                     onClick={() => {
                         setAccessToken('')
                         sessionStorage.removeItem('key')
-                        /* sessionStorage.removeItem('user'); */ alert(
+                        sessionStorage.removeItem('user'); alert(
                             'logout successful.',
                         )
                         toggle ? setToggle(0) : (setToggle = 1)

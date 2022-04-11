@@ -23,7 +23,7 @@ export default function Login() {
         if (result.token) {
             setAccessToken(result.token);
             sessionStorage.setItem('key', result.token);
-            // sessionStorage.setItem('user', result._id);
+            sessionStorage.setItem('user', result._id);
             // console.log(sessionStorage.getItem('user'))
             navigate('/profile')
             alert(`hey ${result.username}, welcome back!`)
