@@ -8,13 +8,11 @@ import Home from './Home'
 
 export default function EditProfile() {
     const [state, dispatch] = useReducer(reducer, {
-        fetched: [],
-        fname: '',
-        lname: '',
+        fetched: []
     })
     const [valueFname, setValueFname] = useState('') //to reset the input field after sending the data to mongoDB
-    const [valueLname, setValueLname] = useState('') 
-    const [valueUsername, setValueUsername] = useState('') 
+    const [valueLname, setValueLname] = useState('')
+    const [valueUsername, setValueUsername] = useState('')
     const [render, setRender] = useState(0)
 
     const accessToken = useContext(Authentication)
