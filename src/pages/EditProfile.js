@@ -9,6 +9,8 @@ import Home from './Home'
 export default function EditProfile() {
     const [state, dispatch] = useReducer(reducer, { fetched: [], fname: '' })
     const [value, setValue] = useState('') //to reset the input field after sending the data to mongoDB
+    const [render, setRender] = useState(0)
+    
     const accessToken = useContext(Authentication)
 
     useEffect(() => {
@@ -30,7 +32,7 @@ export default function EditProfile() {
                 fetched: result,
             })
         })()
-    }, [value])
+    }, [render])
 
     const editUserData = async (e) => {
         //send data to mongoDB
@@ -53,6 +55,7 @@ export default function EditProfile() {
             modification: result,
         })
         setValue('')
+        render ? setRender(0) : setRender(1)
     }
 
     // console.log(state)
@@ -67,6 +70,7 @@ export default function EditProfile() {
                     ? state.fetched.fname
                     : e.target.value,
         })
+  
     }
 
     if (accessToken) {
