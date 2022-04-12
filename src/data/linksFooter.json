@@ -1,19 +1,23 @@
 [
             {
                 "name": "About",
-                "path": "/about"
+                "path": "/about",
+                "showAlways": true
             },
             {
                 "name": "Contact",
-                "path": "/contact"
+                "path": "/contact",
+                "showAlways": true
             },
             {
                 "name": "Login",
-                "path": "/login"
+                "path": "/login",
+                "showAlways": false
             },
             {
                 "name": "Register",
-                "path": "/register"
+                "path": "/register",
+                "showAlways": false
             }
 ]
 
