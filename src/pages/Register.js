@@ -32,7 +32,6 @@ export default function Register() {
     const submit = (e) => {
         e.preventDefault()
         validateRegister(data, addUser)
-        console.log(process.env.NODE_ENV === '')
     }
 
     return (
