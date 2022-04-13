@@ -7,10 +7,14 @@ import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 
 export default function EditProfile() {
-    const [state, dispatch] = useReducer(reducer, { fetched: [], fname: '' })
-    const [value, setValue] = useState('') //to reset the input field after sending the data to mongoDB
+    const [state, dispatch] = useReducer(reducer, {
+        fetched: []
+    })
+    const [valueFname, setValueFname] = useState('') //to reset the input field after sending the data to mongoDB
+    const [valueLname, setValueLname] = useState('')
+    const [valueUsername, setValueUsername] = useState('')
     const [render, setRender] = useState(0)
-    
+
     const accessToken = useContext(Authentication)
 
     useEffect(() => {
@@ -52,9 +56,13 @@ export default function EditProfile() {
         dispatch({
             type: 'modified_user',
             fname: state.fname,
+            lname: state.lname,
+            username: state.username,
             modification: result,
         })
-        setValue('')
+        setValueFname('')
+        setValueLname('')
+        setValueUsername('')
         render ? setRender(0) : setRender(1)
     }
 
@@ -62,7 +70,7 @@ export default function EditProfile() {
 
     const inputChangeFname = (e) => {
         e.preventDefault()
-        setValue(e.target.value)
+        setValueFname(e.target.value)
         dispatch({
             type: 'changed_fname',
             fname:
@@ -70,7 +78,30 @@ export default function EditProfile() {
                     ? state.fetched.fname
                     : e.target.value,
         })
-  
+    }
+
+    const inputChangeLname = (e) => {
+        e.preventDefault()
+        setValueLname(e.target.value)
+        dispatch({
+            type: 'changed_lname',
+            lname:
+                e.target.value.trim() === ''
+                    ? state.fetched.lname
+                    : e.target.value,
+        })
+    }
+
+    const inputChangeUsername = (e) => {
+        e.preventDefault()
+        setValueUsername(e.target.value)
+        dispatch({
+            type: 'changed_username',
+            username:
+                e.target.value.trim() === ''
+                    ? state.fetched.username
+                    : e.target.value,
+        })
     }
 
     if (accessToken) {
@@ -84,7 +115,7 @@ export default function EditProfile() {
                         alt="lorem"
                     />
                     <figcaption className="text-best-white font-noto text-center">
-                        {state.fetched.fname}
+                        {state.fetched.fname + ' ' + state.fetched.lname}
                     </figcaption>
                 </figure>
                 {/* -----------------------profile pic end------------------------- */}
@@ -94,18 +125,37 @@ export default function EditProfile() {
 
                     <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
                         <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex-3xl">
-                            {state.fetched.fname}
+                            Change your Data
                         </h1>
                         <form onSubmit={editUserData}>
                             <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                fname: {state.fetched.fname}
+                                First Name: {state.fetched.fname}
                             </p>
                             <input
-                                value={value}
+                                value={valueFname}
                                 type="text"
                                 onChange={inputChangeFname}
-                                placeholder="enter new fname here"
-                                required
+                                placeholder="New First Name"
+                            />
+
+                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
+                                Last Name: {state.fetched.lname}
+                            </p>
+                            <input
+                                value={valueLname}
+                                type="text"
+                                onChange={inputChangeLname}
+                                placeholder="New Last Name"
+                            />
+
+                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
+                                Username: {state.fetched.username}
+                            </p>
+                            <input
+                                value={valueUsername}
+                                type="text"
+                                onChange={inputChangeUsername}
+                                placeholder="New Username"
                             />
 
                             <button
