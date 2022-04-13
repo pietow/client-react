@@ -1,18 +1,11 @@
 {
     "tabWidth": 4,
-    "overrides": [
-    {
-      "files": ["*.html", "*.handlebars", "*.ejs"],
-      "options": {
-        "tabWidth": 2
-      }
-    }
-    ],
     "semi": false,
     "quoteProps": "consistent",
-    "singleQuote": true,
+    "singleQuotes": true,
     "jsxSingleQuote":false,
-    "bracketSameLine": true,
+    "BracketSameLine": true,
+    "singleQuote": true,
     "trailingComma": "all",
     "arrowParens": "always",
     "insertPragma": true
