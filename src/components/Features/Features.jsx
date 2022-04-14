@@ -44,11 +44,9 @@ export default function Features() {
                             <div className="p-6">
                                 <h2 className="mb-2">{elem.saying}</h2>
                                 <p className="text-justify mb-4">
-                                    Some quick example text to build on the card
-                                    title and make up the bulk of the card's
-                                    content. Some quick example text to build on
-                                    the card title and make up the bulk of the
-                                    card's content.
+                                    {
+                                        'Some quick example text to build on the card'
+                                    }
                                 </p>
                             </div>
                         </div>
