@@ -1,3 +1,5 @@
-import PrevNextButtons from './PrevNextButtons';
+/** @format */
 
-export default PrevNextButtons; 
+import PrevNextButtons from './PrevNextButtons'
+
+export default PrevNextButtons

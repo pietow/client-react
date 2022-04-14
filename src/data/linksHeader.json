@@ -12,6 +12,12 @@
         "showAlways": false
     },
     {
+        "name": "Locations",
+        "path": "/edithost",
+        "needsAccess": true,
+        "showAlways": false
+    },
+    {
         "name": "editprofile",
         "path": "/editprofile",
         "needsAccess": true,

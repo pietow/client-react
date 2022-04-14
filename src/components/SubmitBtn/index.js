@@ -1,3 +1,5 @@
-import SubmitBtn from './SubmitBtn';
+/** @format */
 
-export default SubmitBtn; 
+import SubmitBtn from './SubmitBtn'
+
+export default SubmitBtn

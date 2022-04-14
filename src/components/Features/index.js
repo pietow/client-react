@@ -1,3 +1,5 @@
-import Features from './Features';
+/** @format */
 
-export default Features; 
+import Features from './Features'
+
+export default Features

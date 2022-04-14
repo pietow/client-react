@@ -1,23 +1,22 @@
 [
-            {
-                "name": "About",
-                "path": "/about",
-                "showAlways": true
-            },
-            {
-                "name": "Contact",
-                "path": "/contact",
-                "showAlways": true
-            },
-            {
-                "name": "Login",
-                "path": "/login",
-                "showAlways": false
-            },
-            {
-                "name": "Register",
-                "path": "/register",
-                "showAlways": false
-            }
+    {
+        "name": "About",
+        "path": "/about",
+        "showAlways": true
+    },
+    {
+        "name": "Contact",
+        "path": "/contact",
+        "showAlways": true
+    },
+    {
+        "name": "Login",
+        "path": "/login",
+        "showAlways": false
+    },
+    {
+        "name": "Register",
+        "path": "/register",
+        "showAlways": false
+    }
 ]
-

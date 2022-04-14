@@ -1,3 +1,5 @@
-import Footer from './Footer';
+/** @format */
 
-export default Footer; 
+import Footer from './Footer'
+
+export default Footer

@@ -1,17 +1,17 @@
 [
     {
-        "name": "fname", 
-        "type": "text", 
+        "name": "fname",
+        "type": "text",
         "placeholder": "First Name"
     },
     {
-        "name": "lname", 
-        "type": "text", 
+        "name": "lname",
+        "type": "text",
         "placeholder": "Last Name"
     },
     {
-        "name": "email", 
-        "type": "email", 
+        "name": "email",
+        "type": "email",
         "placeholder": "E-Mail"
     }
 ]

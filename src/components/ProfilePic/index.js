@@ -1,3 +1,5 @@
+/** @format */
+
 import ProfilePic from './ProfilePic'
 
 export default ProfilePic

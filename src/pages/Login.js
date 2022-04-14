@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { SetAuthentication } from '../context/setAccessTokenContext'
 import alertTimeoutMessage from '../data/alertTimeoutMessage'
 
-export default function Login() {
+export default function Login({ dispatch, state }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
@@ -20,15 +20,14 @@ export default function Login() {
         })
         const result = await response.json()
         if (result.token) {
+            dispatch({ type: 'login_fetch', user: result })
             setAccessToken(result.token)
             sessionStorage.setItem('key', result.token)
             sessionStorage.setItem('user', result._id)
             navigate('/profile')
-            alertTimeoutMessage(`hey ${result.username}, welcome back!`)
         } else {
             setUsername('')
             setPassword('')
-            alertTimeoutMessage("nope. something's wrong.\nplease, try again.")
         }
     }
 
@@ -55,7 +54,7 @@ export default function Login() {
                     placeholder="password"
                     value={password}
                     onChange={({ target: { value } }) => setPassword(value)}
-                    required={true}
+                    required
                 />
                 <button
                     type="submit"
