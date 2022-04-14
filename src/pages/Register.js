@@ -41,12 +41,14 @@ export default function Register() {
             </h1>
             <form
                 onSubmit={submit}
-                className="xl:w-1/4 lg:w-1/3 md:w-1/2 w-2/3 backdrop-brightness-75 backdrop-blur-sm flex flex-col border-best-white border rounded">
+                className="xl:w-1/4 lg:w-1/3 md:w-1/2 w-2/3 backdrop-brightness-75 backdrop-blur-sm flex flex-col border-best-white border rounded"
+            >
                 <RegisterInputs data={data} setData={setData} />
                 <button
                     onClick={submit}
                     className="active:scale-95 mx-auto my-4 p-1 border border-best-white text-best-white rounded w-1/2"
-                    type="submit">
+                    type="submit"
+                >
                     Roam as a Member
                 </button>
             </form>

@@ -1,32 +1,32 @@
 [
     {
-        "name": "fname", 
-        "type": "text", 
+        "name": "fname",
+        "type": "text",
         "placeholder": "First Name"
     },
     {
-        "name": "lname", 
-        "type": "text", 
+        "name": "lname",
+        "type": "text",
         "placeholder": "Last Name"
     },
     {
-        "name": "email", 
-        "type": "email", 
+        "name": "email",
+        "type": "email",
         "placeholder": "E-Mail"
     },
     {
-        "name": "username", 
-        "type": "text", 
+        "name": "username",
+        "type": "text",
         "placeholder": "Username"
     },
     {
-        "name": "password", 
-        "type": "password", 
+        "name": "password",
+        "type": "password",
         "placeholder": "Create Password"
     },
     {
-        "name": "rePassword", 
-        "type": "password", 
+        "name": "rePassword",
+        "type": "password",
         "placeholder": "Repeat Password"
     }
 ]

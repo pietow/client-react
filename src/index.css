@@ -14,23 +14,23 @@
     }
     /* Works on Firefox */
     * {
-      scrollbar-width: thin;
-      scrollbar-color: #87AAAA;
+        scrollbar-width: thin;
+        scrollbar-color: #87aaaa;
     }
 
     /* Works on Chrome, Edge, and Safari */
     *::-webkit-scrollbar {
-      width: 10px;
+        width: 10px;
     }
 
     *::-webkit-scrollbar-track {
-      background: #b6f0d0;
+        background: #b6f0d0;
     }
 
     *::-webkit-scrollbar-thumb {
-      background-color: #87AAAA;
-      border-radius: 30px;
-      border: 1px solid #b6f0d0;
+        background-color: #87aaaa;
+        border-radius: 30px;
+        border: 1px solid #b6f0d0;
     }
 }
 @tailwind components;

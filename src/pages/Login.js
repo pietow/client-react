@@ -40,7 +40,8 @@ export default function Login() {
 
             <form
                 onSubmit={onSubmit}
-                className="lg:w-1/3 w-2/3 flex backdrop-brightness-75 backdrop-blur-sm flex-col border-best-white border rounded">
+                className="lg:w-1/3 w-2/3 flex backdrop-brightness-75 backdrop-blur-sm flex-col border-best-white border rounded"
+            >
                 <input
                     className="mt-4 mx-4 p-1 rounded opacity-70"
                     type="text"
@@ -59,7 +60,8 @@ export default function Login() {
                 />
                 <button
                     type="submit"
-                    className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2">
+                    className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2"
+                >
                     login
                 </button>
             </form>

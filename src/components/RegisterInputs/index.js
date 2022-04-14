@@ -1,3 +1,5 @@
-import RegisterInputs from "./RegisterInputs";
+/** @format */
+
+import RegisterInputs from './RegisterInputs'
 
 export default RegisterInputs

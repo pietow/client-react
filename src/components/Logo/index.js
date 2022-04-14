@@ -1,3 +1,5 @@
-import Logo from './Logo';
+/** @format */
 
-export default Logo; 
+import Logo from './Logo'
+
+export default Logo
