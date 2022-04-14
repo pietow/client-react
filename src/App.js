@@ -1,6 +1,6 @@
 /** @format */
 /* setup */
-import React, { useState } from 'react'
+import React, { useState, useReducer } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 /* pages */
 import Contact from './pages/Contact'
@@ -11,12 +11,15 @@ import Footer from './components/Footer'
 import Profile from './pages/Profile'
 import Login from './pages/Login'
 import EditProfile from './pages/EditProfile'
+import EditAccommodation from './pages/EditAccommodation'
 /* context */
 import { Authentication } from './context/accessTokenContext'
 import { SetAuthentication } from './context/setAccessTokenContext'
-// import { BlurContext } from './context/blurContext'
+//USEREDUCER
+import { initialState, userReducer } from './data/userReducer'
 
 export default function App() {
+    const [state, dispatch] = useReducer(userReducer, initialState)
     const [toggle, setToggle] =
         useState(0) /* blurs pages when menu is opening on small screens  */
     const [accessToken, setAccessToken] = useState(
@@ -43,10 +46,24 @@ export default function App() {
                             <Route path="/register" element={<Register />} />
                             <Route path="/contact" element={<Contact />} />
                             <Route path="/profile" element={<Profile />} />
-                            <Route path="/login" element={<Login />} />
+                            <Route
+                                path="/login"
+                                element={
+                                    <Login dispatch={dispatch} state={state} />
+                                }
+                            />
                             <Route
                                 path="/editprofile"
                                 element={<EditProfile />}
+                            />
+                            <Route
+                                path="/offerhost"
+                                element={
+                                    <EditAccommodation
+                                        dispatch={dispatch}
+                                        state={state}
+                                    />
+                                }
                             />
                         </Routes>
                     </div>

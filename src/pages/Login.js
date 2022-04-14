@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { SetAuthentication } from '../context/setAccessTokenContext'
 import alertTimeoutMessage from '../data/alertTimeoutMessage'
 
-export default function Login() {
+export default function Login({ dispatch, state }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
@@ -20,6 +20,7 @@ export default function Login() {
         })
         const result = await response.json()
         if (result.token) {
+            dispatch({ type: 'edit_user', user: result })
             setAccessToken(result.token)
             sessionStorage.setItem('key', result.token)
             sessionStorage.setItem('user', result._id)
