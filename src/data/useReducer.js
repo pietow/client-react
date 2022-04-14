@@ -6,22 +6,13 @@ export default function reducer(state, action) {
         fetched: action.fetched
       }
     }
-    case 'changed_fname': { //onChange im Input
+    case 'changed_values': {
       return {
         ...state,
         fname: action.fname,
-      }
-    }
-    case 'changed_lname': { //onChange im Input
-      return {
-        ...state,
         lname: action.lname,
-      }
-    }
-    case 'changed_username': { //onChange im Input
-      return {
-        ...state,
         username: action.username,
+        email: action.email,
       }
     }
     case 'modified_user': {

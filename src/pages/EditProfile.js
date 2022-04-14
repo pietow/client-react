@@ -6,15 +6,17 @@ import reducer from '../data/useReducer'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 
-export default function EditProfile() {
-    const [state, dispatch] = useReducer(reducer, {
-        fetched: []
-    })
-    const [valueFname, setValueFname] = useState('') //to reset the input field after sending the data to mongoDB
-    const [valueLname, setValueLname] = useState('')
-    const [valueUsername, setValueUsername] = useState('')
-    const [render, setRender] = useState(0)
+const initialValues = {
+    fname: '',
+    lname: '',
+    username: '',
+    email: '',
+}
 
+export default function EditProfile() {
+    const [state, dispatch] = useReducer(reducer, { fetched: [] })
+    const [values, setValues] = useState(initialValues)
+    const [render, setRender] = useState(0)
     const accessToken = useContext(Authentication)
 
     useEffect(() => {
@@ -25,12 +27,11 @@ export default function EditProfile() {
                     method: 'GET',
                     headers: {
                         'content-type': 'application/json',
-                        'authorization': `bearer ${accessToken}`, //after successful login you get access token
+                        'authorization': `bearer ${accessToken}`,
                     },
                 },
             )
             const result = await response.json()
-            // console.log(result)
             dispatch({
                 type: 'fetched_data',
                 fetched: result,
@@ -39,7 +40,6 @@ export default function EditProfile() {
     }, [render])
 
     const editUserData = async (e) => {
-        //send data to mongoDB
         e.preventDefault()
         const responds = await fetch(
             `api/users/${sessionStorage.getItem('user')}`,
@@ -49,7 +49,7 @@ export default function EditProfile() {
                     'content-type': 'application/json',
                     'authorization': `bearer ${accessToken}`,
                 },
-                body: JSON.stringify(state), //state is an object
+                body: JSON.stringify(state),
             },
         )
         const result = await responds.json()
@@ -58,49 +58,23 @@ export default function EditProfile() {
             fname: state.fname,
             lname: state.lname,
             username: state.username,
+            email: state.email,
             modification: result,
         })
-        setValueFname('')
-        setValueLname('')
-        setValueUsername('')
+        setValues(initialValues)
         render ? setRender(0) : setRender(1)
     }
 
-    // console.log(state)
-
-    const inputChangeFname = (e) => {
-        e.preventDefault()
-        setValueFname(e.target.value)
-        dispatch({
-            type: 'changed_fname',
-            fname:
-                e.target.value.trim() === ''
-                    ? state.fetched.fname
-                    : e.target.value,
+    const handleInputChange = (e) => {
+        const { name, value } = e.target
+        setValues({
+            ...values,
+            [name]: value,
         })
-    }
-
-    const inputChangeLname = (e) => {
-        e.preventDefault()
-        setValueLname(e.target.value)
         dispatch({
-            type: 'changed_lname',
-            lname:
-                e.target.value.trim() === ''
-                    ? state.fetched.lname
-                    : e.target.value,
-        })
-    }
-
-    const inputChangeUsername = (e) => {
-        e.preventDefault()
-        setValueUsername(e.target.value)
-        dispatch({
-            type: 'changed_username',
-            username:
-                e.target.value.trim() === ''
-                    ? state.fetched.username
-                    : e.target.value,
+            type: 'changed_values',
+            ...state,
+            [name]: value.trim() === '' ? state.fetched[name] : value,
         })
     }
 
@@ -129,38 +103,57 @@ export default function EditProfile() {
                         </h1>
                         <form onSubmit={editUserData}>
                             <p className="text-justify mx-4 mb-4 p-4 text-best-white">
+                                {/* first name */}
                                 First Name: {state.fetched.fname}
                             </p>
                             <input
-                                value={valueFname}
+                                value={values?.fname}
                                 type="text"
-                                onChange={inputChangeFname}
+                                name="fname"
+                                onChange={handleInputChange}
                                 placeholder="New First Name"
                             />
 
                             <p className="text-justify mx-4 mb-4 p-4 text-best-white">
+                                {/* last name */}
                                 Last Name: {state.fetched.lname}
                             </p>
                             <input
-                                value={valueLname}
+                                value={values?.lname}
                                 type="text"
-                                onChange={inputChangeLname}
+                                name="lname"
+                                onChange={handleInputChange}
                                 placeholder="New Last Name"
                             />
 
                             <p className="text-justify mx-4 mb-4 p-4 text-best-white">
+                                {/* username */}
                                 Username: {state.fetched.username}
                             </p>
                             <input
-                                value={valueUsername}
+                                value={values?.username}
                                 type="text"
-                                onChange={inputChangeUsername}
+                                name="username"
+                                onChange={handleInputChange}
                                 placeholder="New Username"
+                            />
+
+                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
+                                {/* email */}
+                                Email: {state.fetched.email}
+                            </p>
+                            <input
+                                value={values?.email}
+                                type="email"
+                                name="email"
+                                onChange={handleInputChange}
+                                placeholder="New Email Address"
                             />
 
                             <button
                                 type="submit"
-                                className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2">
+                                className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2"
+                            >
                                 save data
                             </button>
                         </form>
