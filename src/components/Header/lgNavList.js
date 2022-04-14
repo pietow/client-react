@@ -46,7 +46,9 @@ export default function LgNavList() {
                         sessionStorage.removeItem('key')
                         setTimeout(() => {
                             //otherwise alert comes before re-rendering which looks stupid!
-                            alert('logout successful.')
+                            {
+                                /* alert('logout successful.') */
+                            }
                         }, 500)
                         sessionStorage.removeItem('user')
                     }}
