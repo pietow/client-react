@@ -14,8 +14,7 @@ export default function SmNavList({ toggle, setToggle }) {
         <li
             onClick={() => setToggle()}
             key={name}
-            className="hover:bg-light-orange hover:text-gray-dark active:outline active:outline-aero-blue pl-2 rounded"
-        >
+            className="hover:bg-light-orange hover:text-gray-dark active:outline active:outline-aero-blue pl-2 rounded">
             <Link className="pr-[54rem]" to={path}>
                 {name}
             </Link>{' '}
@@ -48,8 +47,7 @@ export default function SmNavList({ toggle, setToggle }) {
                     !accessToken
                         ? 'hidden'
                         : 'hover:bg-light-orange hover:text-gray-dark active:outline active:outline-aero-blue pl-2 rounded'
-                }
-            >
+                }>
                 <Link
                     className="pr-[54rem]"
                     onClick={() => {
@@ -62,8 +60,7 @@ export default function SmNavList({ toggle, setToggle }) {
                         sessionStorage.removeItem('user')
                         toggle ? setToggle(0) : setToggle(1)
                     }}
-                    to="/"
-                >
+                    to="/">
                     logout
                 </Link>
             </li>

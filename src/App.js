@@ -35,8 +35,7 @@ export default function App() {
                             toggle
                                 ? 'transition duration-75 blur ease-in saturate-50'
                                 : 'transition duration-50 ease-in'
-                        }
-                    >
+                        }>
                         {' '}
                         {/* should be put in its own context */}
                         <Routes>

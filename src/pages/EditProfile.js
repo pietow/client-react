@@ -160,8 +160,7 @@ export default function EditProfile() {
 
                             <button
                                 type="submit"
-                                className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2"
-                            >
+                                className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2">
                                 save data
                             </button>
                         </form>

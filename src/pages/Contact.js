@@ -16,19 +16,16 @@ export default function Contact() {
             </h1>
             <form
                 onSubmit={submit}
-                className="xl:w-1/4 lg:w-1/3 md:w-1/2 w-2/3 backdrop-brightness-75 backdrop-blur-sm flex flex-col border-best-white border rounded"
-            >
+                className="xl:w-1/4 lg:w-1/3 md:w-1/2 w-2/3 backdrop-brightness-75 backdrop-blur-sm flex flex-col border-best-white border rounded">
                 <ContactInputs />
                 <textarea
                     className="mt-4 mx-4 p-1 rounded opacity-70 h-48"
                     id="message"
-                    placeholder="Your message here..."
-                ></textarea>
+                    placeholder="Your message here..."></textarea>
                 <button
                     onClick={submit}
                     className="active:scale-95 mx-auto my-4 p-1 border border-best-white text-best-white rounded w-1/2"
-                    type="submit"
-                >
+                    type="submit">
                     Send
                 </button>
             </form>

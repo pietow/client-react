@@ -10,8 +10,7 @@ export default function Burger() {
             {rows.map((x) => (
                 <div
                     className="w-5 border-t-2 border-best-white rounded-full"
-                    key={x}
-                ></div>
+                    key={x}></div>
             ))}
         </div>
     )
