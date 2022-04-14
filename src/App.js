@@ -57,7 +57,7 @@ export default function App() {
                                 element={<EditProfile />}
                             />
                             <Route
-                                path="/offerhost"
+                                path="/edithost"
                                 element={
                                     <EditAccommodation
                                         dispatch={dispatch}

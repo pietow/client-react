@@ -5,16 +5,17 @@ import LogoLink from '../components/LogoLink'
 import reducer from '../data/useReducer'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
+import InputField from '../components/InputField'
 
 export default function EditAccommodation({ state, dispatch }) {
-    console.log(state)
-    const [valueFname, setValueFname] = useState('') //to reset the input field after sending the data to mongoDB
-    const [valueLname, setValueLname] = useState('')
-    const [valueUsername, setValueUsername] = useState('')
-    const [render, setRender] = useState(0)
+    const [accommodation, setAccommodation] = useState({
+        availability: '',
+        guests: '',
+        location: '',
+        description: '',
+    })
 
     const accessToken = useContext(Authentication)
-    console.log(accessToken)
 
     const editUserData = async (e) => {
         e.preventDefault()
@@ -26,26 +27,21 @@ export default function EditAccommodation({ state, dispatch }) {
                     'content-type': 'application/json',
                     'authorization': `bearer ${accessToken}`,
                 },
-                body: JSON.stringify(state), //state is an object
+                body: JSON.stringify(accommodation), //state is an object
             },
         )
         const result = await responds.json()
         dispatch({
-            type: 'modified_user',
-            fname: state.fname,
-            lname: state.lname,
-            username: state.username,
-            modification: result,
+            type: 'login_fetch',
+            user: result,
         })
-        setValueFname('')
-        setValueLname('')
-        setValueUsername('')
-        render ? setRender(0) : setRender(1)
     }
 
-    function inputChangeFname() {}
-    function inputChangeLname() {}
-    function inputChangeUsername() {}
+    function inputChange(key) {
+        return (e) => {
+            setAccommodation({ ...accommodation, [key]: e.target.value })
+        }
+    }
 
     if (true) {
         return (
@@ -71,34 +67,33 @@ export default function EditAccommodation({ state, dispatch }) {
                             Change your Data
                         </h1>
                         <form onSubmit={editUserData}>
-                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                First Name: {state.fname}
-                            </p>
-                            <input
-                                value={valueFname}
-                                type="text"
-                                onChange={inputChangeFname}
-                                placeholder="New First Name"
+                            <InputField
+                                name={'availability'}
+                                okey={'availability'}
+                                accommodation={accommodation}
+                                setAccommodation={setAccommodation}
+                                state={state}
                             />
-
-                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                Last Name: {state.lname}
-                            </p>
-                            <input
-                                value={valueLname}
-                                type="text"
-                                onChange={inputChangeLname}
-                                placeholder="New Last Name"
+                            <InputField
+                                name={'Guests'}
+                                okey={'guests'}
+                                accommodation={accommodation}
+                                setAccommodation={setAccommodation}
+                                state={state}
                             />
-
-                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                Username: {state.username}
-                            </p>
-                            <input
-                                value={valueUsername}
-                                type="text"
-                                onChange={inputChangeUsername}
-                                placeholder="New Username"
+                            <InputField
+                                name={'description'}
+                                okey={'description'}
+                                accommodation={accommodation}
+                                setAccommodation={setAccommodation}
+                                state={state}
+                            />
+                            <InputField
+                                name={'Location'}
+                                okey={'location'}
+                                accommodation={accommodation}
+                                setAccommodation={setAccommodation}
+                                state={state}
                             />
 
                             <button

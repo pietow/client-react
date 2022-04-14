@@ -1,35 +1,37 @@
 /** @format */
 
 export const initialState = {
-    fname: '',
-    lname: '',
+    fname: 'dummy',
+    lname: 'dummy',
     username: '',
     email: '',
     active: false,
-    photo: '',
-    onlineStatus: '',
-    title: '',
-    text: '',
-    motto: '',
-    gender: '',
-    language: [],
-    city: '',
-    destrict: '',
-    country: '',
-    birthday: '',
-    //ACCOMMODATION
-    availability: '',
-    guests: '',
-    description: '',
-    location: '',
+    profile: {
+        photo: '',
+        onlineStatus: '',
+        title: '',
+        text: '',
+        motto: '',
+        gender: '',
+        language: [],
+        city: '',
+        destrict: '',
+        country: '',
+        birthday: '',
+    },
+    accommodation: {
+        availability: '',
+        guests: '',
+        description: '',
+        location: '',
+    },
 }
 
 export function userReducer(state, action) {
     switch (action.type) {
-        case 'edit_user': {
+        case 'login_fetch': {
             return {
                 ...action.user,
-                ...state,
             }
         }
         case 'edit_accommodation': {

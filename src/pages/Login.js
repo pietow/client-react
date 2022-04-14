@@ -20,16 +20,14 @@ export default function Login({ dispatch, state }) {
         })
         const result = await response.json()
         if (result.token) {
-            dispatch({ type: 'edit_user', user: result })
+            dispatch({ type: 'login_fetch', user: result })
             setAccessToken(result.token)
             sessionStorage.setItem('key', result.token)
             sessionStorage.setItem('user', result._id)
             navigate('/profile')
-            alertTimeoutMessage(`hey ${result.username}, welcome back!`)
         } else {
             setUsername('')
             setPassword('')
-            alertTimeoutMessage("nope. something's wrong.\nplease, try again.")
         }
     }
 
@@ -56,7 +54,7 @@ export default function Login({ dispatch, state }) {
                     placeholder="password"
                     value={password}
                     onChange={({ target: { value } }) => setPassword(value)}
-                    required={true}
+                    required
                 />
                 <button
                     type="submit"
