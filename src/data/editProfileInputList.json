@@ -1,0 +1,26 @@
+[
+    {
+        "name": "fname",
+        "type": "text",
+        "placeholder": "New First Name",
+        "phrase": "First Name"
+    },
+    {
+        "name": "lname",
+        "type": "text",
+        "placeholder": "New Last Name",
+        "phrase": "Last Name"
+    },
+    {
+        "name": "username",
+        "type": "text",
+        "placeholder": "New Username",
+        "phrase": "Username"
+    },
+    {
+        "name": "email",
+        "type": "email",
+        "placeholder": "New Email",
+        "phrase": "Email"
+    }
+]

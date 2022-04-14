@@ -5,6 +5,7 @@ import LogoLink from '../components/LogoLink'
 import reducer from '../data/useReducer'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
+import editProfileInputList from '../data/editProfileInputList'
 
 const initialValues = {
     fname: '',
@@ -78,6 +79,28 @@ export default function EditProfile() {
         })
     }
 
+    const EditProfileInputs = (
+        name,
+        type,
+        placeholder,
+        phrase,
+        state,
+        values,
+    ) => (
+        <div key={name}>
+            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
+                {phrase}: {state[name]}
+            </p>
+            <input
+                value={values?.[name]}
+                type={type}
+                name={name}
+                onChange={handleInputChange}
+                placeholder={placeholder}
+            />
+        </div>
+    )
+
     if (accessToken) {
         return (
             <main className="xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
@@ -102,53 +125,16 @@ export default function EditProfile() {
                             Change your Data
                         </h1>
                         <form onSubmit={editUserData}>
-                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                {/* first name */}
-                                First Name: {state.fetched.fname}
-                            </p>
-                            <input
-                                value={values?.fname}
-                                type="text"
-                                name="fname"
-                                onChange={handleInputChange}
-                                placeholder="New First Name"
-                            />
-
-                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                {/* last name */}
-                                Last Name: {state.fetched.lname}
-                            </p>
-                            <input
-                                value={values?.lname}
-                                type="text"
-                                name="lname"
-                                onChange={handleInputChange}
-                                placeholder="New Last Name"
-                            />
-
-                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                {/* username */}
-                                Username: {state.fetched.username}
-                            </p>
-                            <input
-                                value={values?.username}
-                                type="text"
-                                name="username"
-                                onChange={handleInputChange}
-                                placeholder="New Username"
-                            />
-
-                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                {/* email */}
-                                Email: {state.fetched.email}
-                            </p>
-                            <input
-                                value={values?.email}
-                                type="email"
-                                name="email"
-                                onChange={handleInputChange}
-                                placeholder="New Email Address"
-                            />
+                            {editProfileInputList.map((elem) =>
+                                EditProfileInputs(
+                                    elem.name,
+                                    elem.type,
+                                    elem.placeholder,
+                                    elem.phrase,
+                                    state.fetched,
+                                    values,
+                                ),
+                            )}
 
                             <button
                                 type="submit"
