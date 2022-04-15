@@ -31,10 +31,13 @@ export default function EditAccommodation({ state, dispatch }) {
             },
         )
         const result = await responds.json()
-        dispatch({
-            type: 'login_fetch',
-            user: result,
-        })
+        if (!result.error) {
+            dispatch({
+                type: 'login_fetch',
+                user: result,
+            })
+        }
+        console.log(result)
     }
 
     function inputChange(key) {
@@ -43,7 +46,7 @@ export default function EditAccommodation({ state, dispatch }) {
         }
     }
 
-    if (true) {
+    if (accessToken) {
         return (
             <main className="xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
                 {/* -----------------------profile pic start----------------------- */}
@@ -68,37 +71,37 @@ export default function EditAccommodation({ state, dispatch }) {
                         </h1>
                         <form onSubmit={editUserData}>
                             <InputField
-                                name={'availability'}
+                                name={'Availability'}
                                 okey={'availability'}
                                 accommodation={accommodation}
                                 setAccommodation={setAccommodation}
-                                state={state}
+                                state={state.accommodation}
                             />
                             <InputField
                                 name={'Guests'}
                                 okey={'guests'}
                                 accommodation={accommodation}
                                 setAccommodation={setAccommodation}
-                                state={state}
+                                state={state.accommodation}
                             />
                             <InputField
-                                name={'description'}
+                                name={'Description'}
                                 okey={'description'}
                                 accommodation={accommodation}
                                 setAccommodation={setAccommodation}
-                                state={state}
+                                state={state.accommodation}
                             />
                             <InputField
                                 name={'Location'}
                                 okey={'location'}
                                 accommodation={accommodation}
                                 setAccommodation={setAccommodation}
-                                state={state}
+                                state={state.accommodation}
                             />
 
                             <button
                                 type="submit"
-                                className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2">
+                                className="active:scale-95 mx-auto m-2 mb-7 p-1 border border-best-white text-best-white rounded w-1/2">
                                 save data
                             </button>
                         </form>
