@@ -20,7 +20,7 @@ export const initialState = {
         birthday: '',
     },
     accommodation: {
-        availability: '',
+        availability: 'no',
         guests: '',
         description: '',
         location: '',

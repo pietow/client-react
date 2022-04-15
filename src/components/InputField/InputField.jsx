@@ -11,8 +11,8 @@ export default function InputField({
 }) {
     return (
         <div>
-            <p className="text-justify mx-4 mb-2 p-4 text-best-white">
-                {name + ' ' + state[okey]}
+            <p className="text-justify p-4 text-best-white">
+                {name + ' ' + state[okey] + ':'}
             </p>
             <input
                 className="mb-3"
