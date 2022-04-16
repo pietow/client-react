@@ -6,7 +6,7 @@ import reducer from '../data/useReducer'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 import InputField from '../components/InputField'
-import { putUser } from '../util/fetchUser'
+import { getUser, putUser } from '../util/fetchUser'
 
 export default function EditAccommodation({ state, dispatch }) {
     const [accommodation, setAccommodation] = useState({
@@ -17,6 +17,11 @@ export default function EditAccommodation({ state, dispatch }) {
     })
 
     const accessToken = useContext(Authentication)
+
+    useEffect(() => {
+        const getUserUrl = `api/users/${sessionStorage.getItem('user')}`
+        getUser(getUserUrl, accessToken, dispatch)
+    }, [accessToken, dispatch])
 
     const putUserUrl = `api/users/${sessionStorage.getItem(
         'user',
