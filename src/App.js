@@ -57,7 +57,12 @@ export default function App() {
                             />
                             <Route
                                 path="/editprofile"
-                                element={<EditProfile />}
+                                element={
+                                    <EditProfile
+                                        dispatch={dispatch}
+                                        state={state}
+                                    />
+                                }
                             />
                             <Route
                                 path="/edithost"

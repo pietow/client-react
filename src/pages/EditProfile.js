@@ -5,104 +5,49 @@ import LogoLink from '../components/LogoLink'
 import reducer from '../data/useReducer'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
+import { getUser, putUser } from '../util/fetchUser'
+import InputField from '../components/InputField'
 
-export default function EditProfile() {
-    const [state, dispatch] = useReducer(reducer, {
-        fetched: [],
-    })
-    const [valueFname, setValueFname] = useState('') //to reset the input field after sending the data to mongoDB
-    const [valueLname, setValueLname] = useState('')
-    const [valueUsername, setValueUsername] = useState('')
-    const [render, setRender] = useState(0)
+export default function EditProfile({ state, dispatch }) {
+    const profileInput = {
+        onlineStatus: '',
+        title: '',
+        text: '',
+        motto: '',
+        gender: '',
+        language: [],
+        city: '',
+        destrict: '',
+        country: '',
+        birthday: '',
+    }
+    const [profile, setProfile] = useState(profileInput)
 
     const accessToken = useContext(Authentication)
 
     useEffect(() => {
-        ;(async () => {
-            const response = await fetch(
-                `api/users/${sessionStorage.getItem('user')}`,
-                {
-                    method: 'GET',
-                    headers: {
-                        'content-type': 'application/json',
-                        'authorization': `bearer ${accessToken}`, //after successful login you get access token
-                    },
-                },
-            )
-            const result = await response.json()
-            // console.log(result)
-            dispatch({
-                type: 'fetched_data',
-                fetched: result,
-            })
-        })()
-    }, [render])
+        const getUserUrl = `api/users/${sessionStorage.getItem('user')}`
+        getUser(getUserUrl, accessToken, dispatch)
+    }, [accessToken, dispatch])
 
-    const editUserData = async (e) => {
-        //send data to mongoDB
+    const putUserUrl = `api/users/${sessionStorage.getItem('user')}/profile`
+
+    const editUserData = (e) => {
+        console.log(profile)
         e.preventDefault()
-        const responds = await fetch(
-            `api/users/${sessionStorage.getItem('user')}`,
-            {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `bearer ${accessToken}`,
-                },
-                body: JSON.stringify(state), //state is an object
-            },
-        )
-        const result = await responds.json()
-        dispatch({
-            type: 'modified_user',
-            fname: state.fname,
-            lname: state.lname,
-            username: state.username,
-            modification: result,
-        })
-        setValueFname('')
-        setValueLname('')
-        setValueUsername('')
-        render ? setRender(0) : setRender(1)
+        putUser(putUserUrl, accessToken, dispatch, profile)
     }
 
-    // console.log(state)
-
-    const inputChangeFname = (e) => {
-        e.preventDefault()
-        setValueFname(e.target.value)
-        dispatch({
-            type: 'changed_fname',
-            fname:
-                e.target.value.trim() === ''
-                    ? state.fetched.fname
-                    : e.target.value,
-        })
-    }
-
-    const inputChangeLname = (e) => {
-        e.preventDefault()
-        setValueLname(e.target.value)
-        dispatch({
-            type: 'changed_lname',
-            lname:
-                e.target.value.trim() === ''
-                    ? state.fetched.lname
-                    : e.target.value,
-        })
-    }
-
-    const inputChangeUsername = (e) => {
-        e.preventDefault()
-        setValueUsername(e.target.value)
-        dispatch({
-            type: 'changed_username',
-            username:
-                e.target.value.trim() === ''
-                    ? state.fetched.username
-                    : e.target.value,
-        })
-    }
+    const inputFields = Object.keys(profileInput).map((key, i) => (
+        <InputField
+            key={i}
+            name={key}
+            okey={key}
+            input={profile}
+            setInput={setProfile}
+            state={state.profile}
+        />
+    ))
 
     if (accessToken) {
         return (
@@ -115,7 +60,7 @@ export default function EditProfile() {
                         alt="lorem"
                     />
                     <figcaption className="text-best-white font-noto text-center">
-                        {state.fetched.fname + ' ' + state.fetched.lname}
+                        {state.fname + ' ' + state.lname}
                     </figcaption>
                 </figure>
                 {/* -----------------------profile pic end------------------------- */}
@@ -128,39 +73,10 @@ export default function EditProfile() {
                             Change your Data
                         </h1>
                         <form onSubmit={editUserData}>
-                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                First Name: {state.fetched.fname}
-                            </p>
-                            <input
-                                value={valueFname}
-                                type="text"
-                                onChange={inputChangeFname}
-                                placeholder="New First Name"
-                            />
-
-                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                Last Name: {state.fetched.lname}
-                            </p>
-                            <input
-                                value={valueLname}
-                                type="text"
-                                onChange={inputChangeLname}
-                                placeholder="New Last Name"
-                            />
-
-                            <p className="text-justify mx-4 mb-4 p-4 text-best-white">
-                                Username: {state.fetched.username}
-                            </p>
-                            <input
-                                value={valueUsername}
-                                type="text"
-                                onChange={inputChangeUsername}
-                                placeholder="New Username"
-                            />
-
+                            {inputFields}
                             <button
                                 type="submit"
-                                className="active:scale-95 mx-auto m-2 p-1 border border-best-white text-best-white rounded w-1/2">
+                                className="active:scale-95 mx-auto m-2 mb-7 p-1 border border-best-white text-best-white rounded w-1/2">
                                 save data
                             </button>
                         </form>
