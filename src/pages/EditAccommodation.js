@@ -6,6 +6,7 @@ import reducer from '../data/useReducer'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 import InputField from '../components/InputField'
+import { putUser } from '../util/fetchUser'
 
 export default function EditAccommodation({ state, dispatch }) {
     const [accommodation, setAccommodation] = useState({
@@ -17,27 +18,13 @@ export default function EditAccommodation({ state, dispatch }) {
 
     const accessToken = useContext(Authentication)
 
+    const putUserUrl = `api/users/${sessionStorage.getItem(
+        'user',
+    )}/accommodation`
+
     const editUserData = async (e) => {
         e.preventDefault()
-        const responds = await fetch(
-            `api/users/${sessionStorage.getItem('user')}`,
-            {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `bearer ${accessToken}`,
-                },
-                body: JSON.stringify(accommodation), //state is an object
-            },
-        )
-        const result = await responds.json()
-        if (!result.error) {
-            dispatch({
-                type: 'login_fetch',
-                user: result,
-            })
-        }
-        console.log(result)
+        putUser(putUserUrl, accessToken, dispatch, accommodation)
     }
 
     function inputChange(key) {
@@ -73,29 +60,29 @@ export default function EditAccommodation({ state, dispatch }) {
                             <InputField
                                 name={'Availability'}
                                 okey={'availability'}
-                                accommodation={accommodation}
-                                setAccommodation={setAccommodation}
+                                input={accommodation}
+                                setInput={setAccommodation}
                                 state={state.accommodation}
                             />
                             <InputField
                                 name={'Guests'}
                                 okey={'guests'}
-                                accommodation={accommodation}
-                                setAccommodation={setAccommodation}
+                                input={accommodation}
+                                setInput={setAccommodation}
                                 state={state.accommodation}
                             />
                             <InputField
                                 name={'Description'}
                                 okey={'description'}
-                                accommodation={accommodation}
-                                setAccommodation={setAccommodation}
+                                input={accommodation}
+                                setInput={setAccommodation}
                                 state={state.accommodation}
                             />
                             <InputField
                                 name={'Location'}
                                 okey={'location'}
-                                accommodation={accommodation}
-                                setAccommodation={setAccommodation}
+                                input={accommodation}
+                                setInput={setAccommodation}
                                 state={state.accommodation}
                             />
 

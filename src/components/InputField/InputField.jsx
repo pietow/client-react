@@ -2,13 +2,7 @@
 
 import React, { useState } from 'react'
 
-export default function InputField({
-    name,
-    okey,
-    accommodation,
-    setAccommodation,
-    state,
-}) {
+export default function InputField({ name, okey, input, setInput, state }) {
     return (
         <div>
             <p className="text-justify p-4 text-best-white">
@@ -16,11 +10,11 @@ export default function InputField({
             </p>
             <input
                 className="mb-3"
-                value={accommodation[okey]}
+                value={input[okey]}
                 type="text"
                 onChange={(e) => {
-                    setAccommodation({
-                        ...accommodation,
+                    setInput({
+                        ...input,
                         [okey]: e.target.value,
                     })
                 }}
