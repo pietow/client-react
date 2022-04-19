@@ -7,7 +7,7 @@ export default function AccommodationSection({ heading, state }) {
     let description = state.description
 
     let bg, status, hide
-    if (isHost === 'yes') {
+    if (isHost === 'Yes') {
         bg = 'bg-green-700'
         status = 'Can host'
         hide = false
@@ -19,7 +19,7 @@ export default function AccommodationSection({ heading, state }) {
         hide = false
         description = state.description
     }
-    if (isHost === 'no') {
+    if (isHost === 'No') {
         bg = 'bg-red-700'
         status = 'Cannot host currently'
         hide = true

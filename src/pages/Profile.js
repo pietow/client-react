@@ -5,6 +5,7 @@ import LogoLink from '../components/LogoLink'
 import ProfileSection from '../components/ProfileSection'
 import AccommodationSection from '../components/AccommodationSection'
 import ProfilePic from '../components/ProfilePic'
+import ProfileCard from '../components/ProfileCard'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 
@@ -14,7 +15,7 @@ export default function Profile({ state }) {
     if (accessToken) {
         return (
             <main className="xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
-                <ProfilePic userData={state} />
+                <ProfileCard userData={state} />
                 <div className="xl:w-2/3 xl:h-screen xl:justify-center flex flex-col items-center">
                     <ProfileSection heading={'about me'} userData="lorem" />
                     <ProfileSection
