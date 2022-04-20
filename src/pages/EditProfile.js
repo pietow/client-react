@@ -8,9 +8,11 @@ import Home from './Home'
 import { getUser, putUser } from '../util/fetchUser'
 import InputField from '../components/InputField'
 import Description from '../components/Description'
+import Modal from '../components/Modal'
 
 export default function EditProfile({ state, dispatch }) {
     const [savable, setSavable] = useState(false)
+    const [isHidden, setIsHidden] = useState(true)
     const profileInput = {
         onlineStatus: '',
         title: '',
@@ -38,14 +40,6 @@ export default function EditProfile({ state, dispatch }) {
         e.preventDefault()
         putUser(putUserUrl, accessToken, dispatch, profile)
     }
-    const modifyUser = () => {
-        if (savable) {
-            putUser(putUserUrl, accessToken, dispatch, {
-                text: state.profile.text,
-            })
-            savable = !savable
-        }
-    }
 
     const inputFields = Object.keys(profileInput).map((key, i) => (
         <InputField
@@ -64,6 +58,7 @@ export default function EditProfile({ state, dispatch }) {
     if (accessToken) {
         return (
             <main className="w-full xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
+                <Modal isHidden={isHidden} setIsHidden={setIsHidden} />
                 <div className="w-full mt-6 md:mt-8 xl:justify-center flex flex-col">
                     {/* -----------------------describe section ------------------- */}
                     <section className="mx-4 p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md md:w-8/12 xl:m-auto">
@@ -84,6 +79,10 @@ export default function EditProfile({ state, dispatch }) {
                                         text: profile.text,
                                     })
                                     setSavable(false)
+                                    setIsHidden(false)
+                                    setTimeout(() => {
+                                        setIsHidden(true)
+                                    }, 2000)
                                 }
                             }}
                             className={`${styles.btnClass} ${
