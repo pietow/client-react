@@ -9,10 +9,24 @@ import { getUser, putUser } from '../util/fetchUser'
 import InputField from '../components/InputField'
 import Description from '../components/Description'
 import Modal from '../components/Modal'
+import { Transition } from 'react-transition-group'
 
 export default function EditProfile({ state, dispatch }) {
+    const duration = 300
+
+    const defaultStyle = {
+        transition: `opacity ${duration}ms ease-in-out`,
+        opacity: 0,
+    }
+
+    const transitionStyles = {
+        entering: { opacity: 0.5 },
+        entered: { opacity: 1 },
+        exiting: { opacity: 0.5 },
+        exited: { opacity: 0 },
+    }
     const [savable, setSavable] = useState(false)
-    const [isHidden, setIsHidden] = useState(true)
+    const [entering, setEntering] = useState(true)
     const profileInput = {
         onlineStatus: '',
         title: '',
@@ -58,7 +72,21 @@ export default function EditProfile({ state, dispatch }) {
     if (accessToken) {
         return (
             <main className="w-full xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
-                <Modal isHidden={isHidden} setIsHidden={setIsHidden} />
+                <Transition in={!entering} timeout={duration}>
+                    {(state) => (
+                        <div
+                            className="w-full"
+                            style={{
+                                ...defaultStyle,
+                                ...transitionStyles[state],
+                            }}>
+                            <Modal
+                                entering={entering}
+                                setEntering={setEntering}
+                            />
+                        </div>
+                    )}
+                </Transition>
                 <div className="w-full mt-6 md:mt-8 xl:justify-center flex flex-col">
                     {/* -----------------------describe section ------------------- */}
                     <section className="mx-4 p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md md:w-8/12 xl:m-auto">
@@ -79,9 +107,9 @@ export default function EditProfile({ state, dispatch }) {
                                         text: profile.text,
                                     })
                                     setSavable(false)
-                                    setIsHidden(false)
+                                    setEntering(false)
                                     setTimeout(() => {
-                                        setIsHidden(true)
+                                        setEntering(true)
                                     }, 2000)
                                 }
                             }}
