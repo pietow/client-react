@@ -10,6 +10,7 @@ import InputField from '../components/InputField'
 import Description from '../components/Description'
 
 export default function EditProfile({ state, dispatch }) {
+    const [savable, setSavable] = useState(false)
     const profileInput = {
         onlineStatus: '',
         title: '',
@@ -37,6 +38,14 @@ export default function EditProfile({ state, dispatch }) {
         e.preventDefault()
         putUser(putUserUrl, accessToken, dispatch, profile)
     }
+    const modifyUser = () => {
+        if (savable) {
+            putUser(putUserUrl, accessToken, dispatch, {
+                text: state.profile.text,
+            })
+            savable = !savable
+        }
+    }
 
     const inputFields = Object.keys(profileInput).map((key, i) => (
         <InputField
@@ -48,6 +57,9 @@ export default function EditProfile({ state, dispatch }) {
             state={state.profile}
         />
     ))
+    const styles = {
+        btnClass: 'active:scale-95  w-fit mb-7 p-2 text-best-white',
+    }
 
     if (accessToken) {
         return (
@@ -60,15 +72,25 @@ export default function EditProfile({ state, dispatch }) {
                         </h1>
                         <Description
                             description={state.profile}
-                            dispatch={dispatch}
+                            savable={savable}
+                            setSavable={setSavable}
+                            input={profile}
+                            setInput={setProfile}
                         />
                         <button
                             onClick={() => {
-                                putUser(putUserUrl, accessToken, dispatch, {
-                                    text: state.profile.text,
-                                })
+                                if (savable) {
+                                    putUser(putUserUrl, accessToken, dispatch, {
+                                        text: profile.text,
+                                    })
+                                    setSavable(false)
+                                }
                             }}
-                            className="active:scale-95 bg-teal-dark w-fit mb-7 p-2 text-best-white">
+                            className={`${styles.btnClass} ${
+                                savable
+                                    ? 'bg-teal-dark'
+                                    : 'bg-teal-bright cursor-not-allowed'
+                            }`}>
                             Save
                         </button>
                     </section>

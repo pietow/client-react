@@ -3,14 +3,28 @@
 import React, { useState, useEffect, useRef } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 
-export default function Description({ description, dispatch }) {
+export default function Description({
+    description,
+    savable,
+    setSavable,
+    input,
+    setInput,
+}) {
+    useEffect(() => {
+        setInput((oldInput) => ({ ...oldInput, text: description.text }))
+    }, [setInput, description])
     return (
         <div className="flex flex-col">
             <TextareaAutosize
                 className="bg-best-white outline-0 mt-5 p-4 pb-9 resize-none w-11/12 hover:bg-pistachio-dark focus:bg-best-white placeholder:italic"
-                value={description.text}
+                value={input.text}
                 onChange={(e) => {
-                    dispatch({ type: 'update_text', text: e.target.value })
+                    if (e.target.value === description.text) {
+                        setSavable(false)
+                    } else {
+                        setSavable(true)
+                    }
+                    setInput({ ...input, text: e.target.value })
                 }}
                 placeholder="Type in your description..."
             />
