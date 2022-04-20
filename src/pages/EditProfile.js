@@ -51,30 +51,29 @@ export default function EditProfile({ state, dispatch }) {
 
     if (accessToken) {
         return (
-            <main className="xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
-                <div className="border-2 :w-2/3 xl:h-screen xl:justify-center flex flex-col items-center">
-                    <section className="h-72 w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
+            <main className="w-full xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
+                <div className="w-full mt-6 md:mt-8 xl:justify-center flex flex-col">
+                    {/* -----------------------describe section ------------------- */}
+                    <section className="mx-4 p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md md:w-8/12 xl:m-auto">
+                        <h1 className="w-full underline underline-offset-8 decoration-1 text-best-white text-4xl">
+                            Descript Yourself
+                        </h1>
                         <Description
                             description={state.profile}
                             dispatch={dispatch}
                         />
-                    </section>
-                    {/* -----------------------profile section start------------------- */}
-
-                    <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
-                        <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex-3xl">
-                            Change your Data
-                        </h1>
-                        <form onSubmit={editUserData}>
-                            <button
-                                type="submit"
-                                className="active:scale-95 mx-auto m-2 mb-7 p-1 border border-best-white text-best-white rounded w-1/2">
-                                save data
-                            </button>
-                        </form>
+                        <button
+                            onClick={() => {
+                                putUser(putUserUrl, accessToken, dispatch, {
+                                    text: state.profile.text,
+                                })
+                            }}
+                            className="active:scale-95 bg-teal-dark w-fit mb-7 p-2 text-best-white">
+                            Save
+                        </button>
                     </section>
 
-                    {/* -----------------------profile section end--------------------- */}
+                    {/* -----------------------Basic section end--------------------- */}
                 </div>
                 <LogoLink />
             </main>

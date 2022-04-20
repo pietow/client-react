@@ -42,6 +42,7 @@ module.exports = {
             },
             'red': colors.red,
             'green': colors.green,
+            'gray': colors.gray,
         },
         extend: {
             backgroundImage: (theme) => ({
