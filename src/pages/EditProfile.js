@@ -61,6 +61,15 @@ export default function EditProfile({ state, dispatch }) {
                             description={state.profile}
                             dispatch={dispatch}
                         />
+                        <button
+                            onClick={() => {
+                                putUser(putUserUrl, accessToken, dispatch, {
+                                    text: state.profile.text,
+                                })
+                            }}
+                            className="active:scale-95 bg-teal-dark w-fit mb-7 p-2 border border-best-white text-best-white">
+                            Save
+                        </button>
                     </section>
                     {/* -----------------------profile section start------------------- */}
 
