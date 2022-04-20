@@ -34,6 +34,15 @@ export function userReducer(state, action) {
                 ...action.user,
             }
         }
+        case 'update_text': {
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    text: action.text,
+                },
+            }
+        }
         case 'edit_accommodation': {
             return {
                 ...state,
