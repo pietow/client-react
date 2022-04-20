@@ -52,8 +52,9 @@ export default function EditProfile({ state, dispatch }) {
     if (accessToken) {
         return (
             <main className="w-full xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
-                <div className="w-full mt-6 xl:justify-center flex flex-col">
-                    <section className="mx-4 p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
+                <div className="w-full mt-6 md:mt-8 xl:justify-center flex flex-col">
+                    {/* -----------------------describe section ------------------- */}
+                    <section className="mx-4 p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md md:w-8/12 xl:m-auto">
                         <h1 className="w-full underline underline-offset-8 decoration-1 text-best-white text-4xl">
                             Descript Yourself
                         </h1>
@@ -67,15 +68,12 @@ export default function EditProfile({ state, dispatch }) {
                                     text: state.profile.text,
                                 })
                             }}
-                            className="active:scale-95 bg-teal-dark w-fit mb-7 p-2 border border-best-white text-best-white">
+                            className="active:scale-95 bg-teal-dark w-fit mb-7 p-2 text-best-white">
                             Save
                         </button>
                     </section>
-                    {/* -----------------------profile section start------------------- */}
 
-                    <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md"></section>
-
-                    {/* -----------------------profile section end--------------------- */}
+                    {/* -----------------------Basic section end--------------------- */}
                 </div>
                 <LogoLink />
             </main>
