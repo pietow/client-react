@@ -1,9 +1,10 @@
 /** @format */
 
-import React from 'react'
+import React, { useRef } from 'react'
 import { Transition } from 'react-transition-group'
 
 export default function Modal({ entering, setEntering }) {
+    const nodeRef = useRef(null)
     const duration = 300
 
     const defaultStyle = {
@@ -21,10 +22,11 @@ export default function Modal({ entering, setEntering }) {
         modalClass: 'relative bg-pistachio-dark w-full text-center p-3',
     }
     return (
-        <Transition in={!entering} timeout={duration}>
+        <Transition in={!entering} nodeRef={nodeRef} timeout={duration}>
             {(state) => (
                 <div
                     className={styles.modalClass}
+                    ref={nodeRef}
                     style={{
                         ...defaultStyle,
                         ...transitionStyles[state],
