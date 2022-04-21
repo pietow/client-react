@@ -8,6 +8,7 @@ import Home from './Home'
 import { getUser, putUser } from '../util/fetchUser'
 import InputField from '../components/InputField'
 import Description from '../components/Description'
+import BasicsInput from '../components/BasicsInput'
 import Modal from '../components/Modal'
 import { Transition } from 'react-transition-group'
 
@@ -66,46 +67,83 @@ export default function EditProfile({ state, dispatch }) {
                         <nav className="hidden md:block h-fit p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md md:w-4/12 md:mr-3">
                             NavBar
                         </nav>
-                        <section className="p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md md:w-8/12">
-                            <h1 className="w-full underline underline-offset-8 decoration-1 text-best-white text-4xl">
-                                Descript Yourself
-                            </h1>
-                            <Description
-                                description={state.profile}
-                                savable={savable}
-                                setSavable={setSavable}
-                                input={profile}
-                                setInput={setProfile}
-                            />
-                            <button
-                                onClick={() => {
-                                    if (savable) {
-                                        putUser(
-                                            putUserUrl,
-                                            accessToken,
-                                            dispatch,
-                                            {
-                                                text: profile.text,
-                                            },
-                                        )
-                                        setSavable(false)
-                                        setEntering(false)
-                                        setTimeout(() => {
-                                            setEntering(true)
-                                        }, 2000)
-                                    }
-                                }}
-                                className={`${styles.btnClass} ${
-                                    savable
-                                        ? 'bg-teal-dark'
-                                        : 'bg-teal-bright cursor-not-allowed'
-                                }`}>
-                                Save
-                            </button>
-                        </section>
+                        <div className="flex flex-col md:w-8/12">
+                            <section className="p-4 mb-7 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
+                                <h1 className="w-full underline underline-offset-8 decoration-1 text-best-white text-4xl">
+                                    Describe yourself
+                                </h1>
+                                <Description
+                                    description={state.profile}
+                                    savable={savable}
+                                    setSavable={setSavable}
+                                    input={profile}
+                                    setInput={setProfile}
+                                />
+                                <button
+                                    onClick={() => {
+                                        if (savable) {
+                                            putUser(
+                                                putUserUrl,
+                                                accessToken,
+                                                dispatch,
+                                                {
+                                                    text: profile.text,
+                                                },
+                                            )
+                                            setSavable(false)
+                                            setEntering(false)
+                                            setTimeout(() => {
+                                                setEntering(true)
+                                            }, 2000)
+                                        }
+                                    }}
+                                    className={`${styles.btnClass} ${
+                                        savable
+                                            ? 'bg-teal-dark'
+                                            : 'bg-teal-bright cursor-not-allowed'
+                                    }`}>
+                                    Save
+                                </button>
+                            </section>
+                            <section className="p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
+                                <h1 className="w-full underline underline-offset-8 decoration-1 text-best-white text-4xl">
+                                    Basics
+                                </h1>
+                                <BasicsInput
+                                    description={state.profile}
+                                    savable={savable}
+                                    setSavable={setSavable}
+                                    input={profile}
+                                    setInput={setProfile}
+                                />
+                                <button
+                                    onClick={() => {
+                                        if (savable) {
+                                            putUser(
+                                                putUserUrl,
+                                                accessToken,
+                                                dispatch,
+                                                {
+                                                    text: profile.text,
+                                                },
+                                            )
+                                            setSavable(false)
+                                            setEntering(false)
+                                            setTimeout(() => {
+                                                setEntering(true)
+                                            }, 2000)
+                                        }
+                                    }}
+                                    className={`${styles.btnClass} ${
+                                        savable
+                                            ? 'bg-teal-dark'
+                                            : 'bg-teal-bright cursor-not-allowed'
+                                    }`}>
+                                    Save
+                                </button>
+                            </section>
+                        </div>
                     </div>
-
-                    {/* -----------------------Basic section end--------------------- */}
                 </div>
                 <LogoLink />
             </main>
