@@ -7,7 +7,9 @@ export default function Birthday({ state, savable, setSavable, styles }) {
         year: 'Year',
         month: 'Month',
         day: 'Day',
+        days: [],
     })
+    const [days, setDays] = useState([])
 
     styles = { ...styles, input: `${styles.input} mb-2 md:mb-0` }
 
@@ -24,25 +26,30 @@ export default function Birthday({ state, savable, setSavable, styles }) {
 
     //CALCULATE DAYS
     function getDays(month, year) {
-        if (month === 'month' && year === 'year') {
+        if (month === 'Month' || year === 'Year') {
             month = 1
             year = 2000
         }
-        console.log(year)
-        console.log(month)
         const days = dates.reduce((acc, b) => {
             if (b.year === year && b.month === month) {
                 acc[b.day] = b.day
             }
             return acc
         }, {})
+        setDays(['Day', ...Object.keys(days)])
         return ['Day', ...Object.keys(days)]
     }
 
     //SET DATE STATE
-    function handleClick(e) {
-        setDateSelection({ ...dateSelection, [e.target.id]: e.target.value })
-        console.log(getDays(dateSelection.month, dateSelection.year))
+    function handleYear(e) {
+        const year = Number(e.target.value)
+        const days = getDays(dateSelection.month, year)
+        setDateSelection({ ...dateSelection, year: year })
+    }
+    function handleMonth(e) {
+        const month = Number(e.target.value)
+        const days = getDays(month, dateSelection.year)
+        setDateSelection({ ...dateSelection, month: month })
     }
 
     return (
@@ -54,7 +61,7 @@ export default function Birthday({ state, savable, setSavable, styles }) {
                 <select
                     id="month"
                     type="text"
-                    onClick={handleClick}
+                    onClick={handleMonth}
                     className={`${styles.input}`}>
                     {months.map((key, i) => {
                         return (
@@ -66,10 +73,10 @@ export default function Birthday({ state, savable, setSavable, styles }) {
                 </select>
                 <select
                     type="text"
-                    id="day"
-                    onClick={handleClick}
+                    onClick={handleYear}
+                    id="year"
                     className={styles.input}>
-                    {getDays(2, 2020).map((key, i) => {
+                    {days.map((key, i) => {
                         return (
                             <option key={key} value={key}>
                                 {key}
@@ -79,7 +86,7 @@ export default function Birthday({ state, savable, setSavable, styles }) {
                 </select>
                 <select
                     type="text"
-                    onClick={handleClick}
+                    onClick={handleYear}
                     id="year"
                     className={styles.input}>
                     {years.map((key, i) => {
