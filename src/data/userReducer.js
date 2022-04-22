@@ -10,7 +10,7 @@ export const initialState = {
         photo: '',
         onlineStatus: '',
         title: '',
-        text: '',
+        text: 'dummy',
         motto: '',
         gender: '',
         language: [],
@@ -34,19 +34,25 @@ export function userReducer(state, action) {
                 ...action.user,
             }
         }
-        case 'update_text': {
+        case 'update_user': {
             return {
                 ...state,
-                profile: {
-                    ...state.profile,
-                    text: action.text,
-                },
+                ...action.payload,
             }
         }
-        case 'edit_accommodation': {
+        case 'update_profile': {
             return {
                 ...state,
-                location: 'HELOE WORLD',
+                profile: { ...state.profile, ...action.payload },
+            }
+        }
+        case 'update_accommodation': {
+            return {
+                ...state,
+                accommodation: {
+                    ...state.accommodation,
+                    ...action.payload,
+                },
             }
         }
         default: {
