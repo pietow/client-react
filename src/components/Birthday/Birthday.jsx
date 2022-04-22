@@ -9,6 +9,7 @@ export default function Birthday({ state, savable, setSavable, styles }) {
         year: 'Year',
         month: 'Month',
         day: 'Day',
+        days: [],
     })
     const [days, setDays] = useState([
         'Day',
