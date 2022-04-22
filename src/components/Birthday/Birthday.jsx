@@ -1,19 +1,33 @@
 /** @format */
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { dateArr } from '../../data/datesArray'
 
 export default function Birthday({ state, savable, setSavable, styles }) {
+    const previousDays = useRef([])
+
     const [dateSelection, setDateSelection] = useState({
         year: 'Year',
         month: 'Month',
         day: 'Day',
-        days: [],
     })
-    const [days, setDays] = useState([])
+    const [days, setDays] = useState([
+        'Day',
+        ...[...Array(31).keys()].map((x) => x + 1),
+    ])
+
+    //SAVE PREVIOUS STATE WITHOUT INFINITE RENDER
+    useEffect(() => {
+        if (previousDays.current.length !== days.length) {
+            setDateSelection((c) => ({ ...c, day: 'Day' }))
+        }
+        previousDays.current = days
+    }, [days])
 
     styles = { ...styles, input: `${styles.input} mb-2 md:mb-0` }
 
     const dates = dateArr()
+
+    //REDUCE ARRAY OF DATE OBJECT TO GET UNIQUE YEAR/MONTH VALUES
     const yearRange = dates.reduce((acc, b) => {
         acc['YEAR'] = acc['YEAR'] ? acc['YEAR'] : {}
         acc['MONTH'] = acc['MONTH'] ? acc['MONTH'] : {}
@@ -21,8 +35,8 @@ export default function Birthday({ state, savable, setSavable, styles }) {
         acc['MONTH'][b.month] = b.month
         return acc
     }, {})
-    const years = ['Year', ...Object.keys(yearRange['YEAR'])]
-    const months = ['Month', ...Object.keys(yearRange['MONTH'])]
+    const years = ['Year', ...[...Object.keys(yearRange['YEAR'])].reverse()]
+    const months = ['Months', ...Object.keys(yearRange['MONTH'])]
 
     //CALCULATE DAYS
     function getDays(month, year) {
@@ -30,26 +44,32 @@ export default function Birthday({ state, savable, setSavable, styles }) {
             month = 1
             year = 2000
         }
-        const days = dates.reduce((acc, b) => {
+        month = month ? month : 1
+        year = year ? year : 2000
+        const newDays = dates.reduce((acc, b) => {
             if (b.year === year && b.month === month) {
                 acc[b.day] = b.day
             }
             return acc
         }, {})
-        setDays(['Day', ...Object.keys(days)])
-        return ['Day', ...Object.keys(days)]
+        return ['Day', ...Object.keys(newDays)]
     }
 
     //SET DATE STATE
     function handleYear(e) {
         const year = Number(e.target.value)
-        const days = getDays(dateSelection.month, year)
+        const newDays = getDays(dateSelection.month, year)
+        setDays(newDays)
         setDateSelection({ ...dateSelection, year: year })
     }
     function handleMonth(e) {
         const month = Number(e.target.value)
-        const days = getDays(month, dateSelection.year)
+        const newDays = getDays(month, dateSelection.year)
+        setDays(newDays)
         setDateSelection({ ...dateSelection, month: month })
+    }
+    function handleDay(e) {
+        setDateSelection({ ...dateSelection, day: Number(e.target.value) })
     }
 
     return (
@@ -73,8 +93,12 @@ export default function Birthday({ state, savable, setSavable, styles }) {
                 </select>
                 <select
                     type="text"
-                    onClick={handleYear}
-                    id="year"
+                    value={dateSelection.day}
+                    onChange={(e) =>
+                        setDateSelection((c) => ({ ...c, day: e.target.value }))
+                    }
+                    onClick={handleDay}
+                    id="day"
                     className={styles.input}>
                     {days.map((key, i) => {
                         return (
