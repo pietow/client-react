@@ -38,22 +38,10 @@ export default function EditProfile({ state, dispatch }) {
 
     const putUserUrl = `api/users/${sessionStorage.getItem('user')}/profile`
 
-    const editUserData = (e) => {
-        e.preventDefault()
-        putUser(putUserUrl, accessToken, dispatch, profile)
-    }
-
-    const inputFields = Object.keys(profileInput).map((key, i) => (
-        <InputField
-            key={i}
-            name={key}
-            okey={key}
-            input={profile}
-            setInput={setProfile}
-            state={state.profile}
-        />
-    ))
     const styles = {
+        label: 'w-28 text-right text-best-white text-sm',
+        input: 'py-1 bg-best-white text-sm px-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:border-pistachio-dark focus:border-2 shadow-pistachio-dark focus:shadow-lg selection:bg-pistachio-dark',
+        container: 'flex mb-4 items-center',
         btnClass: 'active:scale-95  w-fit mb-7 p-2 text-best-white',
     }
 
@@ -68,80 +56,17 @@ export default function EditProfile({ state, dispatch }) {
                             NavBar
                         </nav>
                         <div className="flex flex-col md:w-8/12">
-                            <section className="p-4 mb-7 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
-                                <h1 className="w-full underline underline-offset-8 decoration-1 text-best-white text-4xl">
-                                    Describe yourself
-                                </h1>
-                                <Description
-                                    description={state.profile}
-                                    savable={savable}
-                                    setSavable={setSavable}
-                                    input={profile}
-                                    setInput={setProfile}
-                                />
-                                <button
-                                    onClick={() => {
-                                        if (savable) {
-                                            putUser(
-                                                putUserUrl,
-                                                accessToken,
-                                                dispatch,
-                                                {
-                                                    text: profile.text,
-                                                },
-                                            )
-                                            setSavable(false)
-                                            setEntering(false)
-                                            setTimeout(() => {
-                                                setEntering(true)
-                                            }, 2000)
-                                        }
-                                    }}
-                                    className={`${styles.btnClass} ${
-                                        savable
-                                            ? 'bg-teal-dark'
-                                            : 'bg-teal-bright cursor-not-allowed'
-                                    }`}>
-                                    Save
-                                </button>
-                            </section>
-                            <section className="p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
-                                <h1 className="w-full underline underline-offset-8 decoration-1 text-best-white text-4xl">
-                                    Basics
-                                </h1>
-                                <BasicsInput
-                                    description={state.profile}
-                                    savable={savable}
-                                    setSavable={setSavable}
-                                    input={profile}
-                                    setInput={setProfile}
-                                />
-                                <button
-                                    onClick={() => {
-                                        if (savable) {
-                                            putUser(
-                                                putUserUrl,
-                                                accessToken,
-                                                dispatch,
-                                                {
-                                                    text: profile.text,
-                                                },
-                                            )
-                                            setSavable(false)
-                                            setEntering(false)
-                                            setTimeout(() => {
-                                                setEntering(true)
-                                            }, 2000)
-                                        }
-                                    }}
-                                    className={`${styles.btnClass} ${
-                                        savable
-                                            ? 'bg-teal-dark'
-                                            : 'bg-teal-bright cursor-not-allowed'
-                                    }`}>
-                                    Save
-                                </button>
-                            </section>
+                            <Description
+                                state={state}
+                                styles={styles}
+                                dispatch={dispatch}
+                                setEntering={setEntering}
+                            />
+                            <BasicsInput
+                                styles={styles}
+                                state={state}
+                                dispatch={dispatch}
+                            />
                         </div>
                     </div>
                 </div>
