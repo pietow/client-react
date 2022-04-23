@@ -2,26 +2,43 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { dateArr } from '../../data/datesArray'
 
-export default function Birthday({ state, savable, setSavable, styles }) {
-    const previousDays = useRef([])
-
+export default function Birthday({
+    state,
+    dispatch,
+    savable,
+    setSavable,
+    styles,
+}) {
     const [dateSelection, setDateSelection] = useState({
         year: 'Year',
         month: 'Month',
         day: 'Day',
         days: [],
+        convert: function () {
+            const birthday = new Date(
+                this.year + '-' + this.month + '-' + this.day,
+            )
+            if (birthday.toString() !== 'Invalid Date') return birthday
+            return null
+        },
     })
     const [days, setDays] = useState([
         'Day',
         ...[...Array(31).keys()].map((x) => x + 1),
     ])
 
-    //SAVE PREVIOUS STATE WITHOUT INFINITE RENDER
     useEffect(() => {
-        if (previousDays.current.length !== days.length) {
-            setDateSelection((c) => ({ ...c, day: 'Day' }))
-        }
-        previousDays.current = days
+        const birthday = dateSelection.convert()
+        dispatch({
+            type: 'update_profile',
+            payload: {
+                birthday: birthday,
+            },
+        })
+    }, [dateSelection, dispatch])
+
+    useEffect(() => {
+        setDateSelection((c) => ({ ...c, day: 'Day' }))
     }, [days])
 
     styles = { ...styles, input: `${styles.input} mb-2 md:mb-0` }

@@ -1,10 +1,13 @@
 /** @format */
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { Authentication } from '../../context/accessTokenContext'
 import { dateArr } from '../../data/datesArray'
 import Birthday from '../Birthday'
+import { putUser } from '../..//util/fetchUser'
 
 export default function BasicsInput({ state, dispatch, styles }) {
+    const accessToken = useContext(Authentication)
     const gender = {
         "I'd rather not tell": '',
         'Female': 'Female',
@@ -12,6 +15,9 @@ export default function BasicsInput({ state, dispatch, styles }) {
         'Non-binary': 'Non-binary',
         'Other': 'Other',
     }
+
+    const putUserUrl = `api/users/${sessionStorage.getItem('user')}`
+    const putProfileUrl = `api/users/${sessionStorage.getItem('user')}/profile`
 
     return (
         <section className="p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
@@ -119,6 +125,7 @@ export default function BasicsInput({ state, dispatch, styles }) {
                     </div>
                     <Birthday
                         state={state}
+                        dispatch={dispatch}
                         savable={'bla'}
                         setSavable={'bla'}
                         styles={styles}></Birthday>
@@ -127,7 +134,14 @@ export default function BasicsInput({ state, dispatch, styles }) {
             <button
                 onClick={() => {
                     putUser(putUserUrl, accessToken, dispatch, {
-                        text: profile.text,
+                        fname: state.fname,
+                        lname: state.lname,
+                    })
+                    console.log(state.profile.birthday)
+                    putUser(putProfileUrl, accessToken, dispatch, {
+                        motto: state.profile.motto,
+                        gender: state.gender,
+                        birthdate: '2/1/2011',
                     })
                 }}
                 className={`${styles.btnClass} ${
