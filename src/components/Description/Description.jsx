@@ -8,8 +8,17 @@ import { putUser } from '../..//util/fetchUser'
 export default function Description({ state, styles, dispatch, setEntering }) {
     const [savable, setSavable] = useState(false)
     const accessToken = useContext(Authentication)
-    //SAVE STATE WITHOUT RERENDER
-    const previousText = useRef(state.profile.text)
+    const previousText = useRef('')
+    const renderCount = useRef(0)
+
+    useEffect(() => {
+        //EACH TIME STATE CHANGES COUNT RERENDER
+        renderCount.current += 1
+        if (renderCount.current === 1) {
+            //FIRST RERENDER IS THE DATA FETCHING
+            previousText.current = state.profile.text
+        }
+    }, [state])
 
     const putUserUrl = `api/users/${sessionStorage.getItem('user')}/profile`
 
