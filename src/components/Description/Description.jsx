@@ -8,6 +8,14 @@ import { putUser } from '../..//util/fetchUser'
 export default function Description({ state, styles, dispatch, setEntering }) {
     const [savable, setSavable] = useState(false)
     const accessToken = useContext(Authentication)
+    const previousText = useRef('')
+    const renderCount = useRef(0)
+
+    useEffect(() => {
+        if (state.username !== '' && state._id) {
+            previousText.current = state.profile.text
+        }
+    }, [state])
 
     const putUserUrl = `api/users/${sessionStorage.getItem('user')}/profile`
 
@@ -20,12 +28,17 @@ export default function Description({ state, styles, dispatch, setEntering }) {
                 <TextareaAutosize
                     className="bg-best-white outline-0 mt-5 p-4 pb-9 resize-none w-11/12 hover:bg-pistachio-dark focus:bg-best-white placeholder:italic"
                     value={state.profile?.text ?? 'fail'}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                        if (previousText.current !== e.target.value) {
+                            setSavable(true)
+                        } else {
+                            setSavable(false)
+                        }
                         dispatch({
                             type: 'update_profile',
                             payload: { text: e.target.value },
                         })
-                    }
+                    }}
                     placeholder="Type in your description..."
                 />
                 <div className="bg-best-white w-11/12">
@@ -38,10 +51,11 @@ export default function Description({ state, styles, dispatch, setEntering }) {
             </div>
             <button
                 onClick={() => {
-                    if (true) {
+                    if (savable) {
                         putUser(putUserUrl, accessToken, dispatch, {
                             text: state.profile.text,
                         })
+                        previousText.current = state.profile.text
                         setSavable(false)
                         setEntering(false)
                         setTimeout(() => {

@@ -66,6 +66,7 @@ export default function EditProfile({ state, dispatch }) {
                                 styles={styles}
                                 state={state}
                                 dispatch={dispatch}
+                                setEntering={setEntering}
                             />
                         </div>
                     </div>
