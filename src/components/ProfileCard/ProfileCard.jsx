@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 
 export default function ProfileCard({ userData }) {
+    // HIDING POSTS IF NOT FILLED OUT
     const [visibleData, setVisibleData] = useState(null)
 
     useEffect(() => {
@@ -10,8 +11,10 @@ export default function ProfileCard({ userData }) {
     }, [])
 
     console.log()
-    /* const languages = userData.profile.language */
-    const languages = ['german', 'english']
+
+    // DISPLAYING LANGUAGES
+    const languages = userData.profile.language
+    // const languages = ['german', 'english']
 
     const displayLanguage = languages.map((language, i) => {
         return (
@@ -21,6 +24,9 @@ export default function ProfileCard({ userData }) {
             </li>
         )
     })
+
+    // CALCULATE THE AGE
+    
 
     console.log(userData)
     return (
