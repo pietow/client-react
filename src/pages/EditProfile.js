@@ -7,8 +7,14 @@ import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 import { getUser, putUser } from '../util/fetchUser'
 import InputField from '../components/InputField'
+import Description from '../components/Description'
+import BasicsInput from '../components/BasicsInput'
+import Modal from '../components/Modal'
+import { Transition } from 'react-transition-group'
 
 export default function EditProfile({ state, dispatch }) {
+    const [savable, setSavable] = useState(false)
+    const [entering, setEntering] = useState(true)
     const profileInput = {
         onlineStatus: '',
         title: '',
@@ -32,57 +38,38 @@ export default function EditProfile({ state, dispatch }) {
 
     const putUserUrl = `api/users/${sessionStorage.getItem('user')}/profile`
 
-    const editUserData = (e) => {
-        console.log(profile)
-        e.preventDefault()
-        putUser(putUserUrl, accessToken, dispatch, profile)
+    const styles = {
+        label: 'w-28 text-right text-best-white text-sm',
+        input: 'py-1 bg-best-white text-sm px-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:border-pistachio-dark focus:border-2 shadow-pistachio-dark focus:shadow-lg selection:bg-pistachio-dark',
+        container: 'flex mb-4 items-center',
+        btnClass: 'active:scale-95  w-fit mb-7 p-2 text-best-white',
     }
-
-    const inputFields = Object.keys(profileInput).map((key, i) => (
-        <InputField
-            key={i}
-            name={key}
-            okey={key}
-            input={profile}
-            setInput={setProfile}
-            state={state.profile}
-        />
-    ))
 
     if (accessToken) {
         return (
-            <main className="xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
-                {/* -----------------------profile pic start----------------------- */}
-                <figure className="xl:w-60 xl:bottom-40 relative w-40 space-y-2 mt-6 lg:mt-14 flex flex-col items-center">
-                    <img
-                        className="xl:rounded-xl drop-shadow-lg rounded-full"
-                        src={'https://picsum.photos/200/200.jpg'}
-                        alt="lorem"
-                    />
-                    <figcaption className="text-best-white font-noto text-center">
-                        {state.fname + ' ' + state.lname}
-                    </figcaption>
-                </figure>
-                {/* -----------------------profile pic end------------------------- */}
-
-                <div className="xl:w-2/3 xl:h-screen xl:justify-center flex flex-col items-center">
-                    {/* -----------------------profile section start------------------- */}
-
-                    <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
-                        <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex-3xl">
-                            Change your Data
-                        </h1>
-                        <form onSubmit={editUserData}>
-                            {inputFields}
-                            <button
-                                type="submit"
-                                className="active:scale-95 mx-auto m-2 mb-7 p-1 border border-best-white text-best-white rounded w-1/2">
-                                save data
-                            </button>
-                        </form>
-                    </section>
-
-                    {/* -----------------------profile section end--------------------- */}
+            <main className="w-full flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
+                <Modal entering={entering} setEntering={setEntering} />
+                <div className="w-full mt-6 md:mt-8 xl:justify-center flex flex-col">
+                    {/* -----------------------describe section ------------------- */}
+                    <div className="flex flex-row m-auto w-full md:px-4 xl:w-9/12">
+                        <nav className="hidden md:block h-fit p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md md:w-4/12 md:mr-3">
+                            NavBar
+                        </nav>
+                        <div className="flex flex-col md:w-8/12">
+                            <Description
+                                state={state}
+                                styles={styles}
+                                dispatch={dispatch}
+                                setEntering={setEntering}
+                            />
+                            <BasicsInput
+                                styles={styles}
+                                state={state}
+                                dispatch={dispatch}
+                                setEntering={setEntering}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <LogoLink />
             </main>
