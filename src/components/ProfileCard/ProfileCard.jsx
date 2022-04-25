@@ -9,7 +9,9 @@ export default function ProfileCard({ userData }) {
         setVisibleData(true)
     }, [])
 
-    const languages = userData.language
+    console.log()
+    /* const languages = userData.profile.language */
+    const languages = ['german', 'english']
 
     const displayLanguage = languages.map((language, i) => {
         return (
@@ -22,7 +24,7 @@ export default function ProfileCard({ userData }) {
 
     console.log(userData)
     return (
-        <card className="w-1/5 h-full border-2 border-gray-dark p-4 rounded bg-best-white">
+        <div className="w-1/5 h-full border-2 border-gray-dark p-4 rounded bg-best-white">
             <div className="">
                 <img
                     className="pb-10 m-auto justify-center"
@@ -46,25 +48,27 @@ export default function ProfileCard({ userData }) {
                 )}
                 {visibleData && (
                     <p className="text-black text-xs border-b-2 p-2">
-                        Gender: {userData.gender}
+                        Gender: {userData.profile.gender}
                     </p>
                 )}
                 {visibleData && (
                     <p className="text-black border-b-2 p-2 text-xs">
-                        Age: {userData.birthday}
+                        Age: {userData.profile.birthdate}
                     </p>
                 )}
                 {visibleData && (
                     <p className="text-black border-b-2 p-2 text-xs">
-                        Lives in {userData.city + ', ' + userData.country}
+                        Lives in{' '}
+                        {userData.city + ', ' + userData.profile.country}
                     </p>
                 )}
                 {visibleData && (
                     <div className="text-black border-b-2 p-2 text-xs">
-                        Languages: {displayLanguage}
+                        Languages:
+                        <ul>{displayLanguage}</ul>
                     </div>
                 )}
             </div>
-        </card>
+        </div>
     )
 }
