@@ -2,13 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { dateArr } from '../../data/datesArray'
 
-export default function Birthday({
-    state,
-    dispatch,
-    savable,
-    setSavable,
-    styles,
-}) {
+export default function Birthday({ state, dispatch, setSavable, styles }) {
     const [dateSelection, setDateSelection] = useState({
         year: 'Year',
         month: 'Month',
@@ -63,6 +57,7 @@ export default function Birthday({
 
     //CALCULATE DAYS
     function getDays(month, year) {
+        setSavable(true)
         if (month === 'Month' || year === 'Year') {
             month = 1
             year = 2000
@@ -92,7 +87,13 @@ export default function Birthday({
         setDateSelection({ ...dateSelection, month: month })
     }
     function handleDay(e) {
+        setSavable(true)
         setDateSelection({ ...dateSelection, day: Number(e.target.value) })
+    }
+
+    function getValue(str, pos) {
+        const num = str.split('-')[pos]
+        return +num
     }
 
     return (
@@ -103,6 +104,13 @@ export default function Birthday({
             <div className="flex flex-col md:flex-row w-6/12 ml-8">
                 <select
                     id="month"
+                    value={getValue(state.profile.birthdate, 1)}
+                    onChange={(e) =>
+                        setDateSelection((c) => ({
+                            ...c,
+                            month: e.target.value,
+                        }))
+                    }
                     type="text"
                     onClick={handleMonth}
                     className={`${styles.input}`}>
@@ -132,6 +140,13 @@ export default function Birthday({
                     })}
                 </select>
                 <select
+                    value={dateSelection.year}
+                    onChange={(e) =>
+                        setDateSelection((c) => ({
+                            ...c,
+                            year: e.target.value,
+                        }))
+                    }
                     type="text"
                     onClick={handleYear}
                     id="year"

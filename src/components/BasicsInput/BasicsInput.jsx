@@ -4,40 +4,20 @@ import React, { useState, useRef, useEffect, useContext } from 'react'
 import { Authentication } from '../../context/accessTokenContext'
 import { dateArr } from '../../data/datesArray'
 import Birthday from '../Birthday'
+import Gender from '../Gender'
 import { putUser } from '../..//util/fetchUser'
 
 export default function BasicsInput({ state, dispatch, styles, setEntering }) {
     const accessToken = useContext(Authentication)
 
-    const previousState = useRef({})
-    const renderCount = useRef(0)
     const [savable, setSavable] = useState(false)
 
     function checkChanges(newValue, oldValue) {
         newValue === oldValue ? setSavable(false) : setSavable(true)
     }
 
-    useEffect(() => {
-        if (state._id && renderCount.current === 0) {
-            renderCount.current = 1
-            previousState.current = state
-        }
-    }, [state, renderCount])
-
-    useEffect(() => {
-        console.log(savable)
-    }, [savable, state])
-
-    const gender = {
-        "I'd rather not tell": '',
-        'Female': 'Female',
-        'Male': 'Male',
-        'Non-binary': 'Non-binary',
-        'Other': 'Other',
-    }
-
-    function changeHandler(newValue, oldValue, type, key) {
-        checkChanges(newValue, oldValue)
+    function changeHandler(newValue, type, key) {
+        setSavable(true)
         dispatch({
             type: type,
             payload: {
@@ -68,20 +48,9 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
                                 onChange={(e) => {
                                     changeHandler(
                                         e.target.value,
-                                        previousState.current.fname,
                                         'update_user',
                                         'fname',
                                     )
-                                    /* checkChanges( */
-                                    /*     e.target.value, */
-                                    /*     previousState.current.fname, */
-                                    /* ) */
-                                    /* dispatch({ */
-                                    /*     type: 'update_user', */
-                                    /*     payload: { */
-                                    /*         fname: e.target.value, */
-                                    /*     }, */
-                                    /* }) */
                                 }}
                                 className={styles.input}
                             />
@@ -96,14 +65,13 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
                                 id="lname"
                                 type="text"
                                 value={state.lname ?? 'fail'}
-                                onChange={(e) =>
-                                    dispatch({
-                                        type: 'update_user',
-                                        payload: {
-                                            lname: e.target.value,
-                                        },
-                                    })
-                                }
+                                onChange={(e) => {
+                                    changeHandler(
+                                        e.target.value,
+                                        'update_user',
+                                        'lname',
+                                    )
+                                }}
                                 className={styles.input}
                             />
                         </div>
@@ -117,14 +85,13 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
                                 id="motto"
                                 type="text"
                                 value={state.profile.motto ?? 'fail'}
-                                onChange={(e) =>
-                                    dispatch({
-                                        type: 'update_profile',
-                                        payload: {
-                                            motto: e.target.value,
-                                        },
-                                    })
-                                }
+                                onChange={(e) => {
+                                    changeHandler(
+                                        e.target.value,
+                                        'update_profile',
+                                        'motto',
+                                    )
+                                }}
                                 className={styles.input}
                             />
                             <p className="text-best-white text-sm mt-1 selection:bg-pistachio-dark selection:text-gray-900">
@@ -132,42 +99,16 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
                             </p>
                         </div>
                     </div>
-                    <div className={styles.container}>
-                        <label htmlFor="gender" className={styles.label}>
-                            I Am
-                        </label>
-                        <div className="w-6/12 ml-8">
-                            <select
-                                id="gender"
-                                type="text"
-                                value={state.profile?.gender ?? 'fail'}
-                                onChange={(e) =>
-                                    dispatch({
-                                        type: 'update_profile',
-                                        payload: {
-                                            gender: e.target.value,
-                                        },
-                                    })
-                                }
-                                className={styles.input}>
-                                {Object.keys(gender).map((key, i) => {
-                                    return (
-                                        <option key={i} value={gender[key]}>
-                                            {key}
-                                        </option>
-                                    )
-                                })}
-                            </select>
-                            <p className="text-best-white text-sm mt-1 selection:bg-pistachio-dark selection:text-gray-900">
-                                What is your mission or life motto?
-                            </p>
-                        </div>
-                    </div>
+                    <Gender
+                        state={state}
+                        dispatch={dispatch}
+                        setSavable={setSavable}
+                        styles={styles}
+                    />
                     <Birthday
                         state={state}
                         dispatch={dispatch}
-                        savable={'bla'}
-                        setSavable={'bla'}
+                        setSavable={setSavable}
                         styles={styles}></Birthday>
                 </div>
             </div>
@@ -186,7 +127,6 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
                             payload.birthdate = state.profile.birthday
                         }
                         putUser(putProfileUrl, accessToken, dispatch, payload)
-                        previousState.current = state
                         setSavable(false)
                         setEntering(false)
                         setTimeout(() => {
