@@ -19,7 +19,8 @@ export default function Modal({ entering, setEntering }) {
         exited: { opacity: 0 },
     }
     const styles = {
-        modalClass: 'relative bg-pistachio-dark w-full text-center p-3',
+        modalClass:
+            'absolute top-0 bg-pistachio-dark z-50 p-2 w-full text-center p-3',
     }
     return (
         <Transition in={!entering} nodeRef={nodeRef} timeout={duration}>

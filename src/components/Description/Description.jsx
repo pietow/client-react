@@ -12,10 +12,7 @@ export default function Description({ state, styles, dispatch, setEntering }) {
     const renderCount = useRef(0)
 
     useEffect(() => {
-        //EACH TIME STATE CHANGES COUNT RERENDER
-        renderCount.current += 1
-        if (renderCount.current === 1) {
-            //FIRST RERENDER IS THE DATA FETCHING
+        if (state.username !== '' && state._id) {
             previousText.current = state.profile.text
         }
     }, [state])

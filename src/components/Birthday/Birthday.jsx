@@ -15,10 +15,13 @@ export default function Birthday({
         day: 'Day',
         days: [],
         convert: function () {
+            const numericDate = this.year + '-' + this.month + '-' + this.day
             const birthday = new Date(
-                this.year + '-' + this.month + '-' + this.day,
+                Date.UTC(this.year, this.month - 1, this.day),
             )
-            if (birthday.toString() !== 'Invalid Date') return birthday
+            if (Number(this.year) && Number(this.month) && Number(this.day)) {
+                return birthday
+            }
             return null
         },
     })
@@ -38,7 +41,9 @@ export default function Birthday({
     }, [dateSelection, dispatch])
 
     useEffect(() => {
-        setDateSelection((c) => ({ ...c, day: 'Day' }))
+        if (days > 28) {
+            setDateSelection((c) => ({ ...c, day: 'Day' }))
+        }
     }, [days])
 
     styles = { ...styles, input: `${styles.input} mb-2 md:mb-0` }
