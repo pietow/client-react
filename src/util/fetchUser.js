@@ -2,7 +2,11 @@
 ;(function () {
     'use strict'
 
-    module.exports = { getUser: fetchUser('GET'), putUser: fetchUser('PUT') }
+    module.exports = {
+        getUser: fetchUser('GET'),
+        putUser: fetchUser('PUT'),
+        postUser: fetchUser('POST'),
+    }
 
     function fetchUser(verb) {
         return async function putUser(url, accessToken, dispatch, input) {
@@ -18,12 +22,25 @@
             const result = await response.json()
             /* console.log(result) */
             /* console.log(verb) */
-            if (!result.error && verb === 'GET') {
+            const profile = result.profile
+            const accommodation = result.accommodation
+            delete result.profile
+            delete result.accommodation
+            if (!result.error && verb !== 'POST') {
                 dispatch({
-                    type: 'login_fetch',
-                    user: result,
+                    type: 'update_user',
+                    payload: result,
+                })
+                dispatch({
+                    type: 'update_profile',
+                    payload: profile,
+                })
+                dispatch({
+                    type: 'update_accommodation',
+                    payload: accommodation,
                 })
             }
+            return result
         }
     }
 })()

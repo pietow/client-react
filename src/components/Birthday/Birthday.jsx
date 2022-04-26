@@ -3,42 +3,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import { dateArr } from '../../data/datesArray'
 
 export default function Birthday({ state, dispatch, setSavable, styles }) {
-    const [dateSelection, setDateSelection] = useState({
-        year: 'Year',
-        month: 'Month',
-        day: 'Day',
-        days: [],
-        convert: function () {
-            const numericDate = this.year + '-' + this.month + '-' + this.day
-            const birthday = new Date(
-                Date.UTC(this.year, this.month - 1, this.day),
-            )
-            if (Number(this.year) && Number(this.month) && Number(this.day)) {
-                return birthday
-            }
-            return null
-        },
-    })
     const [days, setDays] = useState([
         'Day',
         ...[...Array(31).keys()].map((x) => x + 1),
     ])
-
-    useEffect(() => {
-        const birthday = dateSelection.convert()
-        dispatch({
-            type: 'update_profile',
-            payload: {
-                birthday: birthday,
-            },
-        })
-    }, [dateSelection, dispatch])
-
-    useEffect(() => {
-        if (days > 28) {
-            setDateSelection((c) => ({ ...c, day: 'Day' }))
-        }
-    }, [days])
 
     styles = { ...styles, input: `${styles.input} mb-2 md:mb-0` }
 
@@ -76,24 +44,38 @@ export default function Birthday({ state, dispatch, setSavable, styles }) {
     //SET DATE STATE
     function handleYear(e) {
         const year = Number(e.target.value)
-        const newDays = getDays(dateSelection.month, year)
+        console.log(year)
+        const newDays = getDays(state.profile.month, year)
         setDays(newDays)
-        setDateSelection({ ...dateSelection, year: year })
+        dispatch({
+            type: 'update_profile',
+            payload: {
+                year: year,
+            },
+        })
     }
     function handleMonth(e) {
         const month = Number(e.target.value)
-        const newDays = getDays(month, dateSelection.year)
+        console.log(month)
+        const newDays = getDays(month, state.profile.year)
         setDays(newDays)
-        setDateSelection({ ...dateSelection, month: month })
+        dispatch({
+            type: 'update_profile',
+            payload: {
+                month: month,
+            },
+        })
     }
     function handleDay(e) {
+        const day = Number(e.target.value)
+        console.log(day)
         setSavable(true)
-        setDateSelection({ ...dateSelection, day: Number(e.target.value) })
-    }
-
-    function getValue(str, pos) {
-        const num = str.split('-')[pos]
-        return +num
+        dispatch({
+            type: 'update_profile',
+            payload: {
+                day: day,
+            },
+        })
     }
 
     return (
@@ -103,16 +85,12 @@ export default function Birthday({ state, dispatch, setSavable, styles }) {
             </label>
             <div className="flex flex-col md:flex-row w-6/12 ml-8">
                 <select
-                    id="month"
-                    value={getValue(state.profile.birthdate, 1)}
-                    onChange={(e) =>
-                        setDateSelection((c) => ({
-                            ...c,
-                            month: e.target.value,
-                        }))
-                    }
+                    value={state.profile.month}
                     type="text"
-                    onClick={handleMonth}
+                    onChange={(e) => {
+                        handleMonth(e)
+                    }}
+                    id="month"
                     className={`${styles.input}`}>
                     {months.map((key, i) => {
                         return (
@@ -123,12 +101,9 @@ export default function Birthday({ state, dispatch, setSavable, styles }) {
                     })}
                 </select>
                 <select
+                    value={state.profile.day}
                     type="text"
-                    value={dateSelection.day}
-                    onChange={(e) =>
-                        setDateSelection((c) => ({ ...c, day: e.target.value }))
-                    }
-                    onClick={handleDay}
+                    onChange={(e) => handleDay(e)}
                     id="day"
                     className={styles.input}>
                     {days.map((key, i) => {
@@ -140,15 +115,9 @@ export default function Birthday({ state, dispatch, setSavable, styles }) {
                     })}
                 </select>
                 <select
-                    value={dateSelection.year}
-                    onChange={(e) =>
-                        setDateSelection((c) => ({
-                            ...c,
-                            year: e.target.value,
-                        }))
-                    }
+                    value={state.profile.year}
                     type="text"
-                    onClick={handleYear}
+                    onChange={(e) => handleYear(e)}
                     id="year"
                     className={styles.input}>
                     {years.map((key, i) => {

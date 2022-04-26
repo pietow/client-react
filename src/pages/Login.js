@@ -4,6 +4,7 @@ import LogoLink from '../components/LogoLink'
 import { useNavigate } from 'react-router-dom'
 import { SetAuthentication } from '../context/setAccessTokenContext'
 import alertTimeoutMessage from '../data/alertTimeoutMessage'
+import { postUser } from '../util/fetchUser'
 
 export default function Login({ dispatch, state }) {
     const [username, setUsername] = useState('')
@@ -13,22 +14,20 @@ export default function Login({ dispatch, state }) {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        const response = await fetch(`/api/users/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password }),
-        })
-        const result = await response.json()
-        if (result.token) {
-            dispatch({ type: 'login_fetch', user: result })
-            setAccessToken(result.token)
-            sessionStorage.setItem('key', result.token)
-            sessionStorage.setItem('user', result._id)
-            navigate('/profile')
-        } else {
-            setUsername('')
-            setPassword('')
-        }
+        postUser('/api/users/login', '', dispatch, { username, password }).then(
+            (result) => {
+                if (result.token) {
+                    dispatch({ type: 'login_fetch', user: result })
+                    setAccessToken(result.token)
+                    sessionStorage.setItem('key', result.token)
+                    sessionStorage.setItem('user', result._id)
+                    navigate('/profile')
+                } else {
+                    setUsername('')
+                    setPassword('')
+                }
+            },
+        )
     }
 
     return (

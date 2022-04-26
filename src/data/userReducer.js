@@ -17,7 +17,10 @@ export const initialState = {
         city: '',
         destrict: '',
         country: '',
-        birthday: '',
+        birthdate: '',
+        year: 'Year',
+        month: 'Month',
+        day: 'Day',
     },
     accommodation: {
         availability: 'no',
@@ -31,6 +34,7 @@ export function userReducer(state, action) {
     switch (action.type) {
         case 'login_fetch': {
             return {
+                ...state,
                 ...action.user,
             }
         }

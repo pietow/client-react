@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react'
 import { Authentication } from '../../context/accessTokenContext'
 import { dateArr } from '../../data/datesArray'
 import Birthday from '../Birthday'
+import DatePicker from 'react-date-picker/'
 import Gender from '../Gender'
 import { putUser } from '../..//util/fetchUser'
 
@@ -11,6 +12,21 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
     const accessToken = useContext(Authentication)
 
     const [savable, setSavable] = useState(false)
+    const [value, onChange] = useState()
+
+    useEffect(() => {
+        const dateObject = new Date(state.profile.birthdate)
+        if (!dateObject.toString().includes('Invalid')) {
+            console.log('yes')
+            onChange(new Date(state.profile.birthdate))
+        } else {
+            onChange()
+        }
+    }, [state])
+
+    useEffect(() => {
+        setSavable(true)
+    }, [setSavable, onChange])
 
     function checkChanges(newValue, oldValue) {
         newValue === oldValue ? setSavable(false) : setSavable(true)
@@ -105,11 +121,14 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
                         setSavable={setSavable}
                         styles={styles}
                     />
-                    <Birthday
-                        state={state}
-                        dispatch={dispatch}
-                        setSavable={setSavable}
-                        styles={styles}></Birthday>
+                    <div className={styles.container}>
+                        <label htmlFor="motto" className={styles.label}>
+                            Birthday
+                        </label>
+                        <div className="w-fit ml-8 bg-best-white">
+                            <DatePicker onChange={onChange} value={value} />
+                        </div>
+                    </div>
                 </div>
             </div>
             <button
@@ -121,10 +140,10 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
                         })
                         const payload = {
                             motto: state.profile.motto,
-                            gender: state.gender,
+                            gender: state.profile.gender,
                         }
-                        if (state.profile.birthday) {
-                            payload.birthdate = state.profile.birthday
+                        if (value) {
+                            payload.birthdate = '2017-02-09T00:00:00.000Z'
                         }
                         putUser(putProfileUrl, accessToken, dispatch, payload)
                         setSavable(false)
