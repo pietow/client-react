@@ -18,6 +18,12 @@
         "showAlways": false
     },
     {
+        "name": "editaccount",
+        "path": "/editaccount",
+        "needsAccess": true,
+        "showAlways": false
+    },
+    {
         "name": "editprofile",
         "path": "/editprofile",
         "needsAccess": true,
