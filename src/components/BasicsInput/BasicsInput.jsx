@@ -13,11 +13,11 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
 
     const [savable, setSavable] = useState(false)
     const [value, onChange] = useState()
+    const renderCount = useRef(0)
 
     useEffect(() => {
         const dateObject = new Date(state.profile.birthdate)
         if (!dateObject.toString().includes('Invalid')) {
-            console.log('yes')
             onChange(new Date(state.profile.birthdate))
         } else {
             onChange()
@@ -25,8 +25,11 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
     }, [state])
 
     useEffect(() => {
-        setSavable(true)
-    }, [setSavable, onChange])
+        renderCount.current += 1
+        if (renderCount.current > 0) {
+            setSavable(true)
+        }
+    }, [value])
 
     function checkChanges(newValue, oldValue) {
         newValue === oldValue ? setSavable(false) : setSavable(true)
@@ -143,7 +146,7 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
                             gender: state.profile.gender,
                         }
                         if (value) {
-                            payload.birthdate = '2017-02-09T00:00:00.000Z'
+                            payload.birthdate = value.setHours(12)
                         }
                         putUser(putProfileUrl, accessToken, dispatch, payload)
                         setSavable(false)
