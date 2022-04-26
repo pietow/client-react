@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 import Profile from './pages/Profile'
 import Login from './pages/Login'
 import EditProfile from './pages/EditProfile'
+import EditPhoto from './pages/EditPhoto'
 import EditAccommodation from './pages/EditAccommodation'
 /* context */
 import { Authentication } from './context/accessTokenContext'
@@ -53,6 +54,15 @@ export default function App() {
                                 path="/login"
                                 element={
                                     <Login dispatch={dispatch} state={state} />
+                                }
+                            />
+                            <Route
+                                path="/editphoto"
+                                element={
+                                    <EditPhoto
+                                        dispatch={dispatch}
+                                        state={state}
+                                    />
                                 }
                             />
                             <Route
