@@ -12,15 +12,15 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
     const accessToken = useContext(Authentication)
 
     const [savable, setSavable] = useState(false)
-    const [value, onChange] = useState()
+    const [birthday, setBirthday] = useState()
     const renderCount = useRef(0)
 
     useEffect(() => {
         const dateObject = new Date(state.profile.birthdate)
         if (!dateObject.toString().includes('Invalid')) {
-            onChange(new Date(state.profile.birthdate))
+            setBirthday(new Date(state.profile.birthdate))
         } else {
-            onChange()
+            setBirthday()
         }
     }, [state])
 
@@ -29,7 +29,7 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
         if (renderCount.current > 0) {
             setSavable(true)
         }
-    }, [value])
+    }, [birthday])
 
     function checkChanges(newValue, oldValue) {
         newValue === oldValue ? setSavable(false) : setSavable(true)
@@ -129,7 +129,10 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
                             Birthday
                         </label>
                         <div className="w-fit ml-8 bg-best-white">
-                            <DatePicker onChange={onChange} value={value} />
+                            <DatePicker
+                                onChange={setBirthday}
+                                value={birthday}
+                            />
                         </div>
                     </div>
                 </div>
@@ -145,8 +148,8 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
                             motto: state.profile.motto,
                             gender: state.profile.gender,
                         }
-                        if (value) {
-                            payload.birthdate = value.setHours(12)
+                        if (birthday) {
+                            payload.birthdate = birthday.setHours(12)
                         }
                         putUser(putProfileUrl, accessToken, dispatch, payload)
                         setSavable(false)
