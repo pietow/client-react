@@ -26,7 +26,7 @@ export default function BasicsInput({ state, dispatch, styles, setEntering }) {
 
     useEffect(() => {
         renderCount.current += 1
-        if (renderCount.current > 0) {
+        if (renderCount.current > 3) {
             setSavable(true)
         }
     }, [birthday])
