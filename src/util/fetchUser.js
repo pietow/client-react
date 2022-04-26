@@ -20,6 +20,7 @@
             if (input) req.body = JSON.stringify(input)
             const response = await fetch(url, req)
             const result = await response.json()
+            console.log(result.email)
             /* console.log(result) */
             /* console.log(verb) */
             const profile = result.profile

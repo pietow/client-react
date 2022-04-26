@@ -23,8 +23,6 @@ export default function EditAccount({ state, dispatch }) {
         getUser(getUserUrl, accessToken, dispatch)
     }, [accessToken, dispatch])
 
-    const putUserUrl = `api/users/${sessionStorage.getItem('user')}/profile`
-
     const styles = {
         label: 'w-28 text-right text-best-white text-sm',
         input: 'py-1 bg-best-white text-sm px-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:border-pistachio-dark focus:border-2 shadow-pistachio-dark focus:shadow-lg selection:bg-pistachio-dark',
