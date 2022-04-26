@@ -19,18 +19,20 @@ export default function ProfileCard({ userData }) {
     const displayLanguage = languages.map((language, i) => {
         return (
             <li key={i}>
-                <span> - </span>
+                <span className="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+                    {' '}
+                    -{' '}
+                </span>
                 {language}
             </li>
         )
     })
 
     // CALCULATE THE AGE
-    
 
     console.log(userData)
     return (
-        <div className="w-1/5 h-full border-2 border-gray-dark p-4 rounded bg-best-white">
+        <div className="w-1/5 h-full backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md text-best-white">
             <div className="">
                 <img
                     className="pb-10 m-auto justify-center"
