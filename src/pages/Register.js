@@ -1,5 +1,6 @@
 /** @format */
 
+import React from 'react'
 import LogoLink from '../components/LogoLink'
 import { useState } from 'react'
 import RegisterInputs from '../components/RegisterInputs'
