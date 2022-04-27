@@ -15,6 +15,7 @@ import { Transition } from 'react-transition-group'
 export default function EditProfile({ state, dispatch }) {
     const [savable, setSavable] = useState(false)
     const [entering, setEntering] = useState(true)
+    const [message, setMessage] = useState('Profile updated!')
     const profileInput = {
         onlineStatus: '',
         title: '',
@@ -48,7 +49,11 @@ export default function EditProfile({ state, dispatch }) {
     if (accessToken) {
         return (
             <main className="w-full flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
-                <Modal entering={entering} setEntering={setEntering} />
+                <Modal
+                    entering={entering}
+                    setEntering={setEntering}
+                    message={message}
+                />
                 <div className="w-full mt-6 md:mt-8 xl:justify-center flex flex-col">
                     {/* -----------------------describe section ------------------- */}
                     <div className="flex flex-row m-auto w-full md:px-4 xl:w-9/12">
