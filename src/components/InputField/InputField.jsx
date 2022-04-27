@@ -6,7 +6,7 @@ export default function InputField({ name, okey, input, setInput, state }) {
     return (
         <div>
             <p className="text-justify p-4 text-best-white">
-                {name + ' ' + state[okey] + ':'}
+                {name + ': ' + state[okey]}
             </p>
             <input
                 className="mb-3"
