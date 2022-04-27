@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useReducer, useContext } from 'react'
 import LogoLink from '../components/LogoLink'
-import reducer from '../data/useReducer'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 import InputField from '../components/InputField'
@@ -11,7 +10,7 @@ import { getUser, putUser } from '../util/fetchUser'
 export default function EditAccommodation({ state, dispatch }) {
     const [accommodation, setAccommodation] = useState({
         availability: '',
-        guests: '',
+        guests: 0,
         location: '',
         description: '',
     })
@@ -21,7 +20,7 @@ export default function EditAccommodation({ state, dispatch }) {
     useEffect(() => {
         const getUserUrl = `api/users/${sessionStorage.getItem('user')}`
         getUser(getUserUrl, accessToken, dispatch)
-    }, [accessToken, dispatch])
+    }, [accessToken])
 
     const putUserUrl = `api/users/${sessionStorage.getItem(
         'user',
@@ -32,12 +31,7 @@ export default function EditAccommodation({ state, dispatch }) {
         putUser(putUserUrl, accessToken, dispatch, accommodation)
     }
 
-    function inputChange(key) {
-        return (e) => {
-            setAccommodation({ ...accommodation, [key]: e.target.value })
-        }
-    }
-
+    console.log(accommodation)
     if (accessToken) {
         return (
             <main className="xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
@@ -49,7 +43,7 @@ export default function EditAccommodation({ state, dispatch }) {
                         alt="lorem"
                     />
                     <figcaption className="text-best-white font-noto text-center">
-                        {state.fname + ' ' + state.flname}
+                        {state.fname + ' ' + state.lname}
                     </figcaption>
                 </figure>
                 {/* -----------------------profile pic end------------------------- */}
@@ -62,34 +56,71 @@ export default function EditAccommodation({ state, dispatch }) {
                             Change your Data
                         </h1>
                         <form onSubmit={editUserData}>
-                            <InputField
-                                name={'Availability'}
-                                okey={'availability'}
-                                input={accommodation}
-                                setInput={setAccommodation}
-                                state={state.accommodation}
-                            />
-                            <InputField
-                                name={'Guests'}
-                                okey={'guests'}
-                                input={accommodation}
-                                setInput={setAccommodation}
-                                state={state.accommodation}
-                            />
-                            <InputField
-                                name={'Description'}
-                                okey={'description'}
-                                input={accommodation}
-                                setInput={setAccommodation}
-                                state={state.accommodation}
-                            />
-                            <InputField
-                                name={'Location'}
-                                okey={'location'}
-                                input={accommodation}
-                                setInput={setAccommodation}
-                                state={state.accommodation}
-                            />
+                            <div className="flex text-best-white items-center gap-2">
+                                <p className="text-justify p-4 text-best-white">
+                                    Availability:
+                                </p>
+
+                                <button
+                                    onClick={() =>
+                                        setAccommodation({
+                                            ...accommodation,
+                                            availability: 'Yes',
+                                        })
+                                    }
+                                    className={
+                                        state.accommodation.availability ===
+                                        'Yes'
+                                            ? 'border rounded px-4 hover:scale-[1.1] bg-teal-dark'
+                                            : 'border rounded px-4 hover:scale-[1.1]'
+                                    }>
+                                    YES
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        setAccommodation({
+                                            ...accommodation,
+                                            availability: 'No',
+                                        })
+                                    }
+                                    className={
+                                        state.accommodation.availability ===
+                                        'No'
+                                            ? 'border rounded px-4 hover:scale-[1.1] bg-apricot-dark'
+                                            : 'border rounded px-4 hover:scale-[1.1]'
+                                    }>
+                                    NO!
+                                </button>
+                            </div>
+
+                            <div className="flex text-best-white items-center gap-2">
+                                <p className="text-justify p-4 text-best-white">
+                                    Guests: {' ' + state.accommodation.guests}
+                                </p>
+
+                                <button
+                                    onClick={() =>
+                                        setAccommodation({
+                                            ...accommodation,
+                                            guests:
+                                                state.accommodation.guests + 1,
+                                        })
+                                    }
+                                    className="border rounded px-4 hover:scale-[1.1]">
+                                    +
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        setAccommodation({
+                                            ...accommodation,
+                                            guests:
+                                                state.accommodation.guests - 1,
+                                        })
+                                    }
+                                    className="border rounded px-4 hover:scale-[1.1]">
+                                    -
+                                </button>
+                            </div>
 
                             <button
                                 type="submit"

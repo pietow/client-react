@@ -12,7 +12,7 @@
         "showAlways": false
     },
     {
-        "name": "Locations",
+        "name": "locations",
         "path": "/edithost",
         "needsAccess": true,
         "showAlways": false
