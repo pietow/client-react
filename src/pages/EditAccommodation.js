@@ -66,6 +66,10 @@ export default function EditAccommodation({ state, dispatch }) {
                                         setAccommodation({
                                             ...accommodation,
                                             availability: 'Yes',
+                                            guests:
+                                                accommodation.guests === 0
+                                                    ? (accommodation.guests = 1)
+                                                    : guests,
                                         })
                                     }
                                     className={
@@ -81,6 +85,7 @@ export default function EditAccommodation({ state, dispatch }) {
                                         setAccommodation({
                                             ...accommodation,
                                             availability: 'No',
+                                            guests: 0,
                                         })
                                     }
                                     className={
@@ -106,28 +111,29 @@ export default function EditAccommodation({ state, dispatch }) {
                                                 Number(
                                                     state.accommodation.guests,
                                                 ) + 1,
+                                            availability: 'Yes',
                                         })
                                     }
                                     className="border rounded px-4 hover:scale-[1.1]">
                                     +
                                 </button>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         setAccommodation({
                                             ...accommodation,
-                                            guests: accommodation.guests - 1,
+                                            guests: accommodation.guests
+                                                ? accommodation.guests - 1
+                                                : 0,
+                                            availability:
+                                                accommodation.guests === 1
+                                                    ? 'No'
+                                                    : 'Yes',
                                         })
-                                    }
+                                    }}
                                     className="border rounded px-4 hover:scale-[1.1]">
                                     -
                                 </button>
                             </div>
-
-                            <button
-                                type="submit"
-                                className="active:scale-95 mx-auto m-2 mb-7 p-1 border border-best-white text-best-white rounded w-1/2">
-                                save data
-                            </button>
                         </form>
                     </section>
 

@@ -43,7 +43,9 @@ export default function AccommodationSection({ heading, state }) {
             <p className="text-best-white m-4 p-4">{description}</p>
             <hr className="w-1/2 my-4 border-best-white " />
             <p className={hide ? 'invisible' : 'text-best-white p-4'}>
-                {'At most ' + state.guests + ' guests.'}
+                {'At most ' +
+                    state.guests +
+                    `${state.guests > 1 ? ' guests.' : ' guest.'}`}
             </p>
             {/* TODO: Link to .../edithost */}
         </section>
