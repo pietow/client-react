@@ -3,7 +3,7 @@
 import React, { useRef } from 'react'
 import { Transition } from 'react-transition-group'
 
-export default function Modal({ entering, setEntering }) {
+export default function Modal({ entering, setEntering, message }) {
     const nodeRef = useRef(null)
     const duration = 300
 
@@ -19,20 +19,23 @@ export default function Modal({ entering, setEntering }) {
         exited: { opacity: 0 },
     }
     const styles = {
-        modalClass:
-            'absolute top-0 bg-pistachio-dark z-50 p-2 w-full text-center p-3',
+        modalClass: 'absolute top-0 z-50 p-2 w-full text-center p-3',
     }
     return (
         <Transition in={!entering} nodeRef={nodeRef} timeout={duration}>
             {(state) => (
                 <div
-                    className={styles.modalClass}
+                    className={`${styles.modalClass} ${
+                        message.includes('Error')
+                            ? 'bg-red-500'
+                            : 'bg-pistachio-dark'
+                    }`}
                     ref={nodeRef}
                     style={{
                         ...defaultStyle,
                         ...transitionStyles[state],
                     }}>
-                    <p>Profile updated.</p>
+                    <p>{message}</p>
                     <div
                         onClick={() => {
                             setEntering(true)
