@@ -24,7 +24,7 @@ export default function EditAccount({ state, dispatch }) {
     }, [accessToken, dispatch])
 
     const styles = {
-        label: 'w-28 text-right text-best-white text-sm',
+        h1: 'w-full underline underline-offset-8 decoration-1 text-best-white text-4xl mb-4',
         input: 'py-1 bg-best-white text-sm px-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:border-pistachio-dark focus:border-2 shadow-pistachio-dark focus:shadow-lg selection:bg-pistachio-dark',
         container: 'flex mb-4 items-center',
         btnClass: 'active:scale-95  w-fit mb-7 p-2 text-best-white',

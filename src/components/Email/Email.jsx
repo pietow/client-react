@@ -23,9 +23,7 @@ export default function Email({ state, styles, dispatch, setEntering }) {
 
     return (
         <section className="p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
-            <h1 className="w-full underline underline-offset-8 decoration-1 text-best-white text-4xl">
-                Email
-            </h1>
+            <h1 className={styles.h1}>Email</h1>
             <div className="flex flex-col">
                 <div className={styles.container}>
                     <label htmlFor="email" className={styles.label}>
