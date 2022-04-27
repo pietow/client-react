@@ -9,10 +9,10 @@ import { getUser, putUser } from '../util/fetchUser'
 
 export default function EditAccommodation({ state, dispatch }) {
     const [accommodation, setAccommodation] = useState({
-        availability: '',
-        guests: 0,
-        location: '',
-        description: '',
+        availability: state.accommodation.availability,
+        guests: state.accommodation.guests,
+        location: state.accommodation.location,
+        description: state.accommodation.description,
     })
 
     const accessToken = useContext(Authentication)
@@ -95,7 +95,7 @@ export default function EditAccommodation({ state, dispatch }) {
 
                             <div className="flex text-best-white items-center gap-2">
                                 <p className="text-justify p-4 text-best-white">
-                                    Guests: {' ' + state.accommodation.guests}
+                                    Guests: {' ' + accommodation.guests}
                                 </p>
 
                                 <button
@@ -103,7 +103,9 @@ export default function EditAccommodation({ state, dispatch }) {
                                         setAccommodation({
                                             ...accommodation,
                                             guests:
-                                                state.accommodation.guests + 1,
+                                                Number(
+                                                    state.accommodation.guests,
+                                                ) + 1,
                                         })
                                     }
                                     className="border rounded px-4 hover:scale-[1.1]">
@@ -113,8 +115,7 @@ export default function EditAccommodation({ state, dispatch }) {
                                     onClick={() =>
                                         setAccommodation({
                                             ...accommodation,
-                                            guests:
-                                                state.accommodation.guests - 1,
+                                            guests: accommodation.guests - 1,
                                         })
                                     }
                                     className="border rounded px-4 hover:scale-[1.1]">
