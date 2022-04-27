@@ -23,6 +23,8 @@ export default function EditAccount({ state, dispatch }) {
     }, [accessToken, dispatch])
 
     const styles = {
+        section:
+            'p-4 mb-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md',
         h1: 'w-full underline underline-offset-8 decoration-1 text-best-white text-4xl mb-4',
         label: 'w-32 text-right text-best-white text-sm',
         input: 'py-1 bg-best-white text-sm px-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:border-pistachio-dark focus:border-2 shadow-pistachio-dark focus:shadow-lg selection:bg-pistachio-dark',
