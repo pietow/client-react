@@ -24,7 +24,7 @@ export default function ProfileCard({ userData }) {
 
     console.log(userData)
     return (
-        <div className="w-1/5 h-full border-2 border-gray-dark p-4 rounded bg-best-white">
+        <div className="w-1/5 h-full border-2 border-gray-dark p-4 rounded bg-best-white opacity-95">
             <div className="">
                 <img
                     className="pb-10 m-auto justify-center"
