@@ -6,6 +6,7 @@
         getUser: fetchUser('GET'),
         putUser: fetchUser('PUT'),
         postUser: fetchUser('POST'),
+        deleteUser: fetchUser('DELETE'),
     }
 
     function fetchUser(verb) {

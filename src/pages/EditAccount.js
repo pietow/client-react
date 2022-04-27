@@ -6,6 +6,7 @@ import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 import { getUser, putUser } from '../util/fetchUser'
 import Email from '../components/Email'
+import DeleteAccount from '../components/DeleteAccount'
 import Password from '../components/Password'
 import Modal from '../components/Modal'
 import { Transition } from 'react-transition-group'
@@ -54,6 +55,12 @@ export default function EditAccount({ state, dispatch }) {
                                 setEntering={setEntering}
                             />
                             <Password
+                                styles={styles}
+                                dispatch={dispatch}
+                                setEntering={setEntering}
+                                setMessage={setMessage}
+                            />
+                            <DeleteAccount
                                 styles={styles}
                                 dispatch={dispatch}
                                 setEntering={setEntering}
