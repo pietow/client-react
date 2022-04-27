@@ -20,7 +20,6 @@
             if (input) req.body = JSON.stringify(input)
             const response = await fetch(url, req)
             const result = await response.json()
-            console.log(result.email)
             /* console.log(result) */
             /* console.log(verb) */
             const profile = result.profile
@@ -41,7 +40,13 @@
                     payload: accommodation,
                 })
             }
-            return result
+            return new Promise((resolve, reject) => {
+                if (result.error) {
+                    reject(result)
+                } else {
+                    resolve(result)
+                }
+            })
         }
     }
 })()
