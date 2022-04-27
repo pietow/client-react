@@ -1,18 +1,17 @@
 /** @format */
 
-import React, { useState, useEffect, useReducer, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import LogoLink from '../components/LogoLink'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
-import { getUser, putUser } from '../util/fetchUser'
+import { getUser } from '../util/fetchUser'
 import Email from '../components/Email'
 import DeleteAccount from '../components/DeleteAccount'
 import Password from '../components/Password'
 import Modal from '../components/Modal'
-import { Transition } from 'react-transition-group'
+import EditNavbar from '../components/EditNavbar'
 
 export default function EditAccount({ state, dispatch }) {
-    const [savable, setSavable] = useState(false)
     const [entering, setEntering] = useState(true)
     const [message, setMessage] = useState('blaProfile updated')
 
@@ -44,9 +43,7 @@ export default function EditAccount({ state, dispatch }) {
                 <div className="w-full mt-6 md:mt-12 xl:justify-center flex flex-col">
                     {/* -----------------------describe section ------------------- */}
                     <div className="flex flex-row m-auto w-full md:px-4 lg:w-10/12 xl:w-8/12">
-                        <nav className="hidden md:block h-fit p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md md:w-4/12 md:mr-3">
-                            NavBar
-                        </nav>
+                        <EditNavbar />
                         <div className="flex flex-col w-11/12 m-auto md:w-8/12">
                             <Email
                                 state={state}

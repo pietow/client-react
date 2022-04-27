@@ -14,7 +14,7 @@ export default function SmNavList({ toggle, setToggle }) {
         <li
             onClick={() => setToggle()}
             key={name}
-            className="hover:bg-light-orange hover:text-gray-dark active:outline active:outline-aero-blue pl-2 rounded">
+            className="hover:bg-light-orange hover:text-gray text-gray-dark active:outline active:outline-aero-blue pl-2 rounded">
             <Link className="pr-[54rem]" to={path}>
                 {name}
             </Link>{' '}
