@@ -1,8 +1,11 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
+import Moment from 'react-moment'
 
 export default function ProfileCard({ userData }) {
+    // HIDING POSTS IF NOT FILLED OUT
     const [visibleData, setVisibleData] = useState(null)
 
     useEffect(() => {
@@ -10,21 +13,33 @@ export default function ProfileCard({ userData }) {
     }, [])
 
     console.log()
-    /* const languages = userData.profile.language */
-    const languages = ['german', 'english']
+
+    // DISPLAYING LANGUAGES
+    const languages = userData.profile.language
+    // const languages = ['german', 'english']
 
     const displayLanguage = languages.map((language, i) => {
         return (
             <li key={i}>
-                <span> - </span>
+                <span className="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+                    {' '}
+                    -{' '}
+                </span>
                 {language}
             </li>
         )
     })
 
+    // CALCULATE THE AGE
+    // const userDOB = moment(userData.profile.birthdate, 'YYYY/M/D')
+    const userAge = moment(userData.profile.birthdate).diff('years')
+
+    // CALCULATE MEMBER SINCE
+    const userMemberSince = moment(userData.createdAt).format('ll')
+
     console.log(userData)
     return (
-        <div className="w-1/5 h-full border-2 border-gray-dark p-4 rounded bg-best-white">
+        <div className="w-1/5 h-full backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md text-best-white">
             <div className="">
                 <img
                     className="pb-10 m-auto justify-center"
@@ -38,7 +53,7 @@ export default function ProfileCard({ userData }) {
                 )}
                 {visibleData && (
                     <p className="text-black text-xs border-b-2 p-2">
-                        Member since {userData.createdAt}
+                        Member since {userMemberSince}
                     </p>
                 )}
                 {visibleData && (
@@ -53,7 +68,7 @@ export default function ProfileCard({ userData }) {
                 )}
                 {visibleData && (
                     <p className="text-black border-b-2 p-2 text-xs">
-                        Age: {userData.profile.birthdate}
+                        Age: {userAge}
                     </p>
                 )}
                 {visibleData && (
