@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import LogoLink from '../components/LogoLink'
 import { getUsers } from '../util/fetchUser'
 import { Authentication } from '../context/accessTokenContext'
@@ -10,14 +10,25 @@ export default function Search({ state }) {
     const accessToken = useContext(Authentication)
 
     const [search, setSearch] = useState('')
-    const [users, setUsers] = useState([])
+    const [foundUsers, setFoundUsers] = useState([])
+    const USERS = useRef([])
 
     useEffect(() => {
         const usersURL = '/api/users/'
         getUsers(usersURL, accessToken)
-            .then((users) => setUsers(users))
+            .then((users) => {
+                USERS.current = users
+            })
             .catch((e) => console.log(e))
-    }, [setUsers, accessToken])
+    }, [accessToken])
+
+    function filter(e) {
+        const users = USERS.current.filter(
+            (user) => user.accommodation.place === e.target.value,
+        )
+        setFoundUsers(users)
+        setSearch(e.target.value)
+    }
 
     const styles = {
         label: 'w-28 text-right text-best-white text-sm',
@@ -34,7 +45,7 @@ export default function Search({ state }) {
                         id="search"
                         type="text"
                         value={search}
-                        onChange={(e) => setSearch(e.target.value)}
+                        onChange={filter}
                         className={styles.input}
                         placeholder="Search places"
                     />
@@ -47,22 +58,26 @@ export default function Search({ state }) {
                                     <th>User</th>
                                     <th>Availabilty</th>
                                     <th>Guests</th>
+                                    <th>Place</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.map((user, i) => {
+                                {foundUsers.map((user, i) => {
                                     return (
                                         <tr className="border-t" key={i}>
-                                            <td className="border-r text-center w-4/12 p-4">
+                                            <td className="border-r text-center w-3/12 p-4">
                                                 {user.username}
                                             </td>
-                                            <td className="border-r text-center w-4/12 p-4">
+                                            <td className="border-r text-center w-3/12 p-4">
                                                 {
                                                     user.accommodation
                                                         .availability
                                                 }
                                             </td>
-                                            <td className="border-r text-center w-4/12 p-4">
+                                            <td className="border-r text-center w-3/12 p-4">
+                                                {user.accommodation?.place}
+                                            </td>
+                                            <td className="border-r text-center w-3/12 p-4">
                                                 {user.accommodation.guests}
                                             </td>
                                         </tr>
