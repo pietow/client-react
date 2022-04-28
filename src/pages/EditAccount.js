@@ -34,7 +34,7 @@ export default function EditAccount({ state, dispatch }) {
 
     if (accessToken) {
         return (
-            <main className="w-full flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
+            <main className="w-full h-screen flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
                 <Modal
                     entering={entering}
                     setEntering={setEntering}
@@ -42,7 +42,7 @@ export default function EditAccount({ state, dispatch }) {
                 />
                 <div className="w-full mt-6 md:mt-12 xl:justify-center flex flex-col">
                     {/* -----------------------describe section ------------------- */}
-                    <div className="flex flex-row m-auto w-full md:px-4 lg:w-10/12 xl:w-8/12">
+                    <div className="flex flex-row m-auto w-full md:px-4 lg:w-10/12 xl:w-9/12">
                         <EditNavbar />
                         <div className="flex flex-col w-11/12 m-auto md:w-8/12">
                             <Email
