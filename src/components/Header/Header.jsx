@@ -8,7 +8,7 @@ import LogoLinkHeader from '../LogoLinkHeader'
 import { Link } from 'react-router-dom'
 import { Authentication } from '../../context/accessTokenContext'
 
-export default function Header({ toggle, setToggle }) {
+export default function Header({ toggle, setToggle, dispatch }) {
     const ref = useRef()
     const accessToken = useContext(Authentication)
 
@@ -66,14 +66,18 @@ export default function Header({ toggle, setToggle }) {
                             ? 'absolute drop-shadow-lg top-full left-0 w-full'
                             : 'hidden'
                     }>
-                    <SmNavList toggle={toggle} setToggle={setToggle} />
+                    <SmNavList
+                        toggle={toggle}
+                        setToggle={setToggle}
+                        dispatch={dispatch}
+                    />
                 </nav>
             </div>
 
             {/* ----------------------------BURGER MENU END-------------------------------- */}
 
             <nav className="hidden lg:block text-best-white font-noto top-11 absolute bg-teal-normal border-b border-x rounded-full">
-                <LgNavList />
+                <LgNavList dispatch={dispatch} />
             </nav>
         </header>
     )

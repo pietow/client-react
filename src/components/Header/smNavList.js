@@ -6,7 +6,7 @@ import linksHeader from '../../data/linksHeader.json'
 import { Authentication } from '../../context/accessTokenContext'
 import { SetAuthentication } from '../../context/setAccessTokenContext'
 
-export default function SmNavList({ toggle, setToggle }) {
+export default function SmNavList({ toggle, setToggle, dispatch }) {
     const setAccessToken = useContext(SetAuthentication)
     const accessToken = useContext(Authentication)
 
@@ -51,6 +51,9 @@ export default function SmNavList({ toggle, setToggle }) {
                 <Link
                     className="pr-[54rem]"
                     onClick={() => {
+                        dispatch({
+                            type: 'reset_state',
+                        })
                         setAccessToken('')
                         sessionStorage.removeItem('key')
                         setTimeout(() => {

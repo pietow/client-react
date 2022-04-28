@@ -13,12 +13,6 @@ export default function AccommodationSection({ heading, state }) {
         hide = false
         description = state.description
     }
-    if (isHost === 'maybe') {
-        bg = 'bg-yellow-700'
-        status = 'Might be able to host'
-        hide = false
-        description = state.description
-    }
     if (isHost === 'No') {
         bg = 'bg-apricot-dark'
         status = 'Cannot host currently'

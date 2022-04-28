@@ -18,24 +18,6 @@
         "showAlways": false
     },
     {
-        "name": "locations",
-        "path": "/edithost",
-        "needsAccess": true,
-        "showAlways": false
-    },
-    {
-        "name": "editaccount",
-        "path": "/editaccount",
-        "needsAccess": true,
-        "showAlways": false
-    },
-    {
-        "name": "editprofile",
-        "path": "/editprofile",
-        "needsAccess": true,
-        "showAlways": false
-    },
-    {
         "name": "contact",
         "path": "/contact",
         "needsAccess": false,
