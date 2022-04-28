@@ -1,6 +1,8 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
+import Moment from 'react-moment'
 
 export default function ProfileCard({ userData }) {
     // HIDING POSTS IF NOT FILLED OUT
@@ -29,6 +31,11 @@ export default function ProfileCard({ userData }) {
     })
 
     // CALCULATE THE AGE
+    // const userDOB = moment(userData.profile.birthdate, 'YYYY/M/D')
+    const userAge = moment(userData.profile.birthdate).diff('years')
+
+    // CALCULATE MEMBER SINCE
+    const userMemberSince = moment(userData.createdAt).format('ll')
 
     console.log(userData)
     return (
@@ -46,7 +53,7 @@ export default function ProfileCard({ userData }) {
                 )}
                 {visibleData && (
                     <p className="text-black text-xs border-b-2 p-2">
-                        Member since {userData.createdAt}
+                        Member since {userMemberSince}
                     </p>
                 )}
                 {visibleData && (
@@ -61,7 +68,7 @@ export default function ProfileCard({ userData }) {
                 )}
                 {visibleData && (
                     <p className="text-black border-b-2 p-2 text-xs">
-                        Age: {userData.profile.birthdate}
+                        Age: {userAge}
                     </p>
                 )}
                 {visibleData && (
