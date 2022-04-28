@@ -8,6 +8,7 @@ import { getUser, putUser } from '../util/fetchUser'
 import Modal from '../components/Modal'
 import EditNavbar from '../components/EditNavbar'
 import Description from '../components/Description'
+import ProfileCard from '../components/ProfileCard'
 
 export default function EditAccount({ state, dispatch }) {
     const [message, setMessage] = useState('Profile updated')
@@ -55,8 +56,11 @@ export default function EditAccount({ state, dispatch }) {
                 />
                 <div className="w-full mt-6 md:mt-12 xl:justify-center flex flex-col mb-20">
                     <div className="flex flex-row m-auto w-full md:px-4 lg:w-10/12 xl:w-9/12">
-                        <EditNavbar />
-                        <div className="flex flex-col w-11/12 m-auto md:w-8/12">
+                        <div className="flex flex-col md:w-4/12">
+                            <EditNavbar />
+                            <ProfileCard userData={state} />
+                        </div>
+                        <div className="flex flex-col w-11/12 md:w-8/12">
                             <section className="p-4 mb-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
                                 <h1 className={styles.h1}>Change your Data</h1>
                                 <form onSubmit={editUserData}>

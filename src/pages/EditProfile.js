@@ -9,6 +9,7 @@ import EditNavbar from '../components/EditNavbar'
 import Description from '../components/Description'
 import BasicsInput from '../components/BasicsInput'
 import Modal from '../components/Modal'
+import ProfileCard from '../components/ProfileCard'
 
 export default function EditProfile({ state, dispatch }) {
     const [entering, setEntering] = useState(true)
@@ -51,7 +52,10 @@ export default function EditProfile({ state, dispatch }) {
                 <div className="w-full mt-6 md:mt-12 xl:justify-center flex flex-col mb-20">
                     {/* -----------------------describe section ------------------- */}
                     <div className="flex flex-row m-auto w-full lg:w-10/12 md:px-4 xl:w-9/12">
-                        <EditNavbar />
+                        <div className="flex flex-col md:w-4/12">
+                            <EditNavbar />
+                            <ProfileCard userData={state} />
+                        </div>
                         <div className="flex flex-col md:w-8/12">
                             <Description
                                 state={state}
