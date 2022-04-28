@@ -6,6 +6,12 @@
         "showAlways": true
     },
     {
+        "name": "Search",
+        "path": "/search",
+        "needsAccess": true,
+        "showAlways": false
+    },
+    {
         "name": "profile",
         "path": "/profile",
         "needsAccess": true,

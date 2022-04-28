@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Profile from './pages/Profile'
+import Search from './pages/Search'
 import Login from './pages/Login'
 import EditProfile from './pages/EditProfile'
 import EditAccount from './pages/EditAccount'
@@ -49,6 +50,10 @@ export default function App() {
                             <Route
                                 path="/profile"
                                 element={<Profile state={state} />}
+                            />
+                            <Route
+                                path="/search"
+                                element={<Search state={state} />}
                             />
                             <Route
                                 path="/login"
