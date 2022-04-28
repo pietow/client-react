@@ -1,19 +1,21 @@
 /** @format */
 
-import React, { useState, useEffect, useReducer, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import LogoLink from '../components/LogoLink'
-import reducer from '../data/useReducer'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
-import InputField from '../components/InputField'
 import { getUser, putUser } from '../util/fetchUser'
+import Modal from '../components/Modal'
+import EditNavbar from '../components/EditNavbar'
 
-export default function EditAccommodation({ state, dispatch }) {
+export default function EditAccount({ state, dispatch }) {
+    const [message, setMessage] = useState('blaProfile updated')
+    const [entering, setEntering] = useState(true)
     const [accommodation, setAccommodation] = useState({
-        availability: '',
-        guests: '',
-        location: '',
-        description: '',
+        availability: state.accommodation.availability,
+        guests: state.accommodation.guests,
+        location: state.accommodation.location,
+        description: state.accommodation.description,
     })
 
     const accessToken = useContext(Authentication)
@@ -21,7 +23,7 @@ export default function EditAccommodation({ state, dispatch }) {
     useEffect(() => {
         const getUserUrl = `api/users/${sessionStorage.getItem('user')}`
         getUser(getUserUrl, accessToken, dispatch)
-    }, [accessToken, dispatch])
+    }, [accessToken])
 
     const putUserUrl = `api/users/${sessionStorage.getItem(
         'user',
@@ -32,74 +34,119 @@ export default function EditAccommodation({ state, dispatch }) {
         putUser(putUserUrl, accessToken, dispatch, accommodation)
     }
 
-    function inputChange(key) {
-        return (e) => {
-            setAccommodation({ ...accommodation, [key]: e.target.value })
-        }
+    const styles = {
+        section:
+            'p-4 mb-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md',
+        h1: 'w-full underline underline-offset-8 decoration-1 text-best-white text-4xl mb-4',
+        label: 'w-32 text-right text-best-white text-sm',
+        input: 'py-1 bg-best-white text-sm px-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:border-pistachio-dark focus:border-2 shadow-pistachio-dark focus:shadow-lg selection:bg-pistachio-dark',
+        container: 'flex mb-4 items-center',
+        btnClass: 'active:scale-95  w-fit mb-7 p-2 text-best-white',
     }
 
     if (accessToken) {
         return (
-            <main className="xl:flex-row xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
-                {/* -----------------------profile pic start----------------------- */}
-                <figure className="xl:w-60 xl:bottom-40 relative w-40 space-y-2 mt-6 lg:mt-14 flex flex-col items-center">
-                    <img
-                        className="xl:rounded-xl drop-shadow-lg rounded-full"
-                        src={'https://picsum.photos/200/200.jpg'}
-                        alt="lorem"
-                    />
-                    <figcaption className="text-best-white font-noto text-center">
-                        {state.fname + ' ' + state.flname}
-                    </figcaption>
-                </figure>
-                {/* -----------------------profile pic end------------------------- */}
+            <main className="w-full h-screen flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
+                <Modal
+                    entering={entering}
+                    setEntering={setEntering}
+                    message={message}
+                />
+                <div className="w-full mt-6 md:mt-12 xl:justify-center flex flex-col">
+                    <div className="flex flex-row m-auto w-full md:px-4 lg:w-10/12 xl:w-8/12">
+                        <EditNavbar />
+                        <div className="flex flex-col w-11/12 m-auto md:w-8/12">
+                            <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
+                                <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex-3xl">
+                                    Change your Data
+                                </h1>
+                                <form onSubmit={editUserData}>
+                                    <div className="flex text-best-white items-center gap-2">
+                                        <p className="text-justify p-4 text-best-white">
+                                            Availability:
+                                        </p>
 
-                <div className="xl:w-2/3 xl:h-screen xl:justify-center flex flex-col items-center">
-                    {/* -----------------------profile section start------------------- */}
+                                        <button
+                                            onClick={() =>
+                                                setAccommodation({
+                                                    ...accommodation,
+                                                    availability: 'Yes',
+                                                    guests:
+                                                        accommodation.guests ===
+                                                        0
+                                                            ? (accommodation.guests = 1)
+                                                            : guests,
+                                                })
+                                            }
+                                            className={
+                                                state.accommodation
+                                                    .availability === 'Yes'
+                                                    ? 'border rounded px-4 hover:scale-[1.1] bg-teal-dark'
+                                                    : 'border rounded px-4 hover:scale-[1.1]'
+                                            }>
+                                            YES
+                                        </button>
+                                        <button
+                                            onClick={() =>
+                                                setAccommodation({
+                                                    ...accommodation,
+                                                    availability: 'No',
+                                                    guests: 0,
+                                                })
+                                            }
+                                            className={
+                                                state.accommodation
+                                                    .availability === 'No'
+                                                    ? 'border rounded px-4 hover:scale-[1.1] bg-apricot-dark'
+                                                    : 'border rounded px-4 hover:scale-[1.1]'
+                                            }>
+                                            NO!
+                                        </button>
+                                    </div>
 
-                    <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
-                        <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex-3xl">
-                            Change your Data
-                        </h1>
-                        <form onSubmit={editUserData}>
-                            <InputField
-                                name={'Availability'}
-                                okey={'availability'}
-                                input={accommodation}
-                                setInput={setAccommodation}
-                                state={state.accommodation}
-                            />
-                            <InputField
-                                name={'Guests'}
-                                okey={'guests'}
-                                input={accommodation}
-                                setInput={setAccommodation}
-                                state={state.accommodation}
-                            />
-                            <InputField
-                                name={'Description'}
-                                okey={'description'}
-                                input={accommodation}
-                                setInput={setAccommodation}
-                                state={state.accommodation}
-                            />
-                            <InputField
-                                name={'Location'}
-                                okey={'location'}
-                                input={accommodation}
-                                setInput={setAccommodation}
-                                state={state.accommodation}
-                            />
+                                    <div className="flex text-best-white items-center gap-2">
+                                        <p className="text-justify p-4 text-best-white">
+                                            Guests: {' ' + accommodation.guests}
+                                        </p>
 
-                            <button
-                                type="submit"
-                                className="active:scale-95 mx-auto m-2 mb-7 p-1 border border-best-white text-best-white rounded w-1/2">
-                                save data
-                            </button>
-                        </form>
-                    </section>
-
-                    {/* -----------------------profile section end--------------------- */}
+                                        <button
+                                            onClick={() =>
+                                                setAccommodation({
+                                                    ...accommodation,
+                                                    guests:
+                                                        Number(
+                                                            state.accommodation
+                                                                .guests,
+                                                        ) + 1,
+                                                    availability: 'Yes',
+                                                })
+                                            }
+                                            className="border rounded px-4 hover:scale-[1.1]">
+                                            +
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setAccommodation({
+                                                    ...accommodation,
+                                                    guests: accommodation.guests
+                                                        ? accommodation.guests -
+                                                          1
+                                                        : 0,
+                                                    availability:
+                                                        accommodation.guests ===
+                                                        1
+                                                            ? 'No'
+                                                            : 'Yes',
+                                                })
+                                            }}
+                                            className="border rounded px-4 hover:scale-[1.1]">
+                                            -
+                                        </button>
+                                    </div>
+                                </form>
+                            </section>
+                        </div>
+                    </div>
                 </div>
                 <LogoLink />
             </main>

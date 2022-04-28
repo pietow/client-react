@@ -12,10 +12,12 @@ export default function Login({ dispatch, state }) {
     const navigate = useNavigate()
     const setAccessToken = useContext(SetAuthentication)
 
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
+        // console.log('HIER AUS DEM LOGIN')
         e.preventDefault()
         postUser('/api/users/login', '', dispatch, { username, password }).then(
             (result) => {
+                console.log(result)
                 if (result.token) {
                     dispatch({ type: 'login_fetch', user: result })
                     setAccessToken(result.token)
