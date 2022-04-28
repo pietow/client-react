@@ -1,8 +1,8 @@
 /** @format */
 
 export const initialState = {
-    fname: 'dummy',
-    lname: 'dummy',
+    fname: '',
+    lname: '',
     username: '',
     email: '',
     active: false,
@@ -10,12 +10,12 @@ export const initialState = {
         photo: '',
         onlineStatus: '',
         title: '',
-        text: 'dummy',
+        text: '',
         motto: '',
         gender: '',
         language: [],
         city: '',
-        destrict: '',
+        district: '',
         country: '',
         birthdate: '',
         year: 'Year',
@@ -23,8 +23,8 @@ export const initialState = {
         day: 'Day',
     },
     accommodation: {
-        availability: 'no',
-        guests: '',
+        availability: 'No',
+        guests: 0,
         description: '',
         location: '',
     },
@@ -58,6 +58,9 @@ export function userReducer(state, action) {
                     ...action.payload,
                 },
             }
+        }
+        case 'reset_state': {
+            return initialState
         }
         default: {
             return Error("something's wrong: " + action.type)

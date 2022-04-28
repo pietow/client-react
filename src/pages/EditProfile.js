@@ -48,11 +48,11 @@ export default function EditProfile({ state, dispatch }) {
                     setEntering={setEntering}
                     message={message}
                 />
-                <div className="w-full mt-6 md:mt-12 xl:justify-center flex flex-col">
+                <div className="w-full mt-6 md:mt-12 xl:justify-center flex flex-col mb-20">
                     {/* -----------------------describe section ------------------- */}
-                    <div className="flex flex-row m-auto w-full md:px-4 xl:w-9/12">
+                    <div className="flex flex-row m-auto w-full lg:w-10/12 md:px-4 xl:w-9/12">
                         <EditNavbar />
-                        <div className="flex flex-col md:w-6/12">
+                        <div className="flex flex-col md:w-8/12">
                             <Description
                                 state={state}
                                 styles={styles}
