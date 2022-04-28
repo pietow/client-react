@@ -9,7 +9,6 @@ export default function Description({ state, styles, dispatch, setEntering }) {
     const [savable, setSavable] = useState(false)
     const accessToken = useContext(Authentication)
     const previousText = useRef('')
-    const renderCount = useRef(0)
 
     useEffect(() => {
         if (state.username !== '' && state._id) {
