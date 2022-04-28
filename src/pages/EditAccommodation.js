@@ -9,7 +9,7 @@ import Modal from '../components/Modal'
 import EditNavbar from '../components/EditNavbar'
 
 export default function EditAccount({ state, dispatch }) {
-    const [message, setMessage] = useState('blaProfile updated')
+    const [message, setMessage] = useState('Profile updated')
     const [entering, setEntering] = useState(true)
     const [accommodation, setAccommodation] = useState({
         availability: state.accommodation.availability,

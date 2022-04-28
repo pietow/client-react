@@ -12,6 +12,12 @@
     p {
         @apply font-noto;
     }
+    label {
+        @apply font-noto;
+    }
+    div {
+        @apply font-noto;
+    }
     /* Works on Firefox */
     * {
         scrollbar-width: thin;

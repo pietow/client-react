@@ -1,10 +1,10 @@
 /** @format */
 
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import LogoLink from '../components/LogoLink'
 import ProfileSection from '../components/ProfileSection'
 import AccommodationSection from '../components/AccommodationSection'
-import ProfilePic from '../components/ProfilePic'
+
 import ProfileCard from '../components/ProfileCard'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'

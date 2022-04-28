@@ -1,23 +1,23 @@
 /** @format */
 
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export default function EditNavbar() {
     return (
-        <nav className="hidden md:block h-fit p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md md:w-4/12 md:mr-3">
-            <ul>
-                <li>
-                    <Link to="/profile">profile</Link>
+        <nav className="hidden md:block h-fit backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md md:w-4/12 mr-3">
+            <ul className="font-noto m-4 text-best-white flex flex-col gap-4 items-start pl-2">
+                <li className="hover:scale-110">
+                    <NavLink to="/profile">profile</NavLink>
                 </li>
-                <li>
-                    <Link to="/edithost">location</Link>
+                <li className="hover:scale-110">
+                    <NavLink to="/edithost">location</NavLink>
                 </li>
-                <li>
-                    <Link to="/editaccount">editaccount</Link>
+                <li className="hover:scale-110">
+                    <NavLink to="/editaccount">editaccount</NavLink>
                 </li>
-                <li>
-                    <Link to="/editprofile">editprofile</Link>
+                <li className="hover:scale-110">
+                    <NavLink to="/editprofile">editprofile</NavLink>
                 </li>
             </ul>
         </nav>
