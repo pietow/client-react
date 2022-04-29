@@ -51,7 +51,12 @@ export default function App() {
                             <Route path="/contact" element={<Contact />} />
                             <Route
                                 path="/profile"
-                                element={<Profile state={state} />}
+                                element={
+                                    <Profile
+                                        state={state}
+                                        dispatch={dispatch}
+                                    />
+                                }
                             />
                             <Route
                                 path="/search"
