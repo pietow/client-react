@@ -21,7 +21,10 @@ export default function Profile({ state }) {
                         <ProfileCard userData={state} />
                     </div>
                     <div className="flex flex-col md:w-8/12">
-                        <ProfileSection heading={'about me'} userData="lorem" />
+                        <ProfileSection
+                            heading={'about me'}
+                            userData={state.profile.text}
+                        />
                         <ProfileSection
                             heading={'about my dear guests'}
                             userData="lorem"

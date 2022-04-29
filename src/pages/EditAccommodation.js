@@ -7,8 +7,9 @@ import Home from './Home'
 import { getUser, putUser } from '../util/fetchUser'
 import Modal from '../components/Modal'
 import EditNavbar from '../components/EditNavbar'
-import Description from '../components/Description'
 import ProfileCard from '../components/ProfileCard'
+import DescriptionHost from '../components/DescriptionHost'
+import HostLocation from '../components/HostLocation'
 
 export default function EditAccount({ state, dispatch }) {
     const [message, setMessage] = useState('Profile updated')
@@ -148,7 +149,13 @@ export default function EditAccount({ state, dispatch }) {
                                     </div>
                                 </form>
                             </section>
-                            <Description
+                            <DescriptionHost
+                                state={state}
+                                styles={styles}
+                                dispatch={dispatch}
+                                setEntering={setEntering}
+                            />
+                            <HostLocation
                                 state={state}
                                 styles={styles}
                                 dispatch={dispatch}
