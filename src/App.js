@@ -37,8 +37,6 @@ export default function App() {
                         setToggle={setToggle}
                         dispatch={dispatch}
                     />
-                    {/* how to widen Link??? */}
-                    {/* <BlurContext.Provider>could be filled with the toggle stuff from one line below, but might be too much work; would be useContext in every component; feels not right */}
                     <div
                         className={
                             toggle
@@ -53,7 +51,12 @@ export default function App() {
                             <Route path="/contact" element={<Contact />} />
                             <Route
                                 path="/profile"
-                                element={<Profile state={state} />}
+                                element={
+                                    <Profile
+                                        state={state}
+                                        dispatch={dispatch}
+                                    />
+                                }
                             />
                             <Route
                                 path="/search"
@@ -94,7 +97,6 @@ export default function App() {
                             />
                         </Routes>
                     </div>
-                    {/* </BlurContext.Provider> */}
                     <Footer />
                 </SetAuthentication.Provider>
             </Authentication.Provider>

@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import LogoLink from '../components/LogoLink'
 import ProfileSection from '../components/ProfileSection'
 import AccommodationSection from '../components/AccommodationSection'
@@ -8,9 +8,15 @@ import EditNavbar from '../components/EditNavbar'
 import ProfileCard from '../components/ProfileCard'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
+import { getUser } from '../util/fetchUser'
 
-export default function Profile({ state }) {
+export default function Profile({ state, dispatch }) {
     const accessToken = useContext(Authentication)
+
+    useEffect(() => {
+        const getUserUrl = `api/users/${sessionStorage.getItem('user')}`
+        getUser(getUserUrl, accessToken, dispatch)
+    }, [accessToken])
 
     if (accessToken) {
         return (
@@ -21,7 +27,10 @@ export default function Profile({ state }) {
                         <ProfileCard userData={state} />
                     </div>
                     <div className="flex flex-col md:w-8/12">
-                        <ProfileSection heading={'about me'} userData="lorem" />
+                        <ProfileSection
+                            heading={'about me'}
+                            userData={state.profile.text}
+                        />
                         <ProfileSection
                             heading={'about my dear guests'}
                             userData="lorem"
