@@ -11,8 +11,6 @@ export default function ProfileCard({ userData }) {
         setVisibleData(true)
     }, [])
 
-    console.log()
-
     // DISPLAYING LANGUAGES
     const languages = userData.profile.language
     // const languages = ['german', 'english']
@@ -36,7 +34,6 @@ export default function ProfileCard({ userData }) {
     // CALCULATE MEMBER SINCE
     const userMemberSince = moment(userData.createdAt).format('ll')
 
-    console.log(userData)
     return (
         <div className="h-full backdrop-brightness-75 backdrop-blur-lg mr-3 mt-3 drop-shadow-md border border-best-white rounded-md text-best-white">
             <img
