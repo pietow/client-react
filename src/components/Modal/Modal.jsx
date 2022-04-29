@@ -13,13 +13,13 @@ export default function Modal({ entering, setEntering, message }) {
     }
 
     const transitionStyles = {
-        entering: { opacity: 1 },
-        entered: { opacity: 1 },
-        exiting: { opacity: 0.5 },
+        entering: { opacity: 1, zIndex: '50' },
+        entered: { opacity: 1, zIndex: '50' },
+        exiting: { opacity: 0.5, zIndex: '50' },
         exited: { opacity: 0 },
     }
     const styles = {
-        modalClass: 'absolute top-0 z-50 p-2 w-full text-center p-3',
+        modalClass: 'absolute top-0 p-2 w-full text-center p-3',
     }
     return (
         <Transition in={!entering} nodeRef={nodeRef} timeout={duration}>

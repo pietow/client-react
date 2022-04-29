@@ -7,6 +7,8 @@ import Home from './Home'
 import { getUser, putUser } from '../util/fetchUser'
 import Modal from '../components/Modal'
 import EditNavbar from '../components/EditNavbar'
+import Description from '../components/Description'
+import ProfileCard from '../components/ProfileCard'
 
 export default function EditAccount({ state, dispatch }) {
     const [message, setMessage] = useState('Profile updated')
@@ -52,14 +54,15 @@ export default function EditAccount({ state, dispatch }) {
                     setEntering={setEntering}
                     message={message}
                 />
-                <div className="w-full mt-6 md:mt-12 xl:justify-center flex flex-col">
-                    <div className="flex flex-row m-auto w-full md:px-4 lg:w-10/12 xl:w-8/12">
-                        <EditNavbar />
-                        <div className="flex flex-col w-11/12 m-auto md:w-8/12">
-                            <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
-                                <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 tex-3xl">
-                                    Change your Data
-                                </h1>
+                <div className="w-full mt-6 md:mt-12 xl:justify-center flex flex-col mb-20">
+                    <div className="flex flex-row m-auto w-full md:px-4 lg:w-10/12 xl:w-9/12">
+                        <div className="flex flex-col md:w-4/12">
+                            <EditNavbar />
+                            <ProfileCard userData={state} />
+                        </div>
+                        <div className="flex flex-col w-11/12 md:w-8/12">
+                            <section className="p-4 mb-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
+                                <h1 className={styles.h1}>Change your Data</h1>
                                 <form onSubmit={editUserData}>
                                     <div className="flex text-best-white items-center gap-2">
                                         <p className="text-justify p-4 text-best-white">
@@ -133,7 +136,7 @@ export default function EditAccount({ state, dispatch }) {
                                                           1
                                                         : 0,
                                                     availability:
-                                                        accommodation.guests ===
+                                                        accommodation.guests <=
                                                         1
                                                             ? 'No'
                                                             : 'Yes',
@@ -145,6 +148,12 @@ export default function EditAccount({ state, dispatch }) {
                                     </div>
                                 </form>
                             </section>
+                            <Description
+                                state={state}
+                                styles={styles}
+                                dispatch={dispatch}
+                                setEntering={setEntering}
+                            />
                         </div>
                     </div>
                 </div>

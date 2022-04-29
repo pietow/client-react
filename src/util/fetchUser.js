@@ -7,6 +7,26 @@
         putUser: fetchUser('PUT'),
         postUser: fetchUser('POST'),
         deleteUser: fetchUser('DELETE'),
+        getUsers: fetchUsers,
+    }
+
+    async function fetchUsers(url, accessToken) {
+        const req = {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${accessToken}`,
+            },
+        }
+        const response = await fetch(url, req)
+        const result = await response.json()
+        return new Promise((resolve, reject) => {
+            if (result.error) {
+                reject(result)
+            } else {
+                resolve(result)
+            }
+        })
     }
 
     function fetchUser(verb) {
@@ -23,20 +43,10 @@
             const result = await response.json()
             const profile = result.profile
             const accommodation = result.accommodation
-            delete result.profile
-            delete result.accommodation
             if (!result.error && verb !== 'POST') {
                 dispatch({
                     type: 'update_user',
                     payload: result,
-                })
-                dispatch({
-                    type: 'update_profile',
-                    payload: profile,
-                })
-                dispatch({
-                    type: 'update_accommodation',
-                    payload: accommodation,
                 })
             }
             return new Promise((resolve, reject) => {

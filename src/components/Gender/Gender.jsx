@@ -23,7 +23,7 @@ export default function Gender({ state, dispatch, setSavable, styles }) {
         <div>
             <div className={styles.container}>
                 <label htmlFor="gender" className={styles.label}>
-                    I Am
+                    Gender
                 </label>
                 <div className="w-6/12 ml-8">
                     <select

@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Profile from './pages/Profile'
+import Search from './pages/Search'
 import Login from './pages/Login'
 import EditProfile from './pages/EditProfile'
 import EditAccount from './pages/EditAccount'
@@ -31,7 +32,11 @@ export default function App() {
         <BrowserRouter>
             <Authentication.Provider value={accessToken}>
                 <SetAuthentication.Provider value={setAccessToken}>
-                    <Header toggle={toggle} setToggle={setToggle} />
+                    <Header
+                        toggle={toggle}
+                        setToggle={setToggle}
+                        dispatch={dispatch}
+                    />
                     {/* how to widen Link??? */}
                     {/* <BlurContext.Provider>could be filled with the toggle stuff from one line below, but might be too much work; would be useContext in every component; feels not right */}
                     <div
@@ -49,6 +54,10 @@ export default function App() {
                             <Route
                                 path="/profile"
                                 element={<Profile state={state} />}
+                            />
+                            <Route
+                                path="/search"
+                                element={<Search state={state} />}
                             />
                             <Route
                                 path="/login"

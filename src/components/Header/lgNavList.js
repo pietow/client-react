@@ -6,7 +6,7 @@ import linksHeader from '../../data/linksHeader.json'
 import { Authentication } from '../../context/accessTokenContext'
 import { SetAuthentication } from '../../context/setAccessTokenContext'
 
-export default function LgNavList() {
+export default function LgNavList({ dispatch }) {
     const setAccessToken = useContext(SetAuthentication)
     const accessToken = useContext(Authentication)
 
@@ -42,6 +42,9 @@ export default function LgNavList() {
                 }>
                 <Link
                     onClick={() => {
+                        dispatch({
+                            type: 'reset_state',
+                        })
                         setAccessToken('')
                         sessionStorage.removeItem('key')
                         setTimeout(() => {
