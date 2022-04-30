@@ -35,24 +35,29 @@ export default function Search({ state }) {
         input: 'p-3 text-lg bg-best-white text-sm w-full border border-gray-300 rounded-sm focus:outline-none focus:border-pistachio-dark focus:border-2 shadow-pistachio-dark focus:shadow-lg selection:bg-pistachio-dark',
         container: 'flex mb-4 items-center',
         btnClass: 'active:scale-95  w-fit mb-7 p-2 text-best-white',
+        table: 'w-full table-auto md:table-fixed text-best-white',
+        tableContainer: 'w-full rounded-md border m-2',
     }
 
     if (accessToken) {
         return (
-            <main className="xl:flex-row min-h-full xl:justify-center flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker">
-                <div className="w-full">
+            <main className="xl:flex-row xl:p-16 min-h-full relative  flex flex-col items-center bg-cover bg-left bg-fixed bg-backpacker md:p-4 lg:pt-10 md:flex-row md:items-start">
+                <div className="w-full md:w-fit xl:w-2/12 xl:mx-auto">
                     <input
                         id="search"
                         type="text"
                         value={search}
                         onChange={filter}
-                        className={styles.input}
+                        className={styles.input + ''}
                         placeholder="Search places"
                     />
                 </div>
-                <div className="w-11/12 xl:w-2/3 h-screen xl:justify-center flex flex-col items-center">
-                    <div className="w-full rounded-md border m-2">
-                        <table className="w-full table-auto md:table-fixed text-best-white">
+                <div className="w-11/12 md: lg:w-7/12 md:mx-auto xl:w-6/12 h-screen flex flex-col">
+                    <div
+                        className={`${styles.tableContainer} ${
+                            foundUsers.length === 0 ? 'hidden' : ''
+                        }`}>
+                        <table className={`${styles.table}`}>
                             <thead>
                                 <tr>
                                     <th>User</th>
