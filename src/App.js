@@ -19,6 +19,7 @@ import { Authentication } from './context/accessTokenContext'
 import { SetAuthentication } from './context/setAccessTokenContext'
 //USEREDUCER
 import { initialState, userReducer } from './data/userReducer'
+import ChatBox from './components/ChatBox'
 
 export default function App() {
     const [state, dispatch] = useReducer(userReducer, initialState)
@@ -37,6 +38,7 @@ export default function App() {
                         setToggle={setToggle}
                         dispatch={dispatch}
                     />
+                    <ChatBox accessToken={accessToken} />
                     <div
                         className={
                             toggle

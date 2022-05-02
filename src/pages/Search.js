@@ -5,6 +5,7 @@ import LogoLink from '../components/LogoLink'
 import { getUsers } from '../util/fetchUser'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
+import SendBtn from '../components/SendBtn'
 
 export default function Search({ state }) {
     const accessToken = useContext(Authentication)
@@ -71,7 +72,18 @@ export default function Search({ state }) {
                                     return (
                                         <tr className="border-t" key={i}>
                                             <td className="border-r text-center w-3/12 p-4">
-                                                {user.username}
+                                                <p>{user.username}</p>
+                                                <div className="flex justify-center items-center gap-2">
+                                                    <div
+                                                        className={
+                                                            !false
+                                                                ? 'w-4 h-4 bg-red-600 rounded-full'
+                                                                : 'hidden'
+                                                        }></div>
+                                                    <button className="active:scale-95 p-1 border border-best-white text-best-white rounded w-1/2">
+                                                        Talk
+                                                    </button>
+                                                </div>
                                             </td>
                                             <td className="border-r text-center w-3/12 p-4">
                                                 {
