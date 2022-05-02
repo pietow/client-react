@@ -6,12 +6,12 @@ import reducer from '../data/useReducer'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 import { getUser, putUser } from '../util/fetchUser'
-import InputField from '../components/InputField'
-import Description from '../components/Description'
-import BasicsInput from '../components/BasicsInput'
+// import InputField from '../components/InputField'
+// import Description from '../components/Description'
+// import BasicsInput from '../components/BasicsInput'
 import Photo from '../components/Photo'
 import Modal from '../components/Modal'
-import { Transition } from 'react-transition-group'
+// import { Transition } from 'react-transition-group'
 
 export default function EditProfile({ state, dispatch }) {
     const [savable, setSavable] = useState(false)

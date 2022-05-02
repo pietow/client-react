@@ -7,7 +7,7 @@ export const initialState = {
     email: '',
     active: false,
     profile: {
-        photo: '',
+        photoId: '',
         onlineStatus: '',
         title: '',
         text: 'dummy',
@@ -17,7 +17,7 @@ export const initialState = {
         city: '',
         destrict: '',
         country: '',
-        birthday: '',
+        birthdate: '',
     },
     accommodation: {
         availability: 'no',

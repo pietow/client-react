@@ -2,52 +2,67 @@
 
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import { Authentication } from '../../context/accessTokenContext'
-import TextareaAutosize from 'react-textarea-autosize'
-import { putUser } from '../..//util/fetchUser'
+import { getUser, putUser } from '../../util/fetchUser'
 
 export default function Photo({ state, styles, dispatch, setEntering }) {
     const [savable, setSavable] = useState(false)
+    const [error, setError] = useState('')
+    const [photoPreview, setPhotoPreview] = useState('')
     const accessToken = useContext(Authentication)
-    const previousText = useRef('')
     const renderCount = useRef(0)
 
-    useEffect(() => {
-        if (state.username !== '' && state._id) {
-            previousText.current = state.profile.text
-        }
-    }, [state])
-
     const putUserUrl = `api/users/${sessionStorage.getItem('user')}/profile`
+
+    const handleProfilePhoto = (event) => {
+        const formData = new FormData()
+        const newPhoto = event.target.files[0]
+        setPhotoPreview(URL.createObjectURL(newPhoto))
+
+        formData.append('file', newPhoto)
+
+        const photoUrl = `api/profile/${sessionStorage.getItem('user')}/photo`
+        const req = {
+            method: 'PUT',
+            body: formData,
+        }
+        fetch(photoUrl, req)
+            .then((data) => {
+                // dispatch({
+                //     type: 'update_profile',
+                //     payload: { photoId: data.photoId },
+                // })
+            })
+            .catch((error) => {
+                setError(error)
+            })
+    }
 
     return (
         <section className="p-4 mb-7 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
             <h1 className="w-full underline underline-offset-8 decoration-1 text-best-white text-4xl">
-                Describe yourself
+                Add a photo of you
             </h1>
-            <div className="flex flex-col">
-                <div className="bg-best-white w-11/12"></div>
+            <div className="flex flex-col bg-best-white w-11/12">
+                <label htmlFor="photoItem">
+                    {state.profile.photoId
+                        ? `Choose a new profile photo`
+                        : `Choose a profile photo`}
+                </label>
+                <input
+                    id="photoItem"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleProfilePhoto(e)}
+                />
+                <div style={error !== '' ? {} : { display: 'none' }}>
+                    {`Error during upload: ${error}`}
+                </div>
+                {photoPreview ? (
+                    <img src={photoPreview} alt="Current profile photo" />
+                ) : (
+                    <></>
+                )}
             </div>
-            <button
-                onClick={() => {
-                    if (savable) {
-                        putUser(putUserUrl, accessToken, dispatch, {
-                            text: state.profile.text,
-                        })
-                        previousText.current = state.profile.text
-                        setSavable(false)
-                        setEntering(false)
-                        setTimeout(() => {
-                            setEntering(true)
-                        }, 2000)
-                    }
-                }}
-                className={`${styles.btnClass} ${
-                    savable
-                        ? 'bg-teal-dark'
-                        : 'bg-teal-bright cursor-not-allowed'
-                }`}>
-                Save
-            </button>
         </section>
     )
 }

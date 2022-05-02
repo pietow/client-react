@@ -28,6 +28,22 @@ export default function Header({ toggle, setToggle }) {
             document.removeEventListener('mousedown', checkOutsideClick)
     }, [toggle, setToggle])
 
+    const getThumbnail = async () => {
+        const result = await fetch(
+            `api/profile/${sessionStorage.getItem('user')}/thumbnail`,
+            {
+                method: 'GET',
+            },
+        )
+            .then((response) => {
+                return response.json()
+            })
+            .then((url) => {
+                return url
+            })
+        return result
+    }
+
     return (
         <header className="flex flex-row items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal border-b border-best-white">
             <LogoLinkHeader />
@@ -43,8 +59,11 @@ export default function Header({ toggle, setToggle }) {
                         : 'hidden'
                 }>
                 <img
-                    src={'https://picsum.photos/200/200.jpg'}
-                    alt="lorem picsum"
+                    src={getThumbnail().then((tn) => {
+                        console.log(tn)
+                        tn
+                    })}
+                    alt="user profile"
                 />
             </Link>
 

@@ -16,8 +16,6 @@
             if (input) req.body = JSON.stringify(input)
             const response = await fetch(url, req)
             const result = await response.json()
-            /* console.log(result) */
-            /* console.log(verb) */
             if (!result.error && verb === 'GET') {
                 dispatch({
                     type: 'login_fetch',

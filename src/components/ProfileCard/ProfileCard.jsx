@@ -8,8 +8,6 @@ export default function ProfileCard({ userData }) {
     useEffect(() => {
         setVisibleData(true)
     }, [])
-
-    console.log()
     /* const languages = userData.profile.language */
     const languages = ['german', 'english']
 
@@ -21,8 +19,6 @@ export default function ProfileCard({ userData }) {
             </li>
         )
     })
-
-    console.log(userData)
     return (
         <div className="w-1/5 h-full border-2 border-gray-dark p-4 rounded bg-best-white">
             <div className="">
