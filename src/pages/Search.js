@@ -63,8 +63,8 @@ export default function Search({ state }) {
                                 <tr>
                                     <th>User</th>
                                     <th>Availabilty</th>
-                                    <th>Guests</th>
                                     <th>Place</th>
+                                    <th>Guests</th>
                                 </tr>
                             </thead>
                             <tbody>
