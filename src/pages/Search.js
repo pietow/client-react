@@ -72,7 +72,9 @@ export default function Search({ state }) {
                                     return (
                                         <tr className="border-t" key={i}>
                                             <td className="border-r text-center w-3/12 p-4">
-                                                <p>{user.username}</p>
+                                                <p className="mb-2">
+                                                    {user.username}
+                                                </p>
                                                 <div className="flex justify-center items-center gap-2">
                                                     <div
                                                         className={
