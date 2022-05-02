@@ -26,7 +26,7 @@ export default function DescriptionHost({
     )}/accommodation`
 
     return (
-        <section className="p-4 mb-7 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
+        <section className="p-4 mb-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md">
             <h1 className="w-full underline underline-offset-8 decoration-1 text-best-white text-4xl">
                 Describe Location
             </h1>
