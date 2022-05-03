@@ -4,6 +4,23 @@ import React, { useState, useEffect } from 'react'
 
 export default function ProfileCard({ userData }) {
     const [visibleData, setVisibleData] = useState(null)
+    const [photo, setPhoto] = useState('')
+
+    useEffect(() => {
+        const getPhoto = async () => {
+            await fetch(`api/profile/${sessionStorage.getItem('user')}/photo`, {
+                method: 'GET',
+            })
+                .then((response) => {
+                    return response.json()
+                })
+                .then((url) => {
+                    setPhoto(url)
+                    return
+                })
+        }
+        getPhoto()
+    }, [photo])
 
     useEffect(() => {
         setVisibleData(true)
@@ -24,7 +41,7 @@ export default function ProfileCard({ userData }) {
             <div className="">
                 <img
                     className="pb-10 m-auto justify-center"
-                    src={'https://picsum.photos/200/200.jpg'}
+                    src={photo}
                     alt="lorem"
                 />
                 {visibleData && (
