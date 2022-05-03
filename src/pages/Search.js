@@ -7,7 +7,7 @@ import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 import SendBtn from '../components/SendBtn'
 
-export default function Search({ state, resize, setResize }) {
+export default function Search({ state, resize, setResize, setUserId }) {
     const accessToken = useContext(Authentication)
 
     const [search, setSearch] = useState('')
@@ -83,11 +83,12 @@ export default function Search({ state, resize, setResize }) {
                                                                 : 'hidden'
                                                         }></div>
                                                     <button
-                                                        onClick={() =>
+                                                        onClick={() => {
                                                             resize
                                                                 ? setResize(0)
                                                                 : setResize(1)
-                                                        }
+                                                            setUserId(user._id)
+                                                        }}
                                                         className="active:scale-95 p-1 border border-best-white text-best-white rounded w-1/2">
                                                         Talk
                                                     </button>

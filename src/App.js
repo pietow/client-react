@@ -29,6 +29,7 @@ export default function App() {
     const [accessToken, setAccessToken] = useState(
         sessionStorage.getItem('key') || '',
     ) /* get safety token from backend */
+    const [userId, setUserId] = useState() //searchbar vs chatbox, brief and ugly
 
     return (
         <BrowserRouter>
@@ -43,6 +44,7 @@ export default function App() {
                         accessToken={accessToken}
                         resize={resize}
                         setResize={setResize}
+                        userId={userId}
                     />
                     <div
                         className={
@@ -72,6 +74,7 @@ export default function App() {
                                         state={state}
                                         resize={resize}
                                         setResize={setResize}
+                                        setUserId={setUserId}
                                     />
                                 }
                             />
