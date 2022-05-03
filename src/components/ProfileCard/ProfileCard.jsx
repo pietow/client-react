@@ -53,11 +53,14 @@ export default function ProfileCard({ userData }) {
 
     return (
         <div className="h-full backdrop-brightness-75 backdrop-blur-lg mr-3 mt-3 drop-shadow-md border border-best-white rounded-md text-best-white">
-            <img
+            <div className="w-40 h-40 mx-auto my-4 overflow-hidden rounded-lg">
+                <img
+                    className=""
+                    src={photo}
+                    alt="lorem"
+                />
+            </div>
                 className="pb-10 m-auto justify-center"
-                src={photo}
-                alt="lorem"
-            />
             {visibleData && (
                 <p className="text-black text-xs border-b p-2">
                     Username: {userData.username}

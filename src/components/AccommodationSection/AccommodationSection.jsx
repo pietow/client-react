@@ -21,7 +21,7 @@ export default function AccommodationSection({ heading, state }) {
             'Offering hospitality and welcoming “strangers” to our homes strengthens our faith in each other.'
     }
     return (
-        <section className="w-2/3 flex flex-col items-center backdrop-brightness-75 backdrop-blur-lg m-4 drop-shadow-md border border-best-white rounded-md">
+        <section className="p-4 flex flex-col backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border border-best-white rounded-md mb-4">
             <div className="flex">
                 <h1 className="underline underline-offset-8 decoration-1 text-best-white m-4 text-3xl">
                     {heading}
@@ -41,7 +41,6 @@ export default function AccommodationSection({ heading, state }) {
                     state.guests +
                     `${state.guests > 1 ? ' guests.' : ' guest.'}`}
             </p>
-            {/* TODO: Link to .../edithost */}
         </section>
     )
 }

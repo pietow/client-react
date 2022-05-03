@@ -11,13 +11,13 @@ export default function EditNavbar() {
                     <NavLink to="/profile">profile</NavLink>
                 </li>
                 <li className="hover:scale-110">
-                    <NavLink to="/edithost">location</NavLink>
+                    <NavLink to="/edithost">edit location</NavLink>
                 </li>
                 <li className="hover:scale-110">
-                    <NavLink to="/editaccount">editaccount</NavLink>
+                    <NavLink to="/editaccount">edit account</NavLink>
                 </li>
                 <li className="hover:scale-110">
-                    <NavLink to="/editprofile">editprofile</NavLink>
+                    <NavLink to="/editprofile">edit profile</NavLink>
                 </li>
             </ul>
         </nav>

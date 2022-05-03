@@ -20,11 +20,13 @@ import { Authentication } from './context/accessTokenContext'
 import { SetAuthentication } from './context/setAccessTokenContext'
 //USEREDUCER
 import { initialState, userReducer } from './data/userReducer'
+import ChatBox from './components/ChatBox'
 
 export default function App() {
     const [state, dispatch] = useReducer(userReducer, initialState)
     const [toggle, setToggle] =
         useState(0) /* blurs pages when menu is opening on small screens  */
+    const [resize, setResize] = useState(0)
     const [accessToken, setAccessToken] = useState(
         sessionStorage.getItem('key') || '',
     ) /* get safety token from backend */
@@ -37,6 +39,11 @@ export default function App() {
                         toggle={toggle}
                         setToggle={setToggle}
                         dispatch={dispatch}
+                    />
+                    <ChatBox
+                        accessToken={accessToken}
+                        resize={resize}
+                        setResize={setResize}
                     />
                     <div
                         className={
@@ -61,7 +68,13 @@ export default function App() {
                             />
                             <Route
                                 path="/search"
-                                element={<Search state={state} />}
+                                element={
+                                    <Search
+                                        state={state}
+                                        resize={resize}
+                                        setResize={setResize}
+                                    />
+                                }
                             />
                             <Route
                                 path="/login"
