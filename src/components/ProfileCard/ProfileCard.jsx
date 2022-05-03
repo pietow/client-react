@@ -53,9 +53,9 @@ export default function ProfileCard({ userData }) {
 
     return (
         <div className="h-full backdrop-brightness-75 backdrop-blur-lg mr-3 mt-3 drop-shadow-md border border-best-white rounded-md text-best-white">
-            <div className="h-auto w-full mx-auto my-4 overflow-hidden rounded-lg">
+            <div className="h-[200px] w-[200px] mx-auto my-4 overflow-hidden rounded-lg">
                 <img
-                    className="pb-1 m-auto h-auto w-11/12 object-scale-down justify-center"
+                    className="pb-1 object-scale-down"
                     src={photo}
                     alt="profile photo"
                 />
