@@ -94,7 +94,7 @@ export default function ChatBox({
                     <div className="border border-best-white rounded-full w-12 h-12 overflow-hidden">
                         <img
                             src={'https://picsum.photos/200/200.jpg'}
-                            alt="lorem picsum"
+                            alt="profile photo"
                         />
                     </div>
                     <textarea

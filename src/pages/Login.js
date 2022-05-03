@@ -17,7 +17,6 @@ export default function Login({ dispatch, state }) {
         e.preventDefault()
         postUser('/api/users/login', '', dispatch, { username, password }).then(
             (result) => {
-                console.log(result)
                 if (result.token) {
                     dispatch({ type: 'login_fetch', user: result })
                     setAccessToken(result.token)

@@ -53,3 +53,12 @@
 main {
     min-height: calc(100vh - 8.5rem)
 }
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg) ;
+    }
+    to {
+        transform: rotate(360deg) ;
+    }
+}

@@ -8,7 +8,13 @@ import LogoLinkHeader from '../LogoLinkHeader'
 import { Link } from 'react-router-dom'
 import { Authentication } from '../../context/accessTokenContext'
 
-export default function Header({ toggle, setToggle, dispatch, setChatValue, state }) {
+export default function Header({
+    toggle,
+    setToggle,
+    dispatch,
+    setChatValue,
+    state,
+}) {
     const ref = useRef()
     const accessToken = useContext(Authentication)
 
@@ -31,23 +37,25 @@ export default function Header({ toggle, setToggle, dispatch, setChatValue, stat
     }, [toggle, setToggle])
 
     useEffect(() => {
-        const getThumbnail = async () => {
-            await fetch(
-                `api/profile/${sessionStorage.getItem('user')}/thumbnail`,
-                {
-                    method: 'GET',
-                },
-            )
-                .then((response) => {
-                    return response.json()
-                })
-                .then((url) => {
-                    setThumbnail(url)
-                    return
-                })
+        if (accessToken) {
+            const getThumbnail = async () => {
+                await fetch(
+                    `api/profile/${sessionStorage.getItem('user')}/thumbnail`,
+                    {
+                        method: 'GET',
+                    },
+                )
+                    .then((response) => {
+                        return response.json()
+                    })
+                    .then((url) => {
+                        setThumbnail(url)
+                        return
+                    })
+            }
+            getThumbnail()
         }
-        getThumbnail()
-    }, [thumbnail, state])
+    }, [thumbnail, state]) // eslint-disable-line
 
     return (
         <header className="flex flex-row items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal border-b border-best-white">

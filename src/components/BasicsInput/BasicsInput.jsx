@@ -2,8 +2,6 @@
 
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import { Authentication } from '../../context/accessTokenContext'
-import { dateArr } from '../../data/datesArray'
-import Birthday from '../Birthday'
 import DatePicker from 'react-date-picker/'
 import Gender from '../Gender'
 import { putUser } from '../..//util/fetchUser'

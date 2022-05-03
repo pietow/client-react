@@ -18,12 +18,6 @@
         "showAlways": false
     },
     {
-        "name": "editphoto",
-        "path": "/editphoto",
-        "needsAccess": true,
-        "showAlways": false
-    },
-    {
         "name": "contact",
         "path": "/contact",
         "needsAccess": false,

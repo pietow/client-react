@@ -22,7 +22,7 @@ export default function ProfileCard({ userData }) {
                 })
         }
         getPhoto()
-    }, [photo])
+    }, [photo, userData]) // eslint-disable-line
 
     useEffect(() => {
         setVisibleData(true)
@@ -53,11 +53,11 @@ export default function ProfileCard({ userData }) {
 
     return (
         <div className="h-full backdrop-brightness-75 backdrop-blur-lg mr-3 mt-3 drop-shadow-md border border-best-white rounded-md text-best-white">
-            <div className="w-40 h-40 mx-auto my-4 overflow-hidden rounded-lg">
+            <div className="h-auto w-full mx-auto my-4 overflow-hidden rounded-lg">
                 <img
-                    className="pb-10 m-auto h-48 w-96 object-scale-down justify-center"
+                    className="pb-1 m-auto h-auto w-11/12 object-scale-down justify-center"
                     src={photo}
-                    alt="lorem"
+                    alt="profile photo"
                 />
             </div>
             {visibleData && (
