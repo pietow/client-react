@@ -54,6 +54,7 @@ export default function LgNavList({ dispatch }) {
                             }
                         }, 500)
                         sessionStorage.removeItem('user')
+                        setChatValue('')
                     }}
                     to="/">
                     logout

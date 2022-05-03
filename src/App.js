@@ -30,6 +30,7 @@ export default function App() {
         sessionStorage.getItem('key') || '',
     ) /* get safety token from backend */
     const [userId, setUserId] = useState() //searchbar vs chatbox, brief and ugly
+    const [chatValue, setChatValue] = useState('') //prop-drilling for chatbox
 
     return (
         <BrowserRouter>
@@ -39,12 +40,15 @@ export default function App() {
                         toggle={toggle}
                         setToggle={setToggle}
                         dispatch={dispatch}
+                        setChatValue={setChatValue}
                     />
                     <ChatBox
                         accessToken={accessToken}
                         resize={resize}
                         setResize={setResize}
                         userId={userId}
+                        chatValue={chatValue}
+                        setChatValue={setChatValue}
                     />
                     <div
                         className={

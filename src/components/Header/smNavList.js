@@ -6,7 +6,12 @@ import linksHeader from '../../data/linksHeader.json'
 import { Authentication } from '../../context/accessTokenContext'
 import { SetAuthentication } from '../../context/setAccessTokenContext'
 
-export default function SmNavList({ toggle, setToggle, dispatch }) {
+export default function SmNavList({
+    toggle,
+    setToggle,
+    dispatch,
+    setChatValue,
+}) {
     const setAccessToken = useContext(SetAuthentication)
     const accessToken = useContext(Authentication)
 
@@ -64,6 +69,7 @@ export default function SmNavList({ toggle, setToggle, dispatch }) {
                         }, 500)
                         sessionStorage.removeItem('user')
                         toggle ? setToggle(0) : setToggle(1)
+                        setChatValue('')
                     }}
                     to="/">
                     logout

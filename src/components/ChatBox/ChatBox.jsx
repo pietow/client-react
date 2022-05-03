@@ -2,13 +2,19 @@
 
 import React, { useState, useEffect } from 'react'
 
-export default function ChatBox({ accessToken, resize, setResize, userId }) {
+export default function ChatBox({
+    accessToken,
+    resize,
+    setResize,
+    userId,
+    chatValue,
+    setChatValue,
+}) {
     const style =
         accessToken && resize
             ? 'flex items-center overflow-auto h-80 flex-col fixed z-[200] right-2 top-[500px] border rounded-md border-best-white w-[450px] backdrop-brightness-75 backdrop-blur-lg drop-shadow-md'
             : 'hidden'
 
-    const [value, setValue] = useState('')
     const [allMessages, setAllMessages] = useState([])
 
     const seeAllMessages = async () => {
@@ -32,7 +38,7 @@ export default function ChatBox({ accessToken, resize, setResize, userId }) {
         const body = {
             sender: sender,
             receiver: userId,
-            text: value,
+            text: chatValue,
         }
         const response = await fetch(`api/message/`, {
             method: 'POST',
@@ -92,12 +98,12 @@ export default function ChatBox({ accessToken, resize, setResize, userId }) {
                         />
                     </div>
                     <textarea
-                        onChange={(e) => setValue(e.target.value)}
+                        onChange={(e) => setChatValue(e.target.value)}
                         className="my-4 p-1 rounded opacity-70"
                         name="request"
                         rows="2"
                         cols="33"
-                        value={value}
+                        value={chatValue}
                         placeholder="Write a message"
                     />
 
