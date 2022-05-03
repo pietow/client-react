@@ -8,7 +8,7 @@ import LogoLinkHeader from '../LogoLinkHeader'
 import { Link } from 'react-router-dom'
 import { Authentication } from '../../context/accessTokenContext'
 
-export default function Header({ toggle, setToggle, dispatch }) {
+export default function Header({ toggle, setToggle, dispatch, state }) {
     const ref = useRef()
     const accessToken = useContext(Authentication)
 
@@ -47,7 +47,7 @@ export default function Header({ toggle, setToggle, dispatch }) {
                 })
         }
         getThumbnail()
-    }, [thumbnail])
+    }, [thumbnail, state])
 
     return (
         <header className="flex flex-row items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal border-b border-best-white">

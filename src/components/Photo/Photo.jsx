@@ -27,10 +27,13 @@ export default function Photo({ state, styles, dispatch, setEntering }) {
         }
         fetch(photoUrl, req)
             .then((data) => {
-                // dispatch({
-                //     type: 'update_profile',
-                //     payload: { photoId: data.photoId },
-                // })
+                return data.json()
+            })
+            .then((result) => {
+                dispatch({
+                    type: 'update_profile',
+                    payload: { photoId: result.photoId },
+                })
             })
             .catch((error) => {
                 setError(error)

@@ -39,6 +39,7 @@ export default function App() {
                         toggle={toggle}
                         setToggle={setToggle}
                         dispatch={dispatch}
+                        state={state}
                     />
                     <ChatBox
                         accessToken={accessToken}
