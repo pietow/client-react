@@ -6,7 +6,7 @@
         "showAlways": true
     },
     {
-        "name": "Search",
+        "name": "search",
         "path": "/search",
         "needsAccess": true,
         "showAlways": false
