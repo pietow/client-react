@@ -49,3 +49,7 @@
     font-family: 'zeyada';
     src: url('../src/assets/font/header/Zeyada-Regular.ttf');
 }
+
+main {
+    min-height: calc(100vh - 8.5rem)
+}

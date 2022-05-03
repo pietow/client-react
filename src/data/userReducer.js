@@ -7,7 +7,7 @@ export const initialState = {
     email: '',
     active: false,
     profile: {
-        photo: '',
+        photoId: '',
         onlineStatus: '',
         title: '',
         text: '',

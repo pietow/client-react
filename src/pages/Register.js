@@ -23,10 +23,9 @@ export default function Register() {
             body: JSON.stringify(data),
         })
         const result = await response.json()
-        // console.log(result)
         result.error
-            ? alert('nope, there is an ERROR!')
-            : alertTimeoutMessage('welcome aboard!')
+            ? alert('Nope, there is an ERROR!')
+            : alertTimeoutMessage('Welcome aboard!')
         navigate('/profile')
     }
 

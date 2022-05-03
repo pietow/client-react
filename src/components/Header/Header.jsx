@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useRef, useContext } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import SmNavList from './smNavList.js'
 import LgNavList from './lgNavList.js'
 import Burger from './burger.js'
@@ -18,6 +18,8 @@ export default function Header({ toggle, setToggle, dispatch }) {
         toggle ? setToggle(0) : setToggle(1)
     }
 
+    const [thumbnail, setThumbnail] = useState('')
+
     useEffect(() => {
         const checkOutsideClick = (e) => {
             if (toggle && ref.current && !ref.current.contains(e.target))
@@ -27,6 +29,25 @@ export default function Header({ toggle, setToggle, dispatch }) {
         return () =>
             document.removeEventListener('mousedown', checkOutsideClick)
     }, [toggle, setToggle])
+
+    useEffect(() => {
+        const getThumbnail = async () => {
+            await fetch(
+                `api/profile/${sessionStorage.getItem('user')}/thumbnail`,
+                {
+                    method: 'GET',
+                },
+            )
+                .then((response) => {
+                    return response.json()
+                })
+                .then((url) => {
+                    setThumbnail(url)
+                    return
+                })
+        }
+        getThumbnail()
+    }, [thumbnail])
 
     return (
         <header className="flex flex-row items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal border-b border-best-white">
@@ -42,10 +63,7 @@ export default function Header({ toggle, setToggle, dispatch }) {
                         ? 'lg:order-none order-1 border border-best-white rounded-full w-12 h-12 overflow-hidden'
                         : 'hidden'
                 }>
-                <img
-                    src={'https://picsum.photos/200/200.jpg'}
-                    alt="lorem picsum"
-                />
+                <img src={thumbnail} alt="user profile" />
             </Link>
 
             {/* ----------------------------BURGER MENU START------------------------------ */}

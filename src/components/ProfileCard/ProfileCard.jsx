@@ -6,6 +6,23 @@ import moment from 'moment'
 export default function ProfileCard({ userData }) {
     // HIDING POSTS IF NOT FILLED OUT
     const [visibleData, setVisibleData] = useState(null)
+    const [photo, setPhoto] = useState('')
+
+    useEffect(() => {
+        const getPhoto = async () => {
+            await fetch(`api/profile/${sessionStorage.getItem('user')}/photo`, {
+                method: 'GET',
+            })
+                .then((response) => {
+                    return response.json()
+                })
+                .then((url) => {
+                    setPhoto(url)
+                    return
+                })
+        }
+        getPhoto()
+    }, [photo])
 
     useEffect(() => {
         setVisibleData(true)
@@ -36,11 +53,11 @@ export default function ProfileCard({ userData }) {
 
     return (
         <div className="h-full backdrop-brightness-75 backdrop-blur-lg mr-3 mt-3 drop-shadow-md border border-best-white rounded-md text-best-white">
-            <img
-                className="pb-10 m-auto justify-center rounded-md"
-                src={'https://picsum.photos/200/200.jpg'}
-                alt="lorem"
-            />
+                <img
+                    className="pb-10 m-auto justify-center"
+                    src={photo}
+                    alt="lorem"
+                />
             {visibleData && (
                 <p className="text-black text-xs border-b p-2">
                     Username: {userData.username}
@@ -77,6 +94,7 @@ export default function ProfileCard({ userData }) {
                     <ul>{displayLanguage}</ul>
                 </div>
             )}
+
         </div>
     )
 }
