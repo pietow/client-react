@@ -7,7 +7,7 @@ import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 import SendBtn from '../components/SendBtn'
 
-export default function Search({ state }) {
+export default function Search({ state, resize, setResize }) {
     const accessToken = useContext(Authentication)
 
     const [search, setSearch] = useState('')
@@ -82,7 +82,13 @@ export default function Search({ state }) {
                                                                 ? 'w-4 h-4 bg-red-600 rounded-full'
                                                                 : 'hidden'
                                                         }></div>
-                                                    <button className="active:scale-95 p-1 border border-best-white text-best-white rounded w-1/2">
+                                                    <button
+                                                        onClick={() =>
+                                                            resize
+                                                                ? setResize(0)
+                                                                : setResize(1)
+                                                        }
+                                                        className="active:scale-95 p-1 border border-best-white text-best-white rounded w-1/2">
                                                         Talk
                                                     </button>
                                                 </div>
