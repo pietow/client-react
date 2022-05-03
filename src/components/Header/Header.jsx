@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useRef, useContext } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import SmNavList from './smNavList.js'
 import LgNavList from './lgNavList.js'
 import Burger from './burger.js'
@@ -18,6 +18,8 @@ export default function Header({ toggle, setToggle }) {
         toggle ? setToggle(0) : setToggle(1)
     }
 
+    const [thumbnail, setThumbnail] = useState('')
+
     useEffect(() => {
         const checkOutsideClick = (e) => {
             if (toggle && ref.current && !ref.current.contains(e.target))
@@ -28,21 +30,24 @@ export default function Header({ toggle, setToggle }) {
             document.removeEventListener('mousedown', checkOutsideClick)
     }, [toggle, setToggle])
 
-    const getThumbnail = async () => {
-        const result = await fetch(
-            `api/profile/${sessionStorage.getItem('user')}/thumbnail`,
-            {
-                method: 'GET',
-            },
-        )
-            .then((response) => {
-                return response.json()
-            })
-            .then((url) => {
-                return url
-            })
-        return result
-    }
+    useEffect(() => {
+        const getThumbnail = async () => {
+            await fetch(
+                `api/profile/${sessionStorage.getItem('user')}/thumbnail`,
+                {
+                    method: 'GET',
+                },
+            )
+                .then((response) => {
+                    return response.json()
+                })
+                .then((url) => {
+                    setThumbnail(url)
+                    return
+                })
+        }
+        getThumbnail()
+    }, [thumbnail])
 
     return (
         <header className="flex flex-row items-center justify-evenly h-14 sticky top-0 z-10 bg-teal-normal border-b border-best-white">
@@ -58,13 +63,7 @@ export default function Header({ toggle, setToggle }) {
                         ? 'lg:order-none order-1 border border-best-white rounded-full w-12 h-12 overflow-hidden'
                         : 'hidden'
                 }>
-                <img
-                    src={getThumbnail().then((tn) => {
-                        console.log(tn)
-                        tn
-                    })}
-                    alt="user profile"
-                />
+                <img src={thumbnail} alt="user profile" />
             </Link>
 
             {/* ----------------------------BURGER MENU START------------------------------ */}
