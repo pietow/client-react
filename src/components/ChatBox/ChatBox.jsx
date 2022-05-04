@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react'
+import Rnd from 'react-rnd'
 
 export default function ChatBox({
     allSenders,
@@ -14,9 +15,14 @@ export default function ChatBox({
     setAllMessages,
     allMessages,
 }) {
-    const style =
+    const styleChatBox =
         accessToken && resize
-            ? 'flex items-center overflow-auto h-80 flex-col fixed z-[200] right-2 top-[500px] border rounded-md border-best-white w-[450px] backdrop-brightness-75 backdrop-blur-lg drop-shadow-md'
+            ? 'flex items-center overflow-auto h-80 flex-col border rounded-md border-best-white w-[450px] backdrop-brightness-75 backdrop-blur-lg drop-shadow-md'
+            : 'hidden'
+
+    const styleChatList =
+        accessToken && resize
+            ? 'fixed right-[510px] w-fit backdrop-brightness-75 backdrop-blur-lg drop-shadow-md border rounded-md border-best-white'
             : 'hidden'
 
     const messageToHost = async () => {
@@ -83,74 +89,86 @@ export default function ChatBox({
                     messages
                 </button>
             </div>
-
-            <div className="border-2 border-best-white fixed z-[201] right-[500px] top-[500px]">
-                <ul>
-                    {allSenders.map((user, i) => {
-                        return (
-                            <li
-                                onClick={() => selectChatList(user.id)}
-                                className="self-start p-2"
-                                key={i}>
-                                <p className="text-best-white">{user.sender}</p>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </div>
-            <div className={style}>
-                {/* sender and x for closing the window */}
-                <div className="sticky top-0 flex w-full justify-between">
-                    <p className="self-start text-best-white p-4">
-                        {/* <span className="underline">From:</span> here name from
-                        database */}
-                    </p>
-                    <button
-                        onClick={() => setResize(0)}
-                        className="self-end text-best-white p-4">
-                        x
-                    </button>
+            <Rnd
+                default={{
+                    x: 850,
+                    y: 205,
+                    width: 500,
+                    height: 190,
+                }}
+                className="z-[250]"
+                minWidth={500}
+                minHeight={190}
+                bounds="window">
+                <div className={styleChatList}>
+                    <ul className="flex flex-col">
+                        {allSenders.map((user, i) => {
+                            return (
+                                <button
+                                    onClick={() => selectChatList(user.id)}
+                                    className="curser-pointer hover:scale-[1.1] self-start p-2 text-best-white"
+                                    key={i}>
+                                    {user.sender}
+                                </button>
+                            )
+                        })}
+                    </ul>
                 </div>
-                {/* all kind of texts and pics and reply buttons */}
-                <div className="flex items-center gap-2">
-                    <div className="border border-best-white rounded-full w-12 h-12 overflow-hidden">
-                        <img
-                            src={'https://picsum.photos/200/200.jpg'}
-                            alt="profile photo"
-                        />
-                    </div>
-                    <textarea
-                        onChange={(e) => setChatValue(e.target.value)}
-                        className="my-4 p-1 rounded opacity-70"
-                        name="request"
-                        rows="2"
-                        cols="33"
-                        value={chatValue}
-                        placeholder="Write a message"
-                    />
 
-                    {/* <button className="active:scale-95 p-1 border border-best-white text-best-white rounded">
+                <div className={styleChatBox}>
+                    {/* sender and x for closing the window */}
+                    <div className="sticky top-0 flex w-full justify-between">
+                        <p className="self-start text-best-white p-4">
+                            {/* <span className="underline">From:</span> here name from
+                        database */}
+                        </p>
+                        <button
+                            onClick={() => setResize(0)}
+                            className="self-end text-best-white p-4">
+                            x
+                        </button>
+                    </div>
+                    {/* all kind of texts and pics and reply buttons */}
+                    <div className="flex items-center gap-2">
+                        <div className="border border-best-white rounded-full w-12 h-12 overflow-hidden">
+                            <img
+                                src={'https://picsum.photos/200/200.jpg'}
+                                alt="profile photo"
+                            />
+                        </div>
+                        <textarea
+                            onChange={(e) => setChatValue(e.target.value)}
+                            className="my-4 p-1 rounded opacity-70"
+                            name="request"
+                            rows="2"
+                            cols="33"
+                            value={chatValue}
+                            placeholder="Write a message"
+                        />
+
+                        {/* <button className="active:scale-95 p-1 border border-best-white text-best-white rounded">
                         Reply
                     </button> */}
+                    </div>
+                    <button
+                        onClick={() => messageToHost()}
+                        className="active:scale-95 mx-auto my-4 p-1 border border-best-white text-best-white rounded w-1/2">
+                        Send
+                    </button>
+                    {allMessages.map((message, i) => {
+                        return (
+                            <div className="self-start p-2" key={i}>
+                                <p className="text-best-white">
+                                    {message.sender.username} wrote:
+                                </p>
+                                <p className="border border-best-white rounded-md px-2 py text-best-white">
+                                    {message.text}
+                                </p>
+                            </div>
+                        )
+                    })}
                 </div>
-                <button
-                    onClick={() => messageToHost()}
-                    className="active:scale-95 mx-auto my-4 p-1 border border-best-white text-best-white rounded w-1/2">
-                    Send
-                </button>
-                {allMessages.map((message, i) => {
-                    return (
-                        <div className="self-start p-2" key={i}>
-                            <p className="text-best-white">
-                                {message.sender.username} wrote:
-                            </p>
-                            <p className="border border-best-white rounded-md px-2 py text-best-white">
-                                {message.text}
-                            </p>
-                        </div>
-                    )
-                })}
-            </div>
+            </Rnd>
         </>
     )
 }
