@@ -3,35 +3,19 @@
 import React, { useState, useEffect } from 'react'
 
 export default function ChatBox({
+    seeAllMessages,
     accessToken,
     resize,
     setResize,
     userId,
     chatValue,
     setChatValue,
+    allMessages,
 }) {
     const style =
         accessToken && resize
             ? 'flex items-center overflow-auto h-80 flex-col fixed z-[200] right-2 top-[500px] border rounded-md border-best-white w-[450px] backdrop-brightness-75 backdrop-blur-lg drop-shadow-md'
             : 'hidden'
-
-    const [allMessages, setAllMessages] = useState([])
-
-    const seeAllMessages = async () => {
-        const receiver = sessionStorage.getItem('user')
-        const response = await fetch(`/api/message/${receiver}/receive`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application',
-                'authorization': `bearer ${accessToken}`,
-            },
-        })
-        const result = await response.json()
-        setAllMessages(result.reverse())
-    }
-    /* useEffect(() => {
-        setAllMessages(seeAllMessages())
-    }, []) */
 
     const messageToHost = async () => {
         const sender = sessionStorage.getItem('user')
@@ -51,7 +35,7 @@ export default function ChatBox({
         const result = await response.json()
         /* console.log(result) */
     }
-    // console.log(allMessages)
+
     return (
         <>
             <div
@@ -68,7 +52,7 @@ export default function ChatBox({
                     }></div>
                 <button
                     onClick={() => {
-                        resize === 0 ? setResize(1) : setResize(0)
+                        !resize ? setResize(1) : setResize(0)
                         seeAllMessages()
                     }}
                     className="">

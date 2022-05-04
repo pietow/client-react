@@ -5,9 +5,13 @@ import LogoLink from '../components/LogoLink'
 import { getUsers } from '../util/fetchUser'
 import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
-import SendBtn from '../components/SendBtn'
 
-export default function Search({ state, resize, setResize, setUserId }) {
+export default function Search({
+    resize,
+    setResize,
+    setUserId,
+    seeAllMessages,
+}) {
     const accessToken = useContext(Authentication)
 
     const [search, setSearch] = useState('')
@@ -88,6 +92,7 @@ export default function Search({ state, resize, setResize, setUserId }) {
                                                                 ? setResize(0)
                                                                 : setResize(1)
                                                             setUserId(user._id)
+                                                            seeAllMessages()
                                                         }}
                                                         className="active:scale-95 p-1 border border-best-white text-best-white rounded w-1/2">
                                                         Talk
