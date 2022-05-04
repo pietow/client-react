@@ -3,35 +3,21 @@
 import React, { useState, useEffect } from 'react'
 
 export default function ChatBox({
+    allSenders,
+    seeAllMessages,
     accessToken,
     resize,
     setResize,
     userId,
     chatValue,
     setChatValue,
+    setAllMessages,
+    allMessages,
 }) {
     const style =
         accessToken && resize
             ? 'flex items-center overflow-auto h-80 flex-col fixed z-[200] right-2 top-[500px] border rounded-md border-best-white w-[450px] backdrop-brightness-75 backdrop-blur-lg drop-shadow-md'
             : 'hidden'
-
-    const [allMessages, setAllMessages] = useState([])
-
-    const seeAllMessages = async () => {
-        const receiver = sessionStorage.getItem('user')
-        const response = await fetch(`/api/message/${receiver}/receive`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application',
-                'authorization': `bearer ${accessToken}`,
-            },
-        })
-        const result = await response.json()
-        setAllMessages(result.reverse())
-    }
-    /* useEffect(() => {
-        setAllMessages(seeAllMessages())
-    }, []) */
 
     const messageToHost = async () => {
         const sender = sessionStorage.getItem('user')
@@ -51,7 +37,29 @@ export default function ChatBox({
         const result = await response.json()
         /* console.log(result) */
     }
-    // console.log(allMessages)
+
+    function selectChatList(userId) {
+        const seeAllMessages = async () => {
+            const receiver = sessionStorage.getItem('user')
+            const response = await fetch(`/api/message/${receiver}/receive`, {
+                //change url to /api/message/:userId/sent
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application',
+                    'authorization': `bearer ${accessToken}`,
+                },
+            })
+            const result = await response.json()
+            const filterMessages = result.filter((message) => {
+                if (message.sender._id === userId) return true
+            })
+            console.log(filterMessages)
+            console.log(userId)
+            setAllMessages(filterMessages)
+        }
+        seeAllMessages()
+    }
+
     return (
         <>
             <div
@@ -68,7 +76,7 @@ export default function ChatBox({
                     }></div>
                 <button
                     onClick={() => {
-                        resize === 0 ? setResize(1) : setResize(0)
+                        !resize ? setResize(1) : setResize(0)
                         seeAllMessages()
                     }}
                     className="">
@@ -76,6 +84,20 @@ export default function ChatBox({
                 </button>
             </div>
 
+            <div className="border-2 border-best-white fixed z-[201] right-[500px] top-[500px]">
+                <ul>
+                    {allSenders.map((user, i) => {
+                        return (
+                            <li
+                                onClick={() => selectChatList(user.id)}
+                                className="self-start p-2"
+                                key={i}>
+                                <p className="text-best-white">{user.sender}</p>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
             <div className={style}>
                 {/* sender and x for closing the window */}
                 <div className="sticky top-0 flex w-full justify-between">
@@ -94,7 +116,7 @@ export default function ChatBox({
                     <div className="border border-best-white rounded-full w-12 h-12 overflow-hidden">
                         <img
                             src={'https://picsum.photos/200/200.jpg'}
-                            alt="lorem picsum"
+                            alt="profile photo"
                         />
                     </div>
                     <textarea

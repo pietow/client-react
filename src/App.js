@@ -32,6 +32,31 @@ export default function App() {
     ) /* get safety token from backend */
     const [userId, setUserId] = useState() //searchbar vs chatbox, brief and ugly
     const [chatValue, setChatValue] = useState('') //prop-drilling for chatbox
+    const [allMessages, setAllMessages] = useState([])
+    const [allSenders, setAllSenders] = useState([])
+
+    const seeAllMessages = async () => {
+        const receiver = sessionStorage.getItem('user')
+        const response = await fetch(`/api/message/${receiver}/receive`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application',
+                'authorization': `bearer ${accessToken}`,
+            },
+        })
+        const result = await response.json()
+        setAllMessages(result.reverse())
+        const reducedObj = result.reduce((acc, curr) => {
+            acc[curr.sender._id] = {
+                sender: curr.sender.username,
+                id: curr.sender._id,
+                text: curr.text,
+            }
+            return acc
+        }, {})
+        const userList = Object.values(reducedObj)
+        setAllSenders(userList)
+    }
 
     return (
         <BrowserRouter>
@@ -45,6 +70,10 @@ export default function App() {
                         state={state}
                     />
                     <ChatBox
+                        allSenders={allSenders}
+                        seeAllMessages={seeAllMessages}
+                        setAllMessages={setAllMessages}
+                        allMessages={allMessages}
                         accessToken={accessToken}
                         resize={resize}
                         setResize={setResize}
@@ -77,6 +106,9 @@ export default function App() {
                                 path="/search"
                                 element={
                                     <Search
+                                        seeAllMessages={seeAllMessages}
+                                        allMessages={allMessages}
+                                        setAllMessages={setAllMessages}
                                         state={state}
                                         resize={resize}
                                         setResize={setResize}

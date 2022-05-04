@@ -26,7 +26,7 @@ export default function EditAccount({ state, dispatch }) {
     useEffect(() => {
         const getUserUrl = `api/users/${sessionStorage.getItem('user')}`
         getUser(getUserUrl, accessToken, dispatch)
-    }, [accessToken])
+    }, [accessToken, dispatch])
 
     const putUserUrl = `api/users/${sessionStorage.getItem(
         'user',

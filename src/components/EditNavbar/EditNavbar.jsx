@@ -19,6 +19,9 @@ export default function EditNavbar() {
                 <li className="hover:scale-110">
                     <NavLink to="/editprofile">edit profile</NavLink>
                 </li>
+                <li className="hover:scale-110">
+                    <NavLink to="/editphoto">edit photo</NavLink>
+                </li>
             </ul>
         </nav>
     )
