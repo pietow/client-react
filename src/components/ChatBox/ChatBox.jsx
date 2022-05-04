@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 
 export default function ChatBox({
+    allSenders,
     seeAllMessages,
     accessToken,
     resize,
@@ -10,6 +11,7 @@ export default function ChatBox({
     userId,
     chatValue,
     setChatValue,
+    setAllMessages,
     allMessages,
 }) {
     const style =
@@ -36,6 +38,28 @@ export default function ChatBox({
         /* console.log(result) */
     }
 
+    function selectChatList(userId) {
+        const seeAllMessages = async () => {
+            const receiver = sessionStorage.getItem('user')
+            const response = await fetch(`/api/message/${receiver}/receive`, {
+                //change url to /api/message/:userId/sent
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application',
+                    'authorization': `bearer ${accessToken}`,
+                },
+            })
+            const result = await response.json()
+            const filterMessages = result.filter((message) => {
+                if (message.sender._id === userId) return true
+            })
+            console.log(filterMessages)
+            console.log(userId)
+            setAllMessages(filterMessages)
+        }
+        seeAllMessages()
+    }
+
     return (
         <>
             <div
@@ -60,6 +84,20 @@ export default function ChatBox({
                 </button>
             </div>
 
+            <div className="border-2 border-best-white fixed z-[201] right-[500px] top-[500px]">
+                <ul>
+                    {allSenders.map((user, i) => {
+                        return (
+                            <li
+                                onClick={() => selectChatList(user.id)}
+                                className="self-start p-2"
+                                key={i}>
+                                <p className="text-best-white">{user.sender}</p>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
             <div className={style}>
                 {/* sender and x for closing the window */}
                 <div className="sticky top-0 flex w-full justify-between">

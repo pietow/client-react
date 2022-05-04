@@ -33,6 +33,7 @@ export default function App() {
     const [userId, setUserId] = useState() //searchbar vs chatbox, brief and ugly
     const [chatValue, setChatValue] = useState('') //prop-drilling for chatbox
     const [allMessages, setAllMessages] = useState([])
+    const [allSenders, setAllSenders] = useState([])
 
     const seeAllMessages = async () => {
         const receiver = sessionStorage.getItem('user')
@@ -45,17 +46,16 @@ export default function App() {
         })
         const result = await response.json()
         setAllMessages(result.reverse())
-        console.log(result)
-
-        const chatList = result.reduce((acc, cur) => {
-            //id und userName
-
-            acc.userId = cur.sender._id
-            acc.username = cur.sender.username
-
+        const reducedObj = result.reduce((acc, curr) => {
+            acc[curr.sender._id] = {
+                sender: curr.sender.username,
+                id: curr.sender._id,
+                text: curr.text,
+            }
             return acc
         }, {})
-        console.log(chatList)
+        const userList = Object.values(reducedObj)
+        setAllSenders(userList)
     }
 
     return (
@@ -70,6 +70,7 @@ export default function App() {
                         state={state}
                     />
                     <ChatBox
+                        allSenders={allSenders}
                         seeAllMessages={seeAllMessages}
                         setAllMessages={setAllMessages}
                         allMessages={allMessages}
