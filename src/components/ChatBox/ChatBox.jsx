@@ -77,7 +77,7 @@ export default function ChatBox({
             const resultII = await responseII.json()
             /* console.log(resultII) */
             const filterMessagesII = resultII.filter((message) => {
-                if (message.sender._id === userId) return true
+                if (message.sender._id === receiverSender) return true
             })
             // console.log(filterMessagesII)
             // setAllMessages(filterMessagesII)
