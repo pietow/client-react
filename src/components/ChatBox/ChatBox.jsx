@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Rnd from 'react-rnd'
+import Contact from '../../pages/Contact'
 
 export default function ChatBox({
     allSenders,
@@ -46,26 +47,45 @@ export default function ChatBox({
 
     function selectChatList(userId) {
         const seeAllMessages = async () => {
-            const receiver = sessionStorage.getItem('user')
-            const response = await fetch(`/api/message/${receiver}/receive`, {
-                //change url to /api/message/:userId/sent
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application',
-                    'authorization': `bearer ${accessToken}`,
+            const receiverSender = sessionStorage.getItem('user')
+            const responseII = await fetch(
+                `/api/message/${receiverSender}/sent`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application',
+                        'authorization': `bearer ${accessToken}`,
+                    },
                 },
+            )
+            const resultII = await responseII.json()
+            /* console.log(resultII) */
+            const filterMessagesII = resultII.filter((message) => {
+                if (message.sender._id === userId) return true
             })
+            // console.log(filterMessagesII)
+            const response = await fetch(
+                `/api/message/${receiverSender}/receive`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application',
+                        'authorization': `bearer ${accessToken}`,
+                    },
+                },
+            )
             const result = await response.json()
             const filterMessages = result.filter((message) => {
                 if (message.sender._id === userId) return true
             })
-            console.log(filterMessages)
-            console.log(userId)
-            setAllMessages(filterMessages)
+            // console.log(filterMessages)
+            // console.log(userId)
+            // setAllMessages(filterMessagesII)
+            setAllMessages([...filterMessages, ...filterMessagesII])
         }
         seeAllMessages()
     }
-
+    console.log(allMessages)
     return (
         <>
             <div
@@ -137,6 +157,7 @@ export default function ChatBox({
                             />
                         </div>
                         <textarea
+                            onMouseDown={(e) => e.stopPropagation()}
                             onChange={(e) => setChatValue(e.target.value)}
                             className="my-4 p-1 rounded opacity-70"
                             name="request"
