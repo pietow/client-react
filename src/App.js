@@ -23,6 +23,8 @@ import { initialState, userReducer } from './data/userReducer'
 import ChatBox from './components/ChatBox'
 
 export default function App() {
+    const [selectedUser, setSelectedUser] = useState('')
+    const [foundUsers, setFoundUsers] = useState([])
     const [state, dispatch] = useReducer(userReducer, initialState)
     const [toggle, setToggle] =
         useState(0) /* blurs pages when menu is opening on small screens  */
@@ -45,7 +47,7 @@ export default function App() {
             },
         })
         const result = await response.json()
-        setAllMessages(result.reverse())
+        setAllMessages([])
         const reducedObj = result.reduce((acc, curr) => {
             acc[curr.sender._id] = {
                 sender: curr.sender.username,
@@ -70,6 +72,9 @@ export default function App() {
                         state={state}
                     />
                     <ChatBox
+                        setSelectedUser={setSelectedUser}
+                        selectedUser={selectedUser}
+                        foundUsers
                         allSenders={allSenders}
                         seeAllMessages={seeAllMessages}
                         setAllMessages={setAllMessages}
@@ -106,6 +111,9 @@ export default function App() {
                                 path="/search"
                                 element={
                                     <Search
+                                        setSelectedUser={setSelectedUser}
+                                        foundUsers={foundUsers}
+                                        setFoundUsers={setFoundUsers}
                                         seeAllMessages={seeAllMessages}
                                         allMessages={allMessages}
                                         setAllMessages={setAllMessages}
