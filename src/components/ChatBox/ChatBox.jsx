@@ -48,22 +48,6 @@ export default function ChatBox({
     function selectChatList(userId) {
         const seeAllMessages = async () => {
             const receiverSender = sessionStorage.getItem('user')
-            const responseII = await fetch(
-                `/api/message/${receiverSender}/sent`,
-                {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application',
-                        'authorization': `bearer ${accessToken}`,
-                    },
-                },
-            )
-            const resultII = await responseII.json()
-            /* console.log(resultII) */
-            const filterMessagesII = resultII.filter((message) => {
-                if (message.sender._id === userId) return true
-            })
-            // console.log(filterMessagesII)
             const response = await fetch(
                 `/api/message/${receiverSender}/receive`,
                 {
@@ -80,6 +64,22 @@ export default function ChatBox({
             })
             // console.log(filterMessages)
             // console.log(userId)
+            const responseII = await fetch(
+                `/api/message/${receiverSender}/sent`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application',
+                        'authorization': `bearer ${accessToken}`,
+                    },
+                },
+            )
+            const resultII = await responseII.json()
+            /* console.log(resultII) */
+            const filterMessagesII = resultII.filter((message) => {
+                if (message.sender._id === userId) return true
+            })
+            // console.log(filterMessagesII)
             // setAllMessages(filterMessagesII)
             setAllMessages([...filterMessages, ...filterMessagesII].reverse())
         }

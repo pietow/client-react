@@ -99,7 +99,20 @@ export default function Search({
                                                     </button>
                                                 </div>
                                             </td>
-                                            <td className="border-r text-center w-3/12 p-4">
+                                            <td
+                                                className="border-r text-center w-3/12 p-4"
+                                                /* let bg
+    if (... === 'Yes') {
+        bg = 'bg-teal-dark'
+    }
+    if (... === 'No') {
+        bg = 'bg-apricot-dark'
+    } */
+                                                /* className={ user.accommodation.availability === 'Yes' ? 
+                                                    'border-r text-center w-3/12 p-4' +
+                                                    bg
+                                                } */
+                                            >
                                                 {
                                                     user.accommodation
                                                         .availability
