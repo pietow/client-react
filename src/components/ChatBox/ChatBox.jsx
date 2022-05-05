@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Rnd from 'react-rnd'
 import Contact from '../../pages/Contact'
+import moment from 'moment'
 
 export default function ChatBox({
     setSelectedUser,
@@ -45,7 +46,6 @@ export default function ChatBox({
             body: JSON.stringify(body),
         })
         const result = await response.json()
-        /* console.log(result) */
     }
 
     function selectChatList(userId) {
@@ -79,11 +79,17 @@ export default function ChatBox({
             const filterMessagesII = resultII.filter((message) => {
                 if (message.sender._id === receiverSender) return true
             })
-            setAllMessages([...filterMessages, ...filterMessagesII].reverse())
+            const unsortedMessages = [...filterMessages, ...filterMessagesII]
+            console.log(unsortedMessages)
+            const sortedMessages = unsortedMessages.sort(
+                (message1, message2) =>
+                    new Date(message2.createdAt) - new Date(message1.createdAt),
+            )
+            console.log(sortedMessages)
+            setAllMessages(sortedMessages)
         }
         seeAllMessages()
     }
-    console.log(allMessages)
     return (
         <>
             <div
@@ -195,7 +201,11 @@ export default function ChatBox({
                         return (
                             <div className="self-start p-2" key={i}>
                                 <p className="text-best-white">
-                                    {message.sender.username} wrote:
+                                    {message.sender.username} wrote at{' '}
+                                    {moment(message.createdAt).format(
+                                        'MMMM Do YYYY, h:mm:ss a',
+                                    )}
+                                    :
                                 </p>
                                 <p className="border border-best-white rounded-md px-2 py text-best-white">
                                     {message.text}
