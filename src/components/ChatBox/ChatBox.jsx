@@ -81,7 +81,7 @@ export default function ChatBox({
             // console.log(filterMessages)
             // console.log(userId)
             // setAllMessages(filterMessagesII)
-            setAllMessages([...filterMessages, ...filterMessagesII])
+            setAllMessages([...filterMessages, ...filterMessagesII].reverse())
         }
         seeAllMessages()
     }
