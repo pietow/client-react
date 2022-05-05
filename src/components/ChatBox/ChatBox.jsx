@@ -133,8 +133,8 @@ export default function ChatBox({
                                     onClick={() => {
                                         selectChatList(user.id)
                                         setSelectedUser(user.sender)
-                                        console.log(user)
-                                        console.log('TEST')
+                                        // console.log(user)
+                                        // console.log('TEST')
                                     }}
                                     className="curser-pointer hover:scale-[1.1] self-start p-2 text-best-white"
                                     key={i}>
@@ -198,16 +198,32 @@ export default function ChatBox({
                         </button>
                     </div>
                     {allMessages.map((message, i) => {
+                        // console.log(selectedUser)
+                        // console.log(userId)
                         return (
-                            <div className="self-start p-2" key={i}>
-                                <p className="text-best-white">
-                                    {message.sender.username} wrote at{' '}
+                            <div className="w-full p-2" key={i}>
+                                <p
+                                    className={
+                                        message.sender.username !== selectedUser
+                                            ? 'px-2 py text-best-white'
+                                            : 'px-2 py text-best-white text-right'
+                                    }>
+                                    <span className="text-xl">
+                                        {message.sender.username}
+                                    </span>{' '}
+                                    wrote at{' '}
                                     {moment(message.createdAt).format(
                                         'MMMM Do YYYY, h:mm:ss a',
                                     )}
                                     :
                                 </p>
-                                <p className="border border-best-white rounded-md px-2 py text-best-white">
+                                <p
+                                    className={
+                                        message.sender.username !== selectedUser
+                                            ? 'border border-best-white rounded-md px-2 py text-best-white'
+                                            : 'border border-best-white rounded-md px-2 py text-best-white text-right'
+                                    }>
+                                    {/* <p className="border border-best-white rounded-md px-2 py text-best-white"> */}
                                     {message.text}
                                 </p>
                             </div>
