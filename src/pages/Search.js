@@ -22,7 +22,10 @@ export default function Search({
         const usersURL = '/api/users/'
         getUsers(usersURL, accessToken)
             .then((users) => {
-                USERS.current = users
+                const localUser = sessionStorage.getItem('user')
+                USERS.current = users.filter((user) => {
+                    return user._id !== localUser
+                })
             })
             .catch((e) => console.log(e))
     }, [accessToken])
