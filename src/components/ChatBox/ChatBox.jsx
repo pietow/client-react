@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Rnd from 'react-rnd'
 import Contact from '../../pages/Contact'
 import moment from 'moment'
+import { io } from '../../../node_modules/socket.io/client-dist/socket.io.js'
 
 export default function ChatBox({
     setSelectedUser,
@@ -46,6 +47,14 @@ export default function ChatBox({
             body: JSON.stringify(body),
         })
         const result = await response.json()
+        console.log(result)
+        console.log(allMessages)
+        setAllMessages([result, ...allMessages])
+        /* const socket = io() */
+        /* socket.emit('chat message', chatValue) */
+        /* socket.on('chat message', (msg) => { */
+        /*     console.log(msg) */
+        /* }) */
     }
 
     function selectChatList(userId) {

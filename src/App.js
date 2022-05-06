@@ -21,8 +21,10 @@ import { SetAuthentication } from './context/setAccessTokenContext'
 //USEREDUCER
 import { initialState, userReducer } from './data/userReducer'
 import ChatBox from './components/ChatBox'
+import { io } from '../node_modules/socket.io/client-dist/socket.io.js'
 
 export default function App() {
+    /* const socket = io() */
     const [selectedUser, setSelectedUser] = useState('')
     const [foundUsers, setFoundUsers] = useState([])
     const [state, dispatch] = useReducer(userReducer, initialState)
