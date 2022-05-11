@@ -31,7 +31,7 @@ export default function Footer() {
                 </ul>
             </nav>
             <p className="text-sm">
-                Copyright bla bla bla and photo credits here
+                Copyright Andre, Gina, Piet and Sonny and credits to DCI, 2022
             </p>
         </footer>
     )

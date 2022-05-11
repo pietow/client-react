@@ -82,12 +82,7 @@ export default function ProfileCard({ userData }) {
             )}
             {visibleData && (
                 <p className="text-black border-b p-2 text-xs">
-                    Age: {userAge}
-                </p>
-            )}
-            {visibleData && (
-                <p className="text-black border-b p-2 text-xs">
-                    Lives in: {userData.city + ', ' + userData.profile.country}
+                    Lives in: {userData.accommodation?.place}
                 </p>
             )}
             {visibleData && (
