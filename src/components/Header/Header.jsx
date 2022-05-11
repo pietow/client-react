@@ -74,7 +74,10 @@ export default function Header({
                     }>
                     <img src={thumbnail} alt="user profile" />
                 </Link>
-                <p className="pl-4 text-best-white">Hello {state.username} </p>
+                <p className="pl-4 text-best-white">
+                    {state.username ? 'Hello ' : ''}
+                    {state.username}{' '}
+                </p>
             </div>
             {/* ----------------------------BURGER MENU START------------------------------ */}
 
