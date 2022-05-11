@@ -7,6 +7,10 @@ import { Authentication } from '../context/accessTokenContext'
 import Home from './Home'
 
 export default function Search({
+    setSelectedUser,
+    foundUsers,
+    setFoundUsers,
+    setAllMessages,
     resize,
     setResize,
     setUserId,
@@ -15,14 +19,16 @@ export default function Search({
     const accessToken = useContext(Authentication)
 
     const [search, setSearch] = useState('')
-    const [foundUsers, setFoundUsers] = useState([])
     const USERS = useRef([])
 
     useEffect(() => {
         const usersURL = '/api/users/'
         getUsers(usersURL, accessToken)
             .then((users) => {
-                USERS.current = users
+                const localUser = sessionStorage.getItem('user')
+                USERS.current = users.filter((user) => {
+                    return user._id !== localUser
+                })
             })
             .catch((e) => console.log(e))
     }, [accessToken])
@@ -33,6 +39,42 @@ export default function Search({
         )
         setFoundUsers(users)
         setSearch(e.target.value)
+    }
+
+    function selectChatList(userId) {
+        const seeAllMessages = async () => {
+            const receiverSender = sessionStorage.getItem('user')
+            const response = await fetch(
+                `/api/message/${receiverSender}/receive`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application',
+                        'authorization': `bearer ${accessToken}`,
+                    },
+                },
+            )
+            const result = await response.json()
+            const filterMessages = result.filter(
+                (message) => message.sender._id === userId,
+            )
+            const responseII = await fetch(
+                `/api/message/${receiverSender}/sent`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application',
+                        'authorization': `bearer ${accessToken}`,
+                    },
+                },
+            )
+            const resultII = await responseII.json()
+            const filterMessagesII = resultII.filter((message) => {
+                if (message.sender._id === receiverSender) return true
+            })
+            setAllMessages([...filterMessages, ...filterMessagesII].reverse())
+        }
+        seeAllMessages()
     }
 
     const styles = {
@@ -93,13 +135,32 @@ export default function Search({
                                                                 : setResize(1)
                                                             setUserId(user._id)
                                                             seeAllMessages()
+                                                            selectChatList(
+                                                                user._id,
+                                                            )
+                                                            setSelectedUser(
+                                                                user.username,
+                                                            )
                                                         }}
                                                         className="active:scale-95 p-1 border border-best-white text-best-white rounded w-1/2">
                                                         Talk
                                                     </button>
                                                 </div>
                                             </td>
-                                            <td className="border-r text-center w-3/12 p-4">
+                                            <td
+                                                className="border-r text-center w-3/12 p-4"
+                                                /* let bg
+    if (... === 'Yes') {
+        bg = 'bg-teal-dark'
+    }
+    if (... === 'No') {
+        bg = 'bg-apricot-dark'
+    } */
+                                                /* className={ user.accommodation.availability === 'Yes' ? 
+                                                    'border-r text-center w-3/12 p-4' +
+                                                    bg
+                                                } */
+                                            >
                                                 {
                                                     user.accommodation
                                                         .availability

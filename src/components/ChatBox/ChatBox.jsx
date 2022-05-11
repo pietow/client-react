@@ -2,8 +2,14 @@
 
 import React, { useState, useEffect } from 'react'
 import Rnd from 'react-rnd'
+import Contact from '../../pages/Contact'
+import moment from 'moment'
+import { io } from '../../../node_modules/socket.io/client-dist/socket.io.js'
 
 export default function ChatBox({
+    setSelectedUser,
+    selectedUser,
+    foundUsers,
     allSenders,
     seeAllMessages,
     accessToken,
@@ -41,31 +47,58 @@ export default function ChatBox({
             body: JSON.stringify(body),
         })
         const result = await response.json()
-        /* console.log(result) */
+        console.log(result)
+        console.log(allMessages)
+        setAllMessages([result, ...allMessages])
+        /* const socket = io() */
+        /* socket.emit('chat message', chatValue) */
+        /* socket.on('chat message', (msg) => { */
+        /*     console.log(msg) */
+        /* }) */
     }
 
     function selectChatList(userId) {
         const seeAllMessages = async () => {
-            const receiver = sessionStorage.getItem('user')
-            const response = await fetch(`/api/message/${receiver}/receive`, {
-                //change url to /api/message/:userId/sent
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application',
-                    'authorization': `bearer ${accessToken}`,
+            const receiverSender = sessionStorage.getItem('user')
+            const response = await fetch(
+                `/api/message/${receiverSender}/receive`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application',
+                        'authorization': `bearer ${accessToken}`,
+                    },
                 },
-            })
+            )
             const result = await response.json()
-            const filterMessages = result.filter((message) => {
-                if (message.sender._id === userId) return true
+            const filterMessages = result.filter(
+                (message) => message.sender._id === userId,
+            )
+            const responseII = await fetch(
+                `/api/message/${receiverSender}/sent`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application',
+                        'authorization': `bearer ${accessToken}`,
+                    },
+                },
+            )
+            const resultII = await responseII.json()
+            const filterMessagesII = resultII.filter((message) => {
+                if (message.sender._id === receiverSender) return true
             })
-            console.log(filterMessages)
-            console.log(userId)
-            setAllMessages(filterMessages)
+            const unsortedMessages = [...filterMessages, ...filterMessagesII]
+            console.log(unsortedMessages)
+            const sortedMessages = unsortedMessages.sort(
+                (message1, message2) =>
+                    new Date(message2.createdAt) - new Date(message1.createdAt),
+            )
+            console.log(sortedMessages)
+            setAllMessages(sortedMessages)
         }
         seeAllMessages()
     }
-
     return (
         <>
             <div
@@ -84,6 +117,7 @@ export default function ChatBox({
                     onClick={() => {
                         !resize ? setResize(1) : setResize(0)
                         seeAllMessages()
+                        setSelectedUser('')
                     }}
                     className="">
                     messages
@@ -91,8 +125,8 @@ export default function ChatBox({
             </div>
             <Rnd
                 default={{
-                    x: 850,
-                    y: 205,
+                    x: 1450,
+                    y: 555,
                     width: 500,
                     height: 190,
                 }}
@@ -105,7 +139,12 @@ export default function ChatBox({
                         {allSenders.map((user, i) => {
                             return (
                                 <button
-                                    onClick={() => selectChatList(user.id)}
+                                    onClick={() => {
+                                        selectChatList(user.id)
+                                        setSelectedUser(user.sender)
+                                        // console.log(user)
+                                        // console.log('TEST')
+                                    }}
                                     className="curser-pointer hover:scale-[1.1] self-start p-2 text-best-white"
                                     key={i}>
                                     {user.sender}
@@ -123,45 +162,77 @@ export default function ChatBox({
                         database */}
                         </p>
                         <button
-                            onClick={() => setResize(0)}
+                            onClick={() => {
+                                setResize(0)
+                                setAllMessages([])
+                            }}
                             className="self-end text-best-white p-4">
                             x
                         </button>
                     </div>
                     {/* all kind of texts and pics and reply buttons */}
-                    <div className="flex items-center gap-2">
-                        <div className="border border-best-white rounded-full w-12 h-12 overflow-hidden">
-                            <img
-                                src={'https://picsum.photos/200/200.jpg'}
-                                alt="profile photo"
+                    <div
+                        className={
+                            allMessages.length ? 'hidden' : 'text-best-white'
+                        }>
+                        pick a conversation
+                    </div>
+                    <div className={allMessages.length ? '' : 'hidden'}>
+                        <div className="flex items-center gap-2">
+                            <div className="border border-best-white rounded-full w-12 h-12 overflow-hidden">
+                                <img
+                                    src={'https://picsum.photos/200/200.jpg'}
+                                    alt="profile photo"
+                                />
+                            </div>
+                            <textarea
+                                onMouseDown={(e) => e.stopPropagation()}
+                                onChange={(e) => setChatValue(e.target.value)}
+                                className="my-4 p-1 rounded opacity-70"
+                                name="request"
+                                rows="2"
+                                cols="33"
+                                value={chatValue}
+                                placeholder={`Write ${selectedUser} a message`}
                             />
-                        </div>
-                        <textarea
-                            onChange={(e) => setChatValue(e.target.value)}
-                            className="my-4 p-1 rounded opacity-70"
-                            name="request"
-                            rows="2"
-                            cols="33"
-                            value={chatValue}
-                            placeholder="Write a message"
-                        />
 
-                        {/* <button className="active:scale-95 p-1 border border-best-white text-best-white rounded">
+                            {/* <button className="active:scale-95 p-1 border border-best-white text-best-white rounded">
                         Reply
                     </button> */}
+                        </div>
+                        <button
+                            onClick={() => messageToHost()}
+                            className="active:scale-95 mx-auto my-4 p-1 border border-best-white text-best-white rounded w-1/2">
+                            Send
+                        </button>
                     </div>
-                    <button
-                        onClick={() => messageToHost()}
-                        className="active:scale-95 mx-auto my-4 p-1 border border-best-white text-best-white rounded w-1/2">
-                        Send
-                    </button>
                     {allMessages.map((message, i) => {
+                        // console.log(selectedUser)
+                        // console.log(userId)
                         return (
-                            <div className="self-start p-2" key={i}>
-                                <p className="text-best-white">
-                                    {message.sender.username} wrote:
+                            <div className="w-full p-2" key={i}>
+                                <p
+                                    className={
+                                        message.sender.username !== selectedUser
+                                            ? 'px-2 py text-best-white'
+                                            : 'px-2 py text-best-white text-right'
+                                    }>
+                                    <span className="text-xl">
+                                        {message.sender.username}
+                                    </span>{' '}
+                                    wrote at{' '}
+                                    {moment(message.createdAt).format(
+                                        'MMMM Do YYYY, h:mm:ss a',
+                                    )}
+                                    :
                                 </p>
-                                <p className="border border-best-white rounded-md px-2 py text-best-white">
+                                <p
+                                    className={
+                                        message.sender.username !== selectedUser
+                                            ? 'border border-best-white rounded-md px-2 py text-best-white'
+                                            : 'border border-best-white rounded-md px-2 py text-best-white text-right'
+                                    }>
+                                    {/* <p className="border border-best-white rounded-md px-2 py text-best-white"> */}
                                     {message.text}
                                 </p>
                             </div>

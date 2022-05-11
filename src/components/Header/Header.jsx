@@ -63,17 +63,22 @@ export default function Header({
             <h2 className="hidden lg:block text-best-white underline underline-offset-8 decoration-1">
                 Roam Mate
             </h2>
-            <Link
-                title="go to profile"
-                to="/profile"
-                className={
-                    accessToken
-                        ? 'lg:order-none order-1 border border-best-white rounded-full w-12 h-12 overflow-hidden'
-                        : 'hidden'
-                }>
-                <img src={thumbnail} alt="user profile" />
-            </Link>
-
+            <div className="flex items-center">
+                <Link
+                    title="go to profile"
+                    to="/profile"
+                    className={
+                        accessToken
+                            ? 'lg:order-none order-1 border border-best-white rounded-full w-12 h-12 overflow-hidden'
+                            : 'hidden'
+                    }>
+                    <img src={thumbnail} alt="user profile" />
+                </Link>
+                <p className="pl-4 text-best-white">
+                    {state.username ? 'Hello ' : ''}
+                    {state.username}{' '}
+                </p>
+            </div>
             {/* ----------------------------BURGER MENU START------------------------------ */}
 
             <div className="lg:order-none order-last lg:hidden" ref={ref}>
